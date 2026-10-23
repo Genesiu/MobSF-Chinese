@@ -1,0 +1,245 @@
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand-sm navbar-dark navbar-primary">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+          <a id="nbar" class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+        </li>
+    </ul>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navLinksCollapse" aria-controls="navLinksCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navLinksCollapse">
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a href="{% url 'recent' %}" class="nav-link">最近扫描</a></li>
+        <li class="nav-item"><a href="{% url 'home' %}" class="nav-link">静态分析</a></li>
+        <li class="nav-item"><a href="{% url 'dynamic' %}" class="nav-link">动态分析</a></li>
+        <li class="nav-item"><a href="{% url 'api_docs' %}" class="nav-link">API 接口</a></li>
+        <li class="nav-item"><a href="{% url 'donate' %}" class="nav-link">赞助项目 ♥</a></li>
+        <li class="nav-item"><a target="_blank" href="https://mobsf.github.io/docs/#/" class="nav-link">使用文档</a></li>
+        <li class="nav-item"><a href="{% url 'about' %}" class="nav-link">关于平台</a></li>
+
+        {% if user.is_authenticated %}
+        <li class="nav-item dropdown">
+          <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa fa-user-circle" aria-hidden="true"></i></a>
+          <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow" style="left: 0px; right: inherit;">
+          <li><a href="#" class="dropdown-item"> <small>{{ request.user.username }} <span class="badge badge-primary"> {% if user.is_staff %} 管理员 {% else %}{{ request.user.groups.all.0 }} {% endif %}</span></small></a></li>
+          <li class="dropdown-divider"></li>
+          <li><a href="{% url 'change_password' %}" class="dropdown-item"><i class="fa fa-asterisk" aria-hidden="true"></i> 修改密码 </a></li>
+          {% if user.is_staff %}<li><a href="{% url 'users' %}" class="dropdown-item"><i class="fa fa-users" aria-hidden="true"></i> 用户管理 </a></li>{% endif %}
+          <li><a href="{% url 'logout' %}" class="dropdown-item"><i class="fa fa-power-off" aria-hidden="true"></i> 退出登录 </a></li>
+          </ul>
+        </li>
+        {% endif %}
+
+    <!-- SEARCH FORM -->
+    <form class="form-inline ml-3" action="/search" method="GET">
+      <div class="input-group input-group-sm">
+        <input class="form-control form-control-navbar" id="navbar-search-input" type="search" placeholder="全局搜索..." name="query" aria-label="Search">
+        <div class="input-group-append">
+          <button class="btn btn-navbar" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+
+  </ul>
+
+    </div>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- MobSF 全局侧边栏与报告看板全量汉化引擎 (阵地1扩展版) -->
+  <script>
+  (function() {
+    'use strict';
+    var zhDict = {
+      // 1. 侧边栏菜单与导航标题
+      "Static Analyzer": "静态分析器",
+      "Dynamic Analyzer": "动态分析器",
+      "Information": "应用基础信息",
+      "Scan Options": "扫描与重测选项",
+      "Signer Certificate": "应用签名证书",
+      "Permissions": "应用权限清单",
+      "Android API": "Android API 调用",
+      "Browsable Activities": "可直接调起组件 (Browsable)",
+      "Security Analysis": "核心安全分析",
+      "Network Security": "网络安全传输配置",
+      "Certificate Analysis": "证书安全性分析",
+      "Manifest Analysis": "清单文件配置审计",
+      "Code Analysis": "源代码静态审计",
+      "Binary Analysis": "SO 动态库防护分析",
+      "NIAP Analysis": "NIAP 合规基线分析",
+      "File Analysis": "文件结构与敏感度",
+      "Firebase Analysis": "Firebase 配置分析",
+      "Dylib & Framework Analysis": "Dylib 与 Framework 分析",
+      "Static Library Analysis": "静态库安全性分析",
+      "Malware Analysis": "恶意行为与威胁情报",
+      "Malware Lookup": "恶意样本哈希检索",
+      "APKiD Analysis": "APKiD 编译器与加壳识别",
+      "Behaviour Analysis": "行为特征审计",
+      "VirusTotal": "VirusTotal 威胁情报",
+      "Abused Permissions": "高危权限滥用分析",
+      "Server Locations": "外联服务器地理分布",
+      "Domain Malware Check": "恶意域名黑名单检测",
+      "Reconnaissance": "资产信息侦察",
+      "URLs": "提取 URL 链接",
+      "Emails": "提取邮箱地址",
+      "Trackers": "第三方追踪器 / SDK",
+      "Hardcoded Secrets": "硬编码凭据与密钥",
+      "Strings": "字符串常量资源",
+      "Symbols": "符号表清单",
+      "Components": "四大组件与依赖",
+      "Activities": "Activity (界面组件)",
+      "Services": "Service (后台服务)",
+      "Receivers": "Receiver (广播接收器)",
+      "Providers": "Provider (内容提供者)",
+      "Libraries": "内置依赖库 (.so/.jar)",
+      "SBOM": "软件物料清单 (SBOM)",
+      "Files": "完整解包文件列表",
+      "PDF Report": "导出 PDF 审计报告",
+      "Print Report": "打印当前报告",
+      "Start Dynamic Analysis": "启动动态分析",
+      "Dynamic Analysis Report": "动态分析结果报告",
+
+      // 2. 报告主界面卡片标题 (Card Headers)
+      "APP SCORES": "综合安全评级与评分",
+      "FILE INFORMATION": "文件基础特征信息",
+      "APP INFORMATION": "应用程序基本信息",
+      "PLAYSTORE INFORMATION": "应用商店发布信息",
+      "BINARY INFORMATION": "二进制安全防护特征",
+      "SCAN OPTIONS": "扫描选项与重新分析",
+      "DECOMPILED CODE": "反编译代码与资源浏览",
+      "SIGNER CERTIFICATE": "签名证书与哈希校验",
+      "APPLICATION PERMISSIONS": "应用权限配置与风险分析",
+      "CODE ANALYSIS": "源代码安全性审计",
+      "FINDINGS SEVERITY": "风险漏洞严重程度统计",
+      "APP COMPONENTS": "应用组件特征统计",
+      "EXPORTED ACTIVITIES": "对外暴露组件 (Activities)",
+      "EXPORTED SERVICES": "对外暴露服务 (Services)",
+      "EXPORTED RECEIVERS": "对外暴露广播 (Receivers)",
+      "EXPORTED PROVIDERS": "对外暴露内容提供商 (Providers)",
+      "View All": "查看完整清单",
+      "View AndroidManifest.xml": "查看清单文件 AndroidManifest.xml",
+      "View Source": "查看 Java 源码",
+      "View Smali": "查看 Smali 代码",
+      "Download Java Code": "下载 Java 源码包",
+      "Download Smali Code": "下载 Smali 代码包",
+      "Show Files": "查看调用代码文件",
+
+      // 3. 统计指标与特征徽章 (Metric Badges)
+      "Average CVSS": "平均 CVSS 评分",
+      "Security Score": "综合安全评分",
+      "Risk Rating": "风险评级",
+      "Grade": "综合安全等级",
+      "Trackers Detection": "第三方追踪器/SDK检出",
+      "VirusTotal Detection": "VirusTotal 威胁情报检出",
+      "MobSF Scorecard": "查看安全计分卡完整看板",
+      "File Name": "文件名称",
+      "Size": "文件大小",
+      "MD5": "MD5 哈希",
+      "SHA1": "SHA1 哈希",
+      "SHA256": "SHA256 哈希",
+      "App Name": "应用名称",
+      "Package Name": "应用包名 (Package Name)",
+      "Main Activity": "入口组件 (Main Activity)",
+      "Target SDK": "目标版本 (Target SDK)",
+      "Min SDK": "最低支持 (Min SDK)",
+      "Max SDK": "最高支持 (Max SDK)",
+      "Android Version Name": "版本名称 (Version Name)",
+      "Android Version Code": "版本代码 (Version Code)",
+      "Category": "应用分类",
+      "Play Store URL": "Google Play 链接",
+      "Developer": "开发者",
+      "Developer ID": "开发者 ID",
+      "Developer Address": "开发者地址",
+      "Developer Website": "官方网站",
+      "Developer Email": "开发者邮箱",
+      "Release Date": "发布日期",
+      "Privacy Policy": "隐私政策协议",
+      "Description": "应用描述",
+
+      // 4. 数据表格列头 (Table Headers)
+      "NO": "序号",
+      "ISSUE": "风险漏洞项",
+      "SEVERITY": "危害级别",
+      "STANDARDS": "安全合规标准 (OWASP/CWE)",
+      "DESCRIPTION": "风险描述与详情",
+      "OPTIONS": "操作",
+      "FILES": "涉及代码位置",
+      "PERMISSION": "权限标识",
+      "STATUS": "风险状态",
+      "INFO": "简要分类",
+      "CODE MAPPINGS": "代码调用映射",
+
+      // 5. 风险与权限等级徽章 (Severity Badges)
+      "high": "高危 (High)",
+      "HIGH": "高危 (High)",
+      "warning": "警告 (Warning)",
+      "WARNING": "警告 (Warning)",
+      "info": "提示 (Info)",
+      "INFO": "提示 (Info)",
+      "secure": "安全 (Secure)",
+      "SECURE": "安全 (Secure)",
+      "suppressed": "已忽略/抑制",
+      "SUPPRESSED": "已忽略/抑制",
+      "dangerous": "高危权限 (dangerous)",
+      "normal": "常规权限 (normal)",
+      "SignatureOrSystem": "系统签名权限 (SignatureOrSystem)",
+      "signature": "签名权限 (signature)",
+      "unknown": "自定义/未知权限 (unknown)"
+    };
+
+    function translateUI() {
+      // 1. 汉化侧边栏
+      var sidebar = document.querySelector('.main-sidebar');
+      if (sidebar) {
+        var sidebarNodes = sidebar.querySelectorAll('.nav-sidebar p, .user-panel a, .sidebar .info a');
+        replaceNodes(sidebarNodes);
+      }
+
+      // 2. 汉化主报表看板卡片、徽章、表格头
+      var contentWrapper = document.querySelector('.content-wrapper');
+      if (contentWrapper) {
+        var contentNodes = contentWrapper.querySelectorAll('strong, .badge, th, .small-box p, .small-box-footer, h3.card-title, .description-block span, .btn');
+        replaceNodes(contentNodes);
+      }
+    }
+
+    function replaceNodes(nodes) {
+      nodes.forEach(function(el) {
+        el.childNodes.forEach(function(child) {
+          if (child.nodeType === 3) { // 仅替换纯文本节点，严禁破坏图标与箭头元素
+            var raw = child.textContent.trim();
+            if (zhDict[raw]) {
+              child.textContent = child.textContent.replace(raw, zhDict[raw]);
+            }
+          }
+        });
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', translateUI);
+    } else {
+      translateUI();
+    }
+
+    var observer = new MutationObserver(function(mutations) {
+      var shouldRun = false;
+      for (var i = 0; i < mutations.length; i++) {
+        if (mutations[i].addedNodes.length > 0) {
+          shouldRun = true;
+          break;
+        }
+      }
+      if (shouldRun) translateUI();
+    });
+
+    var mainContainer = document.querySelector('.wrapper') || document.body;
+    if (mainContainer) {
+      observer.observe(mainContainer, { childList: true, subtree: true });
+    }
+  })();
+  </script>

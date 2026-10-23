@@ -1,0 +1,124 @@
+{% extends "base/base_layout.html" %}
+{% load static %}
+{% block sidebar_option %}
+sidebar-collapse
+{% endblock %}
+{% block extra_css %}
+<link href="{% static "adminlte/plugins/sweetalert2/sweetalert2.min.css" %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="content-wrapper">
+   <div class="content-header">
+   </div>
+   <div class="container-fluid">
+      <div class="row">
+         <div class="col-lg-12">
+            <div class="card">
+               <div class="card-body">
+                  <div class="h-100 d-flex align-items-center justify-content-center">
+                     <div class="">
+                        <div class="login-logo">
+                           <a href="">用户权限管理</a>  <a href="{% url 'create_user' %}" id="add_user" class="btn btn-success" role="button"><i class="fa fa-user"></i> 添加用户</a>
+                        </div>
+                        <div class="card">
+                           <div class="card-body login-card-body">
+                            {% if not users %}
+                            <h3>暂无用户数据</h3>
+                            {% else %}
+                            <div class="table-responsive">
+                                <table class="table table-responsive-md">
+                                    <thead>
+                                        <tr>
+                                            <th><strong>#</strong></th>
+                                            <th><strong>用户名</strong></th>
+                                            <th><strong>电子邮箱</strong></th>
+                                            <th><strong>角色</strong></th>
+                                            <th><strong>操作</strong></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for user in users %}
+                                                <tr>
+                                                    <td>
+                                                        <div class="profile-photo">
+                                                            <img src="https://www.gravatar.com/avatar/{{ user.email | md5}}" width="30" class="img-fluid rounded-circle" alt="">
+                                                        </div>
+                                                     </td>
+                                                    <td>{{user.username}}</td>
+                                                    <td>{{user.email}}</td>
+                                                    <td> {% if user.is_staff %}<span class="badge badge-primary">管理员</span>{% else %} <span class="badge badge-secondary">{{user.groups.all.0}}</span> {% endif %}</td>
+                                                    <td> {% if not user.is_staff %}
+                                                      <a class="btn btn-danger btn-sm" id="{{ user.username }}" onclick="delete_user(this)" href="#"><i class="fa fa-trash"></i> 删除 </a>
+                                                      {% endif %}</td>
+                                                </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            {% endif %}
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock %}
+{% block extra_scripts %}
+<script src="{% static "adminlte/plugins/sweetalert2/sweetalert2.min.js" %}"></script>
+<script>
+    function delete_user(item){
+      Swal.fire({
+      title: '确定要删除该用户吗？',
+      text: "该操作将永久从 MobSF 移除该用户账号！",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: '确定删除',
+      cancelButtonText: '取消',
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#2da532',
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                    url: '{% url "delete_user" %}',
+                        type : 'POST',
+                    dataType: 'json',
+                        data : {
+                                csrfmiddlewaretoken: '{{ csrf_token }}',
+                                username: item.id,
+                                },
+                            success : function(json) {
+                                if (json.deleted==='yes'){
+                                    Swal.fire(
+                                        '已删除！',
+                                        '用户账号已成功删除！',
+                                        'success'
+                                    ).then(function () {
+                                        location.reload();
+                                    })
+                                }
+                                else {
+                                    Swal.fire(
+                                    '删除失败',
+                                    '无法删除该用户',
+                                    'error'
+                                    )
+                                }
+                            },
+                            error : function(xhr,errmsg,err) {
+                                Swal.fire(
+                                    '删除失败',
+                                    errmsg,
+                                    'error'
+                                    )
+                            }
+                });
+               
+        }
+        });
+}
+</script>
+{% endblock %}

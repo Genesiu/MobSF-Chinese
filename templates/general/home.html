@@ -1,0 +1,359 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Mobile Security Framework (MobSF) 是一款自动化全能移动安全测试、恶意软件分析和漏洞评估平台。">
+      <meta name="author" content="Ajin Abraham">
+      <link rel="icon" href="{% static "img/favicon.ico" %}">
+      <title>移动安全测试框架 - MobSF</title>
+      <link rel="stylesheet" href="{% static "adminlte/dashboard/css/adminlte.min.css" %}">
+      <link rel="stylesheet" href="{% static "adminlte/plugins/fontawesome-free/css/all.min.css" %}">
+      <link rel="stylesheet" href="{% static "others/css/spinner.css" %}">
+      <link rel="stylesheet" href="{% static "landing/css/home.css" %}">
+      <!-- Google Font: Source Sans Pro -->
+      <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+   </head>
+   <body class="text-center">
+
+    <div class="d-flex h-100 p-3 mx-auto flex-column">  
+        <nav class="nav nav-masthead justify-content-center">
+            <a class="nav-link active" href="{% url 'recent' %}">最近扫描</a>
+            <a class="nav-link" href="{% url 'dynamic' %}">动态分析</a>
+            <div class="pad">
+                <img src="{% static "img/mobsf_logo.png" %}" alt="MobSF Logo" height="30" width="90" />
+            </div>  
+            <a class="nav-link" href="{% url 'api_docs' %}">API 接口</a>
+            <a class="nav-link" href="{% url 'about' %}">关于平台</a>
+            {% if user.is_authenticated %}
+            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa fa-user-circle" aria-hidden="true"></i> </a>
+            <a class="nav-link"></a>
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow" style="left: 0px; right: inherit;">
+                <li><a href="#" class="dropdown-item"> <small>{{ request.user.username }} <span class="badge badge-primary"> {% if user.is_staff %} 管理员 {% else %}{{ request.user.groups.all.0 }} {% endif %}</span></small></a></li>
+                <li class="dropdown-divider"></li>
+                <li><a href="{% url 'change_password' %}" class="dropdown-item"><i class="fa fa-asterisk" aria-hidden="true"></i> 修改密码 </a></li>
+                {% if user.is_staff %}<li><a href="{% url 'users' %}" class="dropdown-item"><i class="fa fa-users" aria-hidden="true"></i> 用户管理 </a></li>{% endif %}
+                <li><a href="{% url 'logout' %}" class="dropdown-item"><i class="fa fa-power-off" aria-hidden="true"></i> 退出登录 </a></li>
+            </ul>
+            {% endif %}
+            <a class="nav-link">
+                <form action="/search" method="GET">
+                    <input name="query" type="text" class="form-control form-control-sm" placeholder="全局搜索...">
+                </form>
+            </a>
+        </nav>
+
+        <header class="masthead mb-auto">
+            <div class="inner">
+            </div>
+        </header>
+
+        <main role="main" class="inner cover">
+            <div class="inner cover">
+                <div style="visibility:hidden; opacity:0" id="drop">
+                <div id="textnode">拖拽文件至此处上传！</div>
+                </div>
+                </br>
+                <form id="upload_form" enctype="multipart/form-data" method="post">
+                {% csrf_token %}
+                <div class="fileUpload btn btn-lg btn-secondary" id="but">
+                    <input type="file" name="file" id="uploadFile" placeholder="选择文件" multiple>
+                    <span class="fas fa-cloud-upload-alt"></span>
+                    上传并开始分析
+                </div>
+                <br />
+                <small><i>支持拖拽 APK、IPA、AAB、ZIP 或源码压缩包至任意位置！</i></small>
+                <p></p>
+                <h5 class="lead" id="status"></h5>
+                <progress id="progressBar" value="0" max="100" style="width:300px;visibility:hidden;" ></progress>
+                </form>
+            </div>
+        </main>
+
+        <footer class="mastfoot mt-auto">
+            <input type="download" id="package" class="form-control form-control-sm" placeholder="输入软件包下载 URL 在线获取并扫描"/>
+            <p></p>
+            <div class="inner">
+                <h6> <a href="{% url 'recent' %}">最近扫描</a>  |  <a href="{% url 'dynamic' %}">动态分析</a>  |  <a href="{% url 'api_docs' %}">API 接口</a>   |  <a href="{% url 'donate' %}">赞助支持 ♥</a> |  <a target="_blank"
+                    href="https://mobsf.github.io/docs/#/">使用文档</a>  | <a href="{% url 'about' %}">关于平台</a></h6>
+                </br>
+                <p>&copy; {% now "Y" %}  Mobile Security Framework - MobSF {{ version }}</p>
+            </div>
+            <div id="alert" class="alert-bar">分析任务已启动！正在自动跳转至分析面板，或稍后在“最近扫描”中查看报告。</div>
+        </footer>
+    </div>
+
+    <!--Loading Ring-->
+    <div class="hidden loading">
+        <div class='uil-ring-css' style='transform:scale(0.79);'>
+          <div></div>
+        </div>
+    </div>
+
+    <script src="{% static "adminlte/plugins/jquery.min.js" %}"></script>
+    <script src="{% static "adminlte/plugins/bootstrap/bootstrap.bundle.min.js" %}"></script>
+      <script>
+            let warning = "这是一个演示实例，上传的内容可能会对公开环境可见。是否继续？";
+            // Result View
+            function load_result(url){
+                hide_loader();
+                // Display alert notification
+                var x = document.getElementById("alert");
+                x.className = "alert-bar show slide-up";
+                setTimeout(function () {
+                    x.className = x.className.replace("show", "");
+                }, 10000);
+
+                // Redirect after showing alertbar
+                setTimeout(function () {
+                    window.location.href = url;
+                }, 1000); // Adjust delay as needed
+            }
+
+            //Download and scan APK
+            $('#package').keypress(function(event){
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if(keycode == '13'){
+                    _("status").innerText = '正在尝试下载软件包...';
+                    show_loader();
+                    $.ajax({
+                        url : '{% url "download_scan" %}', 
+                        type : "POST",
+                        dataType: "json", 
+                        data : {
+                            package: $('#package').val(),
+                            csrfmiddlewaretoken: '{{ csrf_token }}',
+                        },
+                        success : function(json){
+                            if (json.status === 'ok'){
+                                setInterval(function() {
+                                    get_status(json.hash);
+                                }, 500);
+
+                                url = json.analyzer + '/' + json.hash + '/';
+                                load_result(url);
+                            } else {
+                                hide_loader();
+                                _("status").innerText = json.description;
+                            }
+                        },
+                        error : function(xhr, ajaxOptions, thrownError) {
+                            hide_loader();
+                            if (thrownError === 'Forbidden'){
+                                _("status").innerText = "您没有下载并扫描的权限！";
+                            }
+                        }
+                    });
+                }
+            });
+            function show_loader(){
+                var loadingOverlay = document.querySelector('.loading');
+                loadingOverlay.classList.remove('hidden');
+            }
+
+            function hide_loader(){
+                var loadingOverlay = document.querySelector('.loading');
+                loadingOverlay.classList.add('hidden');
+            }
+            // Existing
+            function _(el){
+                return document.getElementById(el);
+            }
+
+            // Response Handler     
+            function responseHandler(json, isbutton) {
+                if (json.status === 'error') {
+                    _("status").innerText = json.description;
+                } else {
+                    setInterval(function() {
+                        get_status(json.hash);
+                    }, 500);
+                    var url = json.analyzer + '/' + json.hash + '/';
+                    load_result(url);
+                }
+            }
+
+
+           // Get Scan status
+           function get_status(checksum){
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", '{% url "status" %}', true);
+                xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
+                xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhr.onload = function() {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        var response = JSON.parse(xhr.responseText);
+                        if (response.status === 'ok') {
+                            const last_log = response.logs[response.logs.length - 1];
+                            _("status").innerText = last_log.status + ' .';
+                            var number = Math.ceil((Math.floor(Math.random() * 5)));
+                            for (i=0;i<number;i++){
+                                _("status").innerText += '.';
+                            }
+                        }
+                    } else {
+                        console.log("Error:", xhr.statusText);
+                    }
+                };
+                xhr.onerror = function() {
+                    console.log("获取扫描状态失败");
+                };
+                xhr.send('hash=' + checksum);
+           }
+
+            function progressHandler(event) {
+                var percent = (event.loaded / event.total) * 100;
+                console.log("Uploaded ..." + Math.round(percent));
+                _("progressBar").value = Math.round(percent);
+                _("status").innerText = "已上传 " + Math.round(percent) + "% ...";
+            }
+            function completeHandler(event) {
+                if(event.currentTarget.status === 403){
+                    _("status").innerText = "您没有上传文件的权限！";
+                    return;
+                } else {
+                    try {
+                        var json = JSON.parse(event.target.responseText);
+                        responseHandler(json);
+                    } catch (error) {
+                        errorHandler(event);
+                    }
+                }
+            }
+            function errorHandler(event) {
+                _("status").innerText = "文件上传失败！";
+            }
+            function abortHandler(event) {
+                _("status").innerText = "文件上传已被取消！";
+            }
+          // Is valid file extensions
+          function isValidExt(file_name){
+                var val = file_name.toLowerCase();
+                var regex = new RegExp("^(.{1,300}?)\.({{exts}})$");
+                val = val.replace(/^.*[\\\/]/, '');
+                if (!(regex.test(val))) {
+                    _('status').innerText = "MobSF 仅支持 APK, APKS, XAPK, AAB, JAR, AAR, SO, IPA, DYLIB, A, ZIP 和 APPX 文件。";
+                    return false;
+                }
+                return true;
+          }
+          // Is allowed mimetype
+          function isValidMime(file_mime){
+                if (file_mime.length < 1)
+                    // bypass if mime is not available
+                    return true; 
+                var supported = [{% for mime in mimes %}'{{mime}}',{% endfor %}];
+                if(supported.indexOf(file_mime) >-1)
+                    return true;
+                 _('status').innerText = "不支持当前文件的 MIME 类型 (" + file_mime + ")！";
+                return false;
+          }
+         // File Upload
+         function uploadFile(file, i) {
+           try {
+                if (!isValidExt(file.name) || !isValidMime(file.type)){
+                    return;
+                }
+                _("progressBar").style.visibility = "visible";
+                var url = '{% url "upload" %}'
+                var xhr = new XMLHttpRequest()
+                xhr.open('POST', url, true)
+                xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+                xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
+                xhr.upload.addEventListener("progress", progressHandler, false);
+                xhr.addEventListener("load", completeHandler, false);
+                xhr.addEventListener("error", errorHandler, false);
+                xhr.addEventListener("abort", abortHandler, false);
+                var formdata = new FormData();
+                formdata.append("file", file);
+                xhr.send(formdata)
+            } catch (e) {
+                alert("错误:" + e);
+            }
+           }
+         
+           function handleFiles(files) {
+               files = [...files]
+               files.forEach(uploadFile)
+           }
+         
+           // Full Screen Drag & Drop File Upload
+           var lastTarget = null;
+           function isFile(evt) {
+               var dt = evt.dataTransfer;
+         
+               for (var i = 0; i < dt.types.length; i++) {
+                   if (dt.types[i] === "Files") {
+                       return true;
+                   }
+               }
+               return false;
+           }
+         
+           window.addEventListener("dragenter", function (e) {
+               if (isFile(e)) {
+                   lastTarget = e.target;
+                   document.querySelector("#drop").style.visibility = "";
+                   document.querySelector("#drop").style.opacity = 1;
+                   document.querySelector("#textnode").style.fontSize = "48px";
+               }
+           });
+         
+           window.addEventListener("dragleave", function (e) {
+               e.preventDefault();
+               if (e.target === document || e.target === lastTarget) {
+                   document.querySelector("#drop").style.visibility = "hidden";
+                   document.querySelector("#drop").style.opacity = 0;
+                   document.querySelector("#textnode").style.fontSize = "42px";
+               }
+           });
+         
+           window.addEventListener("dragover", function (e) {
+               e.preventDefault();
+           });
+         
+           window.addEventListener("drop", function (e) {
+               e.preventDefault();
+               document.querySelector("#drop").style.visibility = "hidden";
+               document.querySelector("#drop").style.opacity = 0;
+               document.querySelector("#textnode").style.fontSize = "42px";
+               if(e.dataTransfer.files.length > 0) {
+                if (document.location.host === 'mobsf.live'){
+                    if (confirm(warning) == true) {
+                        handleFiles(e.dataTransfer.files);
+                    } else {
+                        return;
+                    }
+                } else {
+                    handleFiles(e.dataTransfer.files);
+                }
+               }
+           });
+
+            $(document).ready(function() {
+                // Button File Upload
+                $('input[type=file]').change(function() {
+                    _('status').innerText = "";
+                    if (_("uploadFile").files.length === 0) {
+                        return;
+                    }
+                    var files = _("uploadFile").files;
+                    if (document.location.host === 'mobsf.live'){
+                        if (confirm(warning) == true) {
+                            _("uploadFile").style.display = "none";
+                            handleFiles(files);
+                        } else {
+                            return;
+                        }
+                    } else {
+                        _("uploadFile").style.display = "none";
+                        handleFiles(files);
+                    }
+                });
+            });
+      </script>
+   </body>
+</html>

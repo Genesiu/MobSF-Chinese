@@ -1,0 +1,17 @@
+# OS Files
+.DS_Store
+Thumbs.db
+
+# IDE Files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Fonts (ttc/ttf files are downloaded on install, avoid bloating git repo unless committed)
+fonts/*.ttc
+fonts/*.ttf
+!fonts/README.md
+
+# Logs
+*.log
