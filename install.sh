@@ -35,23 +35,45 @@ if [ -f "$SCRIPT_DIR/fonts/wqy-microhei.ttc" ]; then
   echo "  ✅ 中文字体就绪 ($(ls -lh "$SCRIPT_DIR/fonts/wqy-microhei.ttc" | awk '{print $5}'))"
 fi
 
-# 2. 检查权限边界 (针对 MobSF 非特权用户 UID 9901)
-echo "[2/4] 配置非特权容器运行权限 (UID 9901)..."
+# 2. 检查数据持久化目录 (优先对接历史生产数据 /data/mobsf_data)
+echo "[2/5] 检查数据持久化与历史扫描库配置..."
+if [ -d "/data/mobsf_data" ]; then
+  echo "  -> 检测到宿主机已有数据目录 /data/mobsf_data，对接已有扫描记录与 JADX 离线引擎..."
+  echo "MOBSF_DATA_DIR=/data/mobsf_data" > "$SCRIPT_DIR/.env"
+  chmod -R 755 /data/mobsf_data 2>/dev/null || true
+  if command -v chown > /dev/null 2>&1; then
+    chown -R 9901:9901 /data/mobsf_data 2>/dev/null || true
+  fi
+else
+  echo "  -> 未发现 /data/mobsf_data，使用默认持久化配置..."
+  rm -f "$SCRIPT_DIR/.env"
+fi
+
+# 3. 检查权限边界 (针对 MobSF 非特权用户 UID 9901)
+echo "[3/5] 配置非特权容器运行权限 (UID 9901)..."
 chmod -R 755 "$SCRIPT_DIR/templates" "$SCRIPT_DIR/fonts"
 if command -v chown > /dev/null 2>&1; then
   chown -R 9901:9901 "$SCRIPT_DIR/templates" "$SCRIPT_DIR/fonts" 2>/dev/null || true
 fi
 
-# 3. 启动或重启容器
-echo "[3/4] 启动/重启 MobSF 容器以清空 Django 模板缓存..."
+# 4. 安全启动容器 (仅监听 8000 端口，防御性清理历史残留端点)
+echo "[4/5] 停止旧容器并以 8000 端口启动 MobSF 汉化版..."
 docker compose down 2>/dev/null || true
+
+# 防御性清理异常残留的 mobsf 容器 (释放占用的网络 endpoint)
+if docker ps -a --format '{{.Names}}' | grep -Eq "^mobsf$"; then
+  echo "  -> 清理历史残留容器 mobsf..."
+  docker stop mobsf 2>/dev/null || true
+  docker rm -f mobsf 2>/dev/null || true
+fi
+
 docker compose up -d
 
-# 4. 轮询健康状态
-echo "[4/4] 等待服务初始化与数据库迁移 (预计需 15~30 秒)..."
+# 5. 轮询健康状态 (仅探活 8000 端口)
+echo "[5/5] 等待服务初始化与数据库迁移 (预计需 15~30 秒)..."
 SUCCESS=0
 for i in {1..35}; do
-  if curl -sf http://127.0.0.1:8000/ > /dev/null 2>&1 || curl -sf http://127.0.0.1/ > /dev/null 2>&1; then
+  if curl -sf http://127.0.0.1:8000/ > /dev/null 2>&1; then
     SUCCESS=1
     break
   fi
@@ -62,7 +84,7 @@ done
 if [ $SUCCESS -eq 1 ]; then
   echo "=========================================================="
   echo "🎉 MobSF 中文版已成功启动并就绪！"
-  echo "🌐 访问地址: http://localhost:8000 (或你的服务器公网/内网IP)"
+  echo "🌐 访问地址: http://<你的服务器IP>:8000"
   echo "🔑 默认账号: mobsf / mobsf"
   echo "=========================================================="
 else

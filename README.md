@@ -53,7 +53,7 @@ git clone https://github.com/Genesiu/MobSF-Chinese.git
 cd MobSF-Chinese
 docker compose up -d
 ```
-启动后访问：`http://<服务器IP>:8000` 或 `http://<服务器IP>` 即可进入中文版 MobSF。默认凭据：`mobsf` / `mobsf`。
+启动后访问：`http://<服务器IP>:8000` 即可进入中文版 MobSF。默认凭据：`mobsf` / `mobsf`。
 
 ---
 

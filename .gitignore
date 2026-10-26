@@ -13,5 +13,8 @@ fonts/*.ttc
 fonts/*.ttf
 !fonts/README.md
 
+# Environment
+.env
+
 # Logs
 *.log
