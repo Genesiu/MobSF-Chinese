@@ -35,19 +35,15 @@ if [ -f "$SCRIPT_DIR/fonts/wqy-microhei.ttc" ]; then
   echo "  ✅ 中文字体就绪 ($(ls -lh "$SCRIPT_DIR/fonts/wqy-microhei.ttc" | awk '{print $5}'))"
 fi
 
-# 2. 检查数据持久化目录 (优先对接历史生产数据 /data/mobsf_data)
-echo "[2/5] 检查数据持久化与历史扫描库配置..."
-if [ -d "/data/mobsf_data" ]; then
-  echo "  -> 检测到宿主机已有数据目录 /data/mobsf_data，对接已有扫描记录与 JADX 离线引擎..."
-  echo "MOBSF_DATA_DIR=/data/mobsf_data" > "$SCRIPT_DIR/.env"
-  chmod -R 755 /data/mobsf_data 2>/dev/null || true
-  if command -v chown > /dev/null 2>&1; then
-    chown -R 9901:9901 /data/mobsf_data 2>/dev/null || true
-  fi
-else
-  echo "  -> 未发现 /data/mobsf_data，使用默认持久化配置..."
-  rm -f "$SCRIPT_DIR/.env"
+# 2. 检查并准备数据持久化目录 (统一规范至 /data/mobsf_data，彻底避免 UID 9901 权限问题)
+echo "[2/5] 准备数据持久化目录与权限 (UID 9901)..."
+mkdir -p /data/mobsf_data
+chmod -R 775 /data/mobsf_data 2>/dev/null || true
+if command -v chown > /dev/null 2>&1; then
+  chown -R 9901:9901 /data/mobsf_data 2>/dev/null || true
 fi
+echo "MOBSF_DATA_DIR=/data/mobsf_data" > "$SCRIPT_DIR/.env"
+echo "  -> 持久化目录 /data/mobsf_data 已就绪并配置 UID 9901 属主"
 
 # 3. 检查权限边界 (针对 MobSF 非特权用户 UID 9901)
 echo "[3/5] 配置非特权容器运行权限 (UID 9901)..."
@@ -55,6 +51,8 @@ chmod -R 755 "$SCRIPT_DIR/templates" "$SCRIPT_DIR/fonts"
 if command -v chown > /dev/null 2>&1; then
   chown -R 9901:9901 "$SCRIPT_DIR/templates" "$SCRIPT_DIR/fonts" 2>/dev/null || true
 fi
+# 确保宿主机用户家目录 (若在 /root 下) 具备穿透执行权限，否则容器内 UID 9901 无法跨目录读取挂载模板
+chmod o+x "$HOME" 2>/dev/null || true
 
 # 4. 安全启动容器 (仅监听 8000 端口，防御性清理历史残留端点)
 echo "[4/5] 停止旧容器并以 8000 端口启动 MobSF 汉化版..."
