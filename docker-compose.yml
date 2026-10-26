@@ -10,9 +10,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      # 持久化扫描历史、规则配置与 SQLite 数据库 (可通过 MOBSF_DATA_DIR 自定义路径)
-      - ${MOBSF_DATA_DIR:-/data/mobsf_data}:/home/mobsf/.MobSF
-      # 挂载中文视图与分析看板汉化引擎 (只读挂载，零侵入原版镜像)
+      # 挂载中文视图与分析看板汉化引擎 (只读挂载，零侵入原版镜像，不覆盖镜像内置工具)
       - ./templates/base/nav.html:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/templates/base/nav.html:ro
       - ./templates/general/home.html:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/templates/general/home.html:ro
       - ./templates/general/recent.html:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/templates/general/recent.html:ro
@@ -25,5 +23,3 @@ services:
     environment:
       - MOBSF_PLATFORM=docker
 
-volumes:
-  mobsf_data:
