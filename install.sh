@@ -37,13 +37,16 @@ fi
 
 # 2. 检查并准备数据持久化目录 (统一规范至 /data/mobsf_data，彻底避免 UID 9901 权限问题)
 echo "[2/6] 准备数据持久化目录与权限 (UID 9901)..."
-mkdir -p /data/mobsf_data
+mkdir -p /data/mobsf_data/tools/jadx/jadx-1.5.0
+if [ ! -f /data/mobsf_data/secret ]; then
+  head -c 32 /dev/urandom | base64 > /data/mobsf_data/secret
+fi
 chmod -R 775 /data/mobsf_data 2>/dev/null || true
 if command -v chown > /dev/null 2>&1; then
   chown -R 9901:9901 /data/mobsf_data 2>/dev/null || true
 fi
 echo "MOBSF_DATA_DIR=/data/mobsf_data" > "$SCRIPT_DIR/.env"
-echo "  -> 持久化目录 /data/mobsf_data 已就绪并配置 UID 9901 属主"
+echo "  -> 持久化目录 /data/mobsf_data 已就绪并配置 UID 9901 属主 (已注入离线 JADX 标记与 Secret)"
 
 # 3. 检查权限边界 (针对 MobSF 非特权用户 UID 9901)
 echo "[3/6] 配置非特权容器运行权限 (UID 9901)..."
