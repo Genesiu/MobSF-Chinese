@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/Genesiu/MobSF-Chinese/releases"><img src="https://img.shields.io/badge/Release-v4.5.4-blue.svg?style=flat-square" alt="Release"></a>
+  <a href="https://github.com/Genesiu/MobSF-Chinese/releases"><img src="https://img.shields.io/badge/Release-v4.6.1-blue.svg?style=flat-square" alt="Release"></a>
   <a href="https://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPL%20v3.0-green.svg?style=flat-square" alt="License"></a>
   <a href="https://hub.docker.com/r/opensecurity/mobile-security-framework-mobsf"><img src="https://img.shields.io/badge/Docker-Official%20Image-2496ED.svg?style=flat-square&logo=docker" alt="Docker"></a>
   <a href="https://github.com/Genesiu/MobSF-Chinese/stargazers"><img src="https://img.shields.io/badge/PRs-Welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"></a>
@@ -27,18 +27,20 @@
   - **核心门户**：静态拖拽分析首页、历史扫描记录面板、用户认证与管理全套页面。
   - **交互看板**：侧边栏 40+ 专项导航、主看板卡片、四大组件（Activity/Service/Receiver/Provider）统计、风险评级与指标徽章、安全合规标准（OWASP/CWE/MASVS）列头。
   - **安全审计报告**：全量重构中文 PDF 导出模版，内置 CJK 字体映射配置，彻底根除 wkhtmltopdf 生成 PDF 时的**“中文豆腐块/乱码”**顽疾。
-- 🔄 **秒级安装与平滑回退**：提供自动化一键挂载脚本与原生恢复脚本，无需改动现有数据库或扫描产物。
+- 🔄 **智能多版本自适应**：原生适配 MobSF >= 4.6.0 现代架构与 <= 4.5.x 经典架构，安装升级脚本自带版本探针与动态切换能力。
 
 ---
 
-## 📸 汉化效果速览
+## 📦 版本对应关系与升级兼容矩阵 (Compatibility Matrix)
 
-| 模块区域 | 汉化覆盖说明 |
-| :--- | :--- |
-| **顶部导航与侧边栏** | 静态/动态分析、资产侦察、恶意行为、合规基线、SBOM 等 40+ 菜单项全中文支持 |
-| **静态分析仪表盘** | 综合安全评分卡、平均 CVSS 评分、应用基本特征、加壳与混淆识别卡片 |
-| **漏洞与合规表格** | 风险级别（高危/中危/提示/安全）、OWASP MASVS 对齐、涉及文件与详细描述 |
-| **PDF 审计报告** | 封面标题、摘要等级、二十余个安全检测章节及文泉驿微米黑高清排版 |
+| MobSF 官方版本 | 架构类型 | 模板架构目录 | 对应编排文件 | 核心技术差异与特性 |
+| :--- | :--- | :--- | :--- | :--- |
+| **MobSF >= 4.6.0**<br>(包含 **4.6.1 / latest**) | **现代模块化架构**<br>*(当前最新主干)* | `templates/`<br>(含 `general/includes/`) | `docker-compose.yml`<br>`docker-compose.v4.6.yml` | 1. 首页升级为 `.home-shell` 与 `.home-main`<br>2. 导航与页脚模块化拆分为 `landing_nav.html`、`landing_footer.html`<br>3. 上传重构为 `<label class="drop-zone">`，支持多文件并发队列与进度追踪<br>4. 顶部导航栏增加深色/浅色模式切换按钮 |
+| **MobSF <= 4.5.x**<br>(如 4.2.x - 4.5.4) | **经典单体架构**<br>*(历史兼容分支)* | `templates_v4.5/`<br>`templates/` (共享部分) | `docker-compose.v4.5.yml` | 1. 首页采用经典 Bootstrap 4 Flex 居中布局 (`.d-flex.h-100`)<br>2. 单体 `home.html` 内嵌所有导航与页脚<br>3. 常规按钮上传与 `#package` 在线包名下载输入框 |
+
+> [!IMPORTANT]
+> **升级排坑：为什么首页点击任何按钮都弹出上传窗口？**
+> MobSF 从 **v4.6.0** 起将上传区重构为 `<label class="fileUpload drop-zone">`，镜像内置的 `home.css` 定义了 `.fileUpload input { position: absolute; inset: 0; width: 100%; height: 100%; }`。若将老版（v4.5.x）的 `home.html` 挂载到新版镜像，由于缺失父级布局约束，隐藏的透明文件输入框会铺满整个视口，导致用户点击页面任意链接或按钮时均触发上传事件。**升级至本仓库最新版后，此问题已被彻底修复！**
 
 ---
 
@@ -57,18 +59,24 @@ docker compose up -d
 
 ---
 
-### 场景 B：为已有 MobSF 实例一键应用汉化
+### 场景 B：为已有 MobSF 实例一键安装/升级汉化
 
-如果你的服务器上已经通过 Docker 运行了官方 MobSF，无需停止或重新初始化数据库：
+如果你的服务器上已经通过 Docker 运行了官方 MobSF，或者需要平滑升级汉化包：
 
 ```bash
-# 1. 克隆汉化包
-git clone https://github.com/Genesiu/MobSF-Chinese.git /opt/MobSF-Chinese
+# 1. 进入 MobSF-Chinese 目录并拉取最新补丁
+cd /opt/MobSF-Chinese  # 或你克隆的目录，如 ~/MobSF-Chinese
+git pull origin main
 
-# 2. 执行一键安装脚本（自动安装 CJK 字体、挂载模板并重启容器）
-cd /opt/MobSF-Chinese
+# 2. 执行自适应安装脚本（自动探测镜像架构、配置 CJK 字体、挂载新版模板并重启）
 sudo bash install.sh
 ```
+
+脚本将自动执行以下操作：
+1. 探测宿主机 MobSF 版本与模板特性，自动匹配挂载 `>=4.6.0` 或 `<=4.5.x` 模板；
+2. 检查并准备文泉驿微米黑 CJK 字体；
+3. 配置非特权 UID 9901 属主权限，避免 `PermissionError`；
+4. 平滑重启容器，仅监听 `8000` 端口。
 
 ---
 
@@ -88,23 +96,31 @@ sudo bash uninstall.sh
 
 ```text
 MobSF-Chinese/
-├── README.md                   # 项目介绍与部署指南
+├── README.md                   # 项目介绍、版本对应关系与部署指南
 ├── LICENSE                     # GNU GPL v3.0 开源协议
-├── docker-compose.yml          # 开箱即用的 Docker 编排配置
-├── install.sh                  # 一键挂载与字体配置脚本
+├── docker-compose.yml          # 开箱即用 Docker Compose (默认适配 >=4.6.0)
+├── docker-compose.v4.6.yml     # MobSF >= 4.6.0 现代架构专用配置
+├── docker-compose.v4.5.yml     # MobSF <= 4.5.x 经典架构兼容配置
+├── install.sh                  # 带版本自动探针的一键安装与升级脚本
 ├── uninstall.sh                # 一键卸载与恢复脚本
-└── templates/                  # 高保真汉化模板资产
-    ├── base/
-    │   └── nav.html            # 顶部导航 + 全局侧边栏 + 看板指标 DOM 汉化引擎
-    ├── general/
-    │   ├── home.html           # 静态分析拖拽上传首页
-    │   └── recent.html         # 最近扫描记录与版本对比弹窗
-    ├── auth/
-    │   ├── login.html          # 用户登录页
-    │   ├── change_password.html # 密码修改页
-    │   └── users.html          # 用户管理页
-    └── pdf/
-        └── android_report.html # 中文 PDF 报告（内置 CJK 字体声明）
+├── templates/                  # >= 4.6.0 现代架构汉化模板
+│   ├── base/
+│   │   └── nav.html            # 导航栏 + 深色模式切换 + 全局侧边栏汉化引擎
+│   ├── general/
+│   │   ├── home.html           # 现代外壳拖拽分析首页 (防点击劫持)
+│   │   ├── recent.html         # 历史扫描记录面板
+│   │   └── includes/           # 模块化包含组件
+│   │       ├── landing_nav.html    # 首页顶部中文导航
+│   │       └── landing_footer.html # 首页底部信息与状态栏
+│   ├── auth/
+│   │   ├── login.html          # 用户登录页
+│   │   ├── change_password.html # 密码修改页
+│   │   └── users.html          # 用户管理页
+│   └── pdf/
+│       └── android_report.html # 中文 PDF 报告（内置 CJK 字体声明）
+└── templates_v4.5/             # <= 4.5.x 经典架构归档模板
+    └── general/
+        └── home.html           # 经典单体首页模板
 ```
 
 ---

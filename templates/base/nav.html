@@ -18,6 +18,7 @@
         <li class="nav-item"><a href="{% url 'donate' %}" class="nav-link">赞助项目 ♥</a></li>
         <li class="nav-item"><a target="_blank" href="https://mobsf.github.io/docs/#/" class="nav-link">使用文档</a></li>
         <li class="nav-item"><a href="{% url 'about' %}" class="nav-link">关于平台</a></li>
+        {% include "base/theme_toggle_button.html" ignore missing %}
 
         {% if user.is_authenticated %}
         <li class="nav-item dropdown">
@@ -48,6 +49,7 @@
 
     </div>
   </nav>
+  {% include "base/theme_toggle.html" ignore missing %}
   <!-- /.navbar -->
 
   <!-- MobSF 全局侧边栏与报告看板全量汉化引擎 (阵地1扩展版) -->

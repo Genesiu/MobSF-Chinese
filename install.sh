@@ -1,6 +1,6 @@
 #!/bin/bash
 # ==============================================================================
-# MobSF-Chinese 一键安装与汉化挂载脚本
+# MobSF-Chinese 一键安装、升级与汉化挂载脚本 (带版本自适应架构探测)
 # GitHub: https://github.com/Genesiu/MobSF-Chinese
 # ==============================================================================
 set -e
@@ -15,7 +15,7 @@ echo "=========================================================="
 # 1. 准备字体支持
 mkdir -p "$SCRIPT_DIR/fonts"
 if [ ! -f "$SCRIPT_DIR/fonts/wqy-microhei.ttc" ]; then
-  echo "[1/4] 检测中文字体支持..."
+  echo "[1/6] 检测中文字体支持..."
   if command -v apt-get > /dev/null 2>&1; then
     echo "  -> 正在通过 apt-get 安装文泉驿微米黑字体..."
     apt-get update -qq && apt-get install -y -qq fonts-wqy-microhei || true
@@ -36,7 +36,7 @@ if [ -f "$SCRIPT_DIR/fonts/wqy-microhei.ttc" ]; then
 fi
 
 # 2. 检查并准备数据持久化目录 (统一规范至 /data/mobsf_data，彻底避免 UID 9901 权限问题)
-echo "[2/5] 准备数据持久化目录与权限 (UID 9901)..."
+echo "[2/6] 准备数据持久化目录与权限 (UID 9901)..."
 mkdir -p /data/mobsf_data
 chmod -R 775 /data/mobsf_data 2>/dev/null || true
 if command -v chown > /dev/null 2>&1; then
@@ -46,16 +46,78 @@ echo "MOBSF_DATA_DIR=/data/mobsf_data" > "$SCRIPT_DIR/.env"
 echo "  -> 持久化目录 /data/mobsf_data 已就绪并配置 UID 9901 属主"
 
 # 3. 检查权限边界 (针对 MobSF 非特权用户 UID 9901)
-echo "[3/5] 配置非特权容器运行权限 (UID 9901)..."
-chmod -R 755 "$SCRIPT_DIR/templates" "$SCRIPT_DIR/fonts"
+echo "[3/6] 配置非特权容器运行权限 (UID 9901)..."
+chmod -R 755 "$SCRIPT_DIR/templates" "$SCRIPT_DIR/templates_v4.5" "$SCRIPT_DIR/fonts" 2>/dev/null || chmod -R 755 "$SCRIPT_DIR/templates" "$SCRIPT_DIR/fonts" 2>/dev/null || true
 if command -v chown > /dev/null 2>&1; then
-  chown -R 9901:9901 "$SCRIPT_DIR/templates" "$SCRIPT_DIR/fonts" 2>/dev/null || true
+  chown -R 9901:9901 "$SCRIPT_DIR/templates" "$SCRIPT_DIR/templates_v4.5" "$SCRIPT_DIR/fonts" 2>/dev/null || true
 fi
 # 确保宿主机用户家目录 (若在 /root 下) 具备穿透执行权限，否则容器内 UID 9901 无法跨目录读取挂载模板
 chmod o+x "$HOME" 2>/dev/null || true
 
-# 4. 安全启动容器 (仅监听 8000 端口，防御性清理历史残留端点)
-echo "[4/5] 停止旧容器并以 8000 端口启动 MobSF 汉化版..."
+# 4. MobSF 版本检测与汉化架构自适应判断 (Version Compatibility Matrix)
+echo "[4/6] 智能检测 MobSF 镜像与架构版本..."
+MOBSF_IMAGE="opensecurity/mobile-security-framework-mobsf:latest"
+
+# 优先拉取或确认镜像存在
+if ! docker image inspect "$MOBSF_IMAGE" >/dev/null 2>&1; then
+  echo "  -> 本地未检测到 $MOBSF_IMAGE，正在拉取最新镜像..."
+  docker pull "$MOBSF_IMAGE" || true
+fi
+
+IS_V46_PLUS=1
+DETECTED_VER=""
+
+# 判定规则 1: 检查运行中容器内部 VERSION
+if docker ps --format '{{.Names}}' | grep -Eq "^mobsf$"; then
+  DETECTED_VER=$(docker exec mobsf python3 -c "import mobsf.MobSF.settings as s; print(s.VERSION)" 2>/dev/null || true)
+fi
+
+# 判定规则 2: 若未获取到，通过 docker run 临时从镜像读取 VERSION
+if [ -z "$DETECTED_VER" ] && docker image inspect "$MOBSF_IMAGE" >/dev/null 2>&1; then
+  DETECTED_VER=$(docker run --rm --entrypoint python3 "$MOBSF_IMAGE" -c "import mobsf.MobSF.settings as s; print(s.VERSION)" 2>/dev/null || true)
+fi
+
+# 判定规则 3: 架构特征探测 (检查镜像内是否存在 landing_nav.html)
+if docker image inspect "$MOBSF_IMAGE" >/dev/null 2>&1; then
+  if docker run --rm --entrypoint test "$MOBSF_IMAGE" -f /home/mobsf/Mobile-Security-Framework-MobSF/mobsf/templates/general/includes/landing_nav.html 2>/dev/null; then
+    IS_V46_PLUS=1
+  else
+    IS_V46_PLUS=0
+  fi
+else
+  # 兜底默认按最新版
+  IS_V46_PLUS=1
+fi
+
+# 如果拿到了版本号，结合版本号双重校验
+if [ -n "$DETECTED_VER" ]; then
+  MAJOR=$(echo "$DETECTED_VER" | cut -d. -f1 | tr -cd '0-9')
+  MINOR=$(echo "$DETECTED_VER" | cut -d. -f2 | tr -cd '0-9')
+  if [ -n "$MAJOR" ] && [ -n "$MINOR" ]; then
+    if [ "$MAJOR" -gt 4 ] || ([ "$MAJOR" -eq 4 ] && [ "$MINOR" -ge 6 ]); then
+      IS_V46_PLUS=1
+    else
+      IS_V46_PLUS=0
+    fi
+  fi
+fi
+
+if [ "$IS_V46_PLUS" -eq 1 ]; then
+  echo "  ✅ 匹配架构: MobSF ${DETECTED_VER:-4.6.1+} (>= 4.6.0 新版架构)"
+  echo "  -> 激活最新模块化汉化套件 (独立导航、拖拽上传防劫持、深色模式切换)"
+  if [ -f "$SCRIPT_DIR/docker-compose.v4.6.yml" ]; then
+    cp "$SCRIPT_DIR/docker-compose.v4.6.yml" "$SCRIPT_DIR/docker-compose.yml"
+  fi
+else
+  echo "  ℹ️ 匹配架构: MobSF ${DETECTED_VER:-4.5.x} (<= 4.5.x 经典架构)"
+  echo "  -> 激活经典兼容汉化套件 (templates_v4.5)"
+  if [ -f "$SCRIPT_DIR/docker-compose.v4.5.yml" ]; then
+    cp "$SCRIPT_DIR/docker-compose.v4.5.yml" "$SCRIPT_DIR/docker-compose.yml"
+  fi
+fi
+
+# 5. 安全启动容器 (仅监听 8000 端口，防御性清理历史残留端点)
+echo "[5/6] 停止旧容器并以 8000 端口启动 MobSF 汉化版..."
 docker compose down 2>/dev/null || true
 
 # 防御性清理异常残留的 mobsf 容器 (释放占用的网络 endpoint)
@@ -67,8 +129,8 @@ fi
 
 docker compose up -d
 
-# 5. 轮询健康状态 (仅探活 8000 端口)
-echo "[5/5] 等待服务初始化与数据库迁移 (预计需 15~30 秒)..."
+# 6. 轮询健康状态 (仅探活 8000 端口)
+echo "[6/6] 等待服务初始化与数据库迁移 (预计需 15~30 秒)..."
 SUCCESS=0
 for i in {1..35}; do
   if curl -sf http://127.0.0.1:8000/ > /dev/null 2>&1; then

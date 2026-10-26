@@ -1,0 +1,27 @@
+{% load static %}
+<nav class="nav nav-masthead">
+    <div class="nav-side nav-side-left">
+        <a class="nav-link active" href="{% url 'recent' %}">扫描记录</a>
+        <a class="nav-link" href="{% url 'dynamic' %}">动态分析</a>
+    </div>
+    <img class="home-logo" src="{% static "img/mobsf_logo.png" %}" alt="MobSF" height="48" width="140" />
+    <div class="nav-side nav-side-right">
+        <a class="nav-link" href="{% url 'api_docs' %}">REST API</a>
+        <a class="nav-link" target="_blank" rel="noopener noreferrer" href="https://mobsf.github.io/docs/#/">开发文档</a>
+        {% if user.is_authenticated %}
+        <div class="dropdown">
+            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa fa-user-circle" aria-hidden="true"></i></a>
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu">
+                <li><a href="#" class="dropdown-item"> <small>{{ request.user.username }} <span class="badge badge-primary"> {% if user.is_staff %} 管理员 {% else %}{{ request.user.groups.all.0 }} {% endif %}</span></small></a></li>
+                <li class="dropdown-divider"></li>
+                <li><a href="{% url 'change_password' %}" class="dropdown-item"><i class="fa fa-asterisk" aria-hidden="true"></i> 修改密码 </a></li>
+                {% if user.is_staff %}<li><a href="{% url 'users' %}" class="dropdown-item"><i class="fa fa-users" aria-hidden="true"></i> 用户管理 </a></li>{% endif %}
+                <li><a href="{% url 'logout' %}" class="dropdown-item"><i class="fa fa-power-off" aria-hidden="true"></i> 退出登录 </a></li>
+            </ul>
+        </div>
+        {% endif %}
+        <form class="nav-search" action="/search" method="GET">
+            <input name="query" type="search" class="form-control" placeholder="搜索应用或哈希..." aria-label="搜索">
+        </form>
+    </div>
+</nav>

@@ -1,5 +1,6 @@
 # ==============================================================================
 # MobSF-Chinese (Mobile Security Framework 中文开箱即用 Docker Compose 编排)
+# 支持 MobSF >= 4.6.0 最新架构（支持深色模式与模块化首页导航）
 # GitHub: https://github.com/Genesiu/MobSF-Chinese
 # ==============================================================================
 services:
@@ -13,6 +14,8 @@ services:
       # 挂载中文视图与分析看板汉化引擎 (只读挂载，零侵入原版镜像，不覆盖镜像内置工具)
       - ./templates/base/nav.html:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/templates/base/nav.html:ro
       - ./templates/general/home.html:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/templates/general/home.html:ro
+      - ./templates/general/includes/landing_nav.html:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/templates/general/includes/landing_nav.html:ro
+      - ./templates/general/includes/landing_footer.html:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/templates/general/includes/landing_footer.html:ro
       - ./templates/general/recent.html:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/templates/general/recent.html:ro
       - ./templates/auth/login.html:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/templates/auth/login.html:ro
       - ./templates/auth/change_password.html:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/templates/auth/change_password.html:ro
@@ -22,4 +25,3 @@ services:
       - ./fonts:/usr/share/fonts/truetype/custom:ro
     environment:
       - MOBSF_PLATFORM=docker
-

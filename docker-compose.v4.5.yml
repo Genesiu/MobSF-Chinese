@@ -1,0 +1,25 @@
+# ==============================================================================
+# MobSF-Chinese (Mobile Security Framework 中文开箱即用 Docker Compose 编排)
+# 针对 MobSF <= 4.5.x 经典架构兼容配置
+# GitHub: https://github.com/Genesiu/MobSF-Chinese
+# ==============================================================================
+services:
+  mobsf:
+    image: opensecurity/mobile-security-framework-mobsf:latest
+    container_name: mobsf
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      # 挂载中文视图与分析看板汉化引擎 (只读挂载，经典单体结构)
+      - ./templates/base/nav.html:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/templates/base/nav.html:ro
+      - ./templates_v4.5/general/home.html:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/templates/general/home.html:ro
+      - ./templates/general/recent.html:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/templates/general/recent.html:ro
+      - ./templates/auth/login.html:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/templates/auth/login.html:ro
+      - ./templates/auth/change_password.html:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/templates/auth/change_password.html:ro
+      - ./templates/auth/users.html:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/templates/auth/users.html:ro
+      - ./templates/pdf/android_report.html:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/templates/pdf/android_report.html:ro
+      # 挂载 CJK 中文字体目录 (解决 wkhtmltopdf 中文方块乱码)
+      - ./fonts:/usr/share/fonts/truetype/custom:ro
+    environment:
+      - MOBSF_PLATFORM=docker
