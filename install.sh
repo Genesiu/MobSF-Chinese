@@ -37,16 +37,40 @@ fi
 
 # 2. 检查并准备数据持久化目录 (统一规范至 /data/mobsf_data，彻底避免 UID 9901 权限问题)
 echo "[2/6] 准备数据持久化目录与权限 (UID 9901)..."
-mkdir -p /data/mobsf_data/tools/jadx/jadx-1.5.0
-if [ ! -f /data/mobsf_data/secret ]; then
-  head -c 32 /dev/urandom | base64 > /data/mobsf_data/secret
+mkdir -p /data/mobsf_data
+# 必须安装真实工具，空目录会让 MobSF 误判为已安装，实际扫描仍会失败。
+JADX_DIR=/data/mobsf_data/tools/jadx/jadx-1.5.0
+if [ ! -s "$JADX_DIR/lib/jadx-1.5.0-all.jar" ] || [ ! -x "$JADX_DIR/bin/jadx" ]; then
+  command -v unzip >/dev/null || { echo "请先安装 unzip。"; exit 1; }
+  JADX_TMP=$(mktemp -d)
+  trap 'rm -rf "$JADX_TMP"' EXIT
+  JADX_ZIP=${MOBSF_JADX_ZIP:-$SCRIPT_DIR/cache/jadx-1.5.0.zip}
+  if [ ! -f "$JADX_ZIP" ]; then
+    echo "  -> 下载官方 JADX 1.5.0（可用 MOBSF_JADX_ZIP 指定离线安装包）..."
+    JADX_ZIP="$JADX_TMP/jadx.zip"
+    curl -fL --connect-timeout 15 --max-time 300 --retry 1 \
+      -o "$JADX_ZIP" https://github.com/skylot/jadx/releases/download/v1.5.0/jadx-1.5.0.zip
+  fi
+  unzip -tq "$JADX_ZIP" >/dev/null
+  unzip -q "$JADX_ZIP" -d "$JADX_TMP/extracted"
+  test -s "$JADX_TMP/extracted/lib/jadx-1.5.0-all.jar"
+  test -s "$JADX_TMP/extracted/bin/jadx"
+  mkdir -p "$JADX_DIR"
+  cp -a "$JADX_TMP/extracted/." "$JADX_DIR/"
+  chmod 755 "$JADX_DIR/bin/jadx" "$JADX_DIR/bin/jadx-gui"
+  rm -rf "$JADX_TMP"
+  trap - EXIT
 fi
-chmod -R 775 /data/mobsf_data 2>/dev/null || true
+if [ ! -f /data/mobsf_data/secret ]; then
+  (umask 077; head -c 32 /dev/urandom | base64 > /data/mobsf_data/secret)
+fi
+chmod 750 /data/mobsf_data
+chmod 600 /data/mobsf_data/secret
 if command -v chown > /dev/null 2>&1; then
   chown -R 9901:9901 /data/mobsf_data 2>/dev/null || true
 fi
 echo "MOBSF_DATA_DIR=/data/mobsf_data" > "$SCRIPT_DIR/.env"
-echo "  -> 持久化目录 /data/mobsf_data 已就绪并配置 UID 9901 属主 (已注入离线 JADX 标记与 Secret)"
+echo "  -> 持久化目录与真实 JADX 工具已就绪。"
 
 # 3. 检查权限边界 (针对 MobSF 非特权用户 UID 9901)
 echo "[3/6] 配置非特权容器运行权限 (UID 9901)..."
@@ -54,8 +78,6 @@ chmod -R 755 "$SCRIPT_DIR/templates" "$SCRIPT_DIR/templates_v4.5" "$SCRIPT_DIR/f
 if command -v chown > /dev/null 2>&1; then
   chown -R 9901:9901 "$SCRIPT_DIR/templates" "$SCRIPT_DIR/templates_v4.5" "$SCRIPT_DIR/fonts" 2>/dev/null || true
 fi
-# 确保宿主机用户家目录 (若在 /root 下) 具备穿透执行权限，否则容器内 UID 9901 无法跨目录读取挂载模板
-chmod o+x "$HOME" 2>/dev/null || true
 
 # 4. MobSF 版本检测与汉化架构自适应判断 (Version Compatibility Matrix)
 echo "[4/6] 智能检测 MobSF 镜像与架构版本..."
@@ -70,19 +92,14 @@ fi
 IS_V46_PLUS=1
 DETECTED_VER=""
 
-# 判定规则 1: 检查运行中容器内部 VERSION
-if docker ps --format '{{.Names}}' | grep -Eq "^mobsf$"; then
-  DETECTED_VER=$(docker exec mobsf python3 -c "import mobsf.MobSF.settings as s; print(s.VERSION)" 2>/dev/null || true)
-fi
-
-# 判定规则 2: 若未获取到，通过 docker run 临时从镜像读取 VERSION
-if [ -z "$DETECTED_VER" ] && docker image inspect "$MOBSF_IMAGE" >/dev/null 2>&1; then
-  DETECTED_VER=$(docker run --rm --entrypoint python3 "$MOBSF_IMAGE" -c "import mobsf.MobSF.settings as s; print(s.VERSION)" 2>/dev/null || true)
+# 静态读取目标镜像版本，不能导入 settings（会触发初始化和后台下载）。
+if docker image inspect "$MOBSF_IMAGE" >/dev/null 2>&1; then
+  DETECTED_VER=$(docker run --rm --network none --entrypoint python3 "$MOBSF_IMAGE" -c "import ast,pathlib; print([ast.literal_eval(n.value) for n in ast.parse(pathlib.Path('mobsf/MobSF/init.py').read_text()).body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='VERSION' for t in n.targets)][0])" 2>/dev/null || true)
 fi
 
 # 判定规则 3: 架构特征探测 (检查镜像内是否存在 landing_nav.html)
 if docker image inspect "$MOBSF_IMAGE" >/dev/null 2>&1; then
-  if docker run --rm --entrypoint test "$MOBSF_IMAGE" -f /home/mobsf/Mobile-Security-Framework-MobSF/mobsf/templates/general/includes/landing_nav.html 2>/dev/null; then
+  if docker run --rm --network none --entrypoint test "$MOBSF_IMAGE" -f /home/mobsf/Mobile-Security-Framework-MobSF/mobsf/templates/general/includes/landing_nav.html 2>/dev/null; then
     IS_V46_PLUS=1
   else
     IS_V46_PLUS=0
@@ -121,26 +138,17 @@ fi
 
 # 5. 安全启动容器 (仅监听 8000 端口，防御性清理历史残留端点)
 echo "[5/6] 停止旧容器并以 8000 端口启动 MobSF 汉化版..."
-docker compose down 2>/dev/null || true
-
-# 防御性清理异常残留的 mobsf 容器 (释放占用的网络 endpoint)
-if docker ps -a --format '{{.Names}}' | grep -Eq "^mobsf$"; then
-  echo "  -> 清理历史残留容器 mobsf..."
-  docker stop mobsf 2>/dev/null || true
-  docker rm -f mobsf 2>/dev/null || true
-fi
-
 docker compose up -d
 
 # 6. 轮询健康状态 (仅探活 8000 端口)
-echo "[6/6] 等待服务初始化与数据库迁移 (预计需 15~30 秒)..."
+echo "[6/6] 等待服务初始化与数据库迁移 (网络较慢时可能需要数分钟)..."
 SUCCESS=0
-for i in {1..35}; do
-  if curl -sf http://127.0.0.1:8000/ > /dev/null 2>&1; then
+for i in {1..90}; do
+  if curl -sf --max-time 3 http://127.0.0.1:8000/login/ > /dev/null 2>&1; then
     SUCCESS=1
     break
   fi
-  echo "  等待服务就绪中... ($i/35)"
+  echo "  等待服务就绪中... ($i/90)"
   sleep 2
 done
 
@@ -153,4 +161,5 @@ if [ $SUCCESS -eq 1 ]; then
 else
   echo "⚠️ 容器未能在预期时间内响应，输出最近 30 行容器日志排查："
   docker logs --tail 30 mobsf
+  exit 1
 fi

@@ -11,6 +11,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
+      - ${MOBSF_DATA_DIR:-/data/mobsf_data}:/home/mobsf/.MobSF
       # 挂载中文视图与分析看板汉化引擎 (只读挂载，零侵入原版镜像，不覆盖镜像内置工具)
       - ./templates/base/nav.html:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/templates/base/nav.html:ro
       - ./templates/general/home.html:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/templates/general/home.html:ro
@@ -25,3 +26,9 @@ services:
       - ./fonts:/usr/share/fonts/truetype/custom:ro
     environment:
       - MOBSF_PLATFORM=docker
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "--silent", "--output", "/dev/null", "--noproxy", "*", "http://127.0.0.1:8000/login/"]
+      interval: 30s
+      timeout: 5s
+      start_period: 120s
+      retries: 3

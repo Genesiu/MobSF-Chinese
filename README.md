@@ -48,14 +48,22 @@
 
 ### 场景 A：从零全新启动（开箱即用）
 
-如果你尚未部署 MobSF，只需克隆本仓库并执行 `docker compose up -d` 即可秒级启动已完整汉化的 MobSF：
+如果你尚未部署 MobSF，请克隆本仓库后运行安装脚本，准备真实的 JADX 工具、数据目录与模板挂载：
 
 ```bash
 git clone https://github.com/Genesiu/MobSF-Chinese.git
 cd MobSF-Chinese
-docker compose up -d
+sudo bash install.sh
 ```
 启动后访问：`http://<服务器IP>:8000` 即可进入中文版 MobSF。默认凭据：`mobsf` / `mobsf`。
+
+首次安装需下载官方 JADX 1.5.0。服务器访问 GitHub 较慢时，可先下载官方的
+`jadx-1.5.0.zip`，再用 `sudo MOBSF_JADX_ZIP=/绝对路径/jadx-1.5.0.zip bash install.sh`
+离线安装。安装脚本会检查压缩包和实际工具文件，不会用空目录冒充安装成功。
+
+三个 Compose 配置均将 `${MOBSF_DATA_DIR:-/data/mobsf_data}` 挂载到
+`/home/mobsf/.MobSF`，保存工具、数据库与扫描结果。已有容器若未挂载该目录，
+请先备份容器内 `/home/mobsf/.MobSF` 并迁移数据，再重建容器。
 
 ---
 
