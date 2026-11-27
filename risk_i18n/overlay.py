@@ -303,6 +303,8 @@ def main():
     parser.add_argument('--backup-dir', type=Path,
                         default=Path('/tmp/mobsf-risk-i18n-backups'))
     parser.add_argument('--backup', type=Path)
+    parser.add_argument('--expect-version',
+                        help='Refuse to apply if the installed MobSF version differs')
     args = parser.parse_args()
     root = args.app_root.resolve()
     if args.action == 'rollback':
@@ -312,6 +314,9 @@ def main():
         print(json.dumps({'restored': str(args.backup)}))
         return
     report = compatibility(root)
+    if args.expect_version is not None and args.expect_version != report['version']:
+        parser.error(
+            f'Expected MobSF {args.expect_version}; found {report["version"]}')
     planned_files(root)
     report['templates_compatible'] = True
     if args.action == 'apply':

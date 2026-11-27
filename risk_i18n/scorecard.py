@@ -31,6 +31,58 @@ GEO_LABELS = {
     'zipcode': '邮政编码', 'zip_code': '邮政编码', 'time_zone': '时区',
     'timezone': '时区', 'ip': 'IP 地址', 'ip_address': 'IP 地址',
 }
+ANDROID_PERMISSION = re.compile(
+    r'^((?:android|com\.google)\.[\w.]+) \(dangerous\): ([^\n]*?) - ([^\n]*)$',
+    re.MULTILINE,
+)
+
+
+def manifest_scorecard(catalog, item):
+    """Recover a reviewed manifest rule from the scorecard's displayed fields."""
+    title, description = item.get('title', ''), item.get('description', '')
+    if not isinstance(title, str) or not isinstance(description, str):
+        return title, description
+    candidates = [(title, description)]
+    prefix, newline, body = description.partition('\n')
+    if newline:
+        # MobSF moves the portion after the first <br> from the title to the body.
+        candidates.append((title + '<br>' + prefix, body))
+    for heading, body in candidates:
+        matches = set()
+        for domain, rule, field in catalog.entries:
+            if domain != 'manifest' or field != 'title':
+                continue
+            translated = catalog.translate(domain, rule, 'title', heading)
+            if translated == heading:
+                continue
+            details = catalog.translate(domain, rule, 'description', body)
+            if details == body:
+                continue
+            summary, breaks, evidence = translated.partition('<br>')
+            if breaks:
+                details = evidence.replace('<br>', '') + '\n' + details
+            matches.add((summary, details))
+        if matches:
+            return matches.pop() if len(matches) == 1 else (title, description)
+    return title, description
+
+
+def android_permission_scorecard(catalog, text):
+    """Translate both stock Android permission fields using their permission ID."""
+    if not isinstance(text, str) or len(text) > MAX_TEXT:
+        return text
+
+    def translate(match):
+        name, info, description = match.groups()
+        item = {'section': 'android-permission',
+                'rule': name.rsplit('.', 1)[-1]}
+        labels = [catalog.translate(dict(item, value=value), 'value')
+                  for value in (info, description)]
+        if labels == [info, description]:
+            return match[0]
+        return f'{name}（高敏感权限）：{labels[0]} — {labels[1]}'
+
+    return ANDROID_PERMISSION.sub(translate, text)
 
 
 def source_hashes(root, origins=None):

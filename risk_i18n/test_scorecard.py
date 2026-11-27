@@ -4,13 +4,14 @@ import json
 import unittest
 from pathlib import Path
 
-from engine import split_source
+from engine import Catalog, split_source
 
-from scorecard import ScorecardCatalog
+from scorecard import ScorecardCatalog, android_permission_scorecard, manifest_scorecard
 
 
 DATA = json.loads((Path(__file__).resolve().parent
                    / 'scorecard.zh-CN.json').read_text('utf-8'))
+ROOT = Path(__file__).resolve().parent
 
 
 class ScorecardTests(unittest.TestCase):
@@ -75,6 +76,48 @@ class ScorecardTests(unittest.TestCase):
         translated = self.catalog.translate(item, 'description')
         self.assertTrue(translated.startswith('从应用中识别出'))
         self.assertTrue(translated.endswith(evidence))
+
+    def test_android_manifest_matches_title_and_details_together(self):
+        reviewed = json.loads((ROOT / 'catalog.zh-CN.json').read_text('utf-8'))
+        source = json.loads((ROOT / 'sources/4.5.2.json').read_text('utf-8'))
+        catalog = Catalog(reviewed, {'manifest': source['manifest']})
+        rule = source['manifest']['task_hijacking2']
+        finding = {'title': rule['title'] % 'example.MainActivity',
+                   'description': rule['description'] % 26}
+        title, details = manifest_scorecard(catalog, finding)
+        self.assertIn('example.MainActivity', title)
+        self.assertIn('任务劫持风险', title)
+        self.assertIn('26', details)
+        finding['description'] += ' New meaning.'
+        self.assertEqual(manifest_scorecard(catalog, finding),
+                         (finding['title'], finding['description']))
+
+    def test_android_manifest_preserves_relocated_permission_evidence(self):
+        reviewed = json.loads((ROOT / 'catalog.zh-CN.json').read_text('utf-8'))
+        source = json.loads((ROOT / 'sources/4.5.2.json').read_text('utf-8'))
+        catalog = Catalog(reviewed, {'manifest': source['manifest']})
+        rule = source['manifest']['exported_protected_permission_signature']
+        evidence = ' example.permission.SIGNED'
+        raw = rule['title'] % (
+            'Activity', 'example.MainActivity', '<br>' + evidence)
+        title, moved = raw.split('<br>', 1)
+        finding = {'title': title,
+                   'description': '\n'.join((moved, rule['description']))}
+        heading, details = manifest_scorecard(catalog, finding)
+        self.assertIn('受权限保护', heading)
+        self.assertIn(evidence, details)
+        self.assertIn('[android:exported=true]', details)
+
+    def test_android_permission_does_not_translate_custom_identifier(self):
+        report = json.loads((ROOT / 'report.zh-CN.json').read_text('utf-8'))
+        hashes = {key: value['sha256']
+                  for key, value in report['origins'].items()}
+        catalog = ScorecardCatalog(dict(report, origins=hashes), hashes)
+        original = ('android.permission.RECORD_AUDIO (dangerous): record audio - '
+                    'Allows application to access the audio record path.')
+        self.assertIn('录制音频', android_permission_scorecard(catalog, original))
+        custom = original.replace('android.permission', 'example.permission')
+        self.assertEqual(android_permission_scorecard(catalog, custom), custom)
 
 
 if __name__ == '__main__':

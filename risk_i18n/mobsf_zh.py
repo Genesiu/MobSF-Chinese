@@ -12,6 +12,7 @@ from django import template
 
 from .mobsf_zh_engine import Catalog
 from .mobsf_zh_scorecard import SECTIONS, ScorecardCatalog, load_catalog, report_catalog
+from .mobsf_zh_scorecard import android_permission_scorecard, manifest_scorecard
 
 
 register = template.Library()
@@ -90,7 +91,18 @@ def scorecard_text(item, field):
     original = item.get(field, '')
     if os.environ.get('MOBSF_RISK_LOCALE', 'zh-CN') != 'zh-CN':
         return original
-    return get_scorecard_catalog().translate(item, field)
+    catalog = get_scorecard_catalog()
+    section = item.get('section')
+    if 'appsec' in catalog.active and section == 'manifest':
+        title, description = manifest_scorecard(get_catalog(), item)
+        return title if field == 'title' else description
+    result = catalog.translate(item, field)
+    if 'appsec' in catalog.active:
+        if section == 'permissions' and field == 'description':
+            return android_permission_scorecard(get_report_catalog(), result)
+        if section in ('certificate', 'firebase') and result == original:
+            return zh_report(original, 'cert' if section == 'certificate' else section)
+    return result
 
 
 @register.filter
