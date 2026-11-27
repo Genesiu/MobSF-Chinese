@@ -707,7 +707,7 @@
       "section": "ios-code",
       "field": "value",
       "source": "IP Address disclosure",
-      "text": "IP 地址泄露",
+      "text": "IP 地址泄露。",
       "rule": "ios_ip_disclosure"
     },
     {
@@ -715,7 +715,7 @@
       "section": "ios-code",
       "field": "value",
       "source": "Files may contain hardcoded sensitive information like usernames, passwords, keys etc.",
-      "text": "文件可能含有硬编码的用户名、密码或密钥等敏感信息。",
+      "text": "文件中可能包含硬编码的敏感信息，例如用户名、密码或密钥。",
       "rule": "ios_hardcoded_info"
     },
     {
@@ -771,7 +771,7 @@
       "section": "ios-code",
       "field": "value",
       "source": "The App logs information. Sensitive information should never be logged.",
-      "text": "应用会记录日志，日志中不应包含敏感信息。",
+      "text": "应用包含日志输出。敏感信息不应写入日志。",
       "rule": "ios_app_logging"
     },
     {
@@ -779,7 +779,7 @@
       "section": "ios-code",
       "field": "value",
       "source": "This app listens to Clipboard changes. Some malware also listen to Clipboard changes.",
-      "text": "应用监听剪贴板变化。部分恶意软件也会监听剪贴板变化。",
+      "text": "应用会监听剪贴板变化。部分恶意软件也会监听剪贴板变化。",
       "rule": "ios_clipboard_listen"
     },
     {
@@ -859,7 +859,7 @@
       "section": "ios-code",
       "field": "value",
       "source": "The App uses ECB mode in Cryptographic encryption algorithm. ECB mode is known to be weak as it results in the same ciphertext for identical blocks of plaintext.",
-      "text": "应用使用 ECB 加密模式。相同明文块会产生相同密文块，因此 ECB 被认为不安全。",
+      "text": "应用使用了 ECB 加密模式。ECB 会将相同的明文块加密为相同的密文块，因此被认为是不安全的。",
       "rule": "ios_aes_ecb"
     },
     {
@@ -883,7 +883,7 @@
       "section": "ios-code",
       "field": "value",
       "source": "This App copies data to clipboard. Sensitive data should not be copied to clipboard as other applications can access it.",
-      "text": "应用将数据复制到剪贴板。其他应用可能访问剪贴板，因此不应复制敏感信息。",
+      "text": "应用会将数据复制到剪贴板。其他应用可能访问剪贴板，因此不应将敏感数据复制到其中。",
       "rule": "ios_clipboard_copy"
     },
     {
@@ -907,7 +907,7 @@
       "section": "ios-code",
       "field": "value",
       "source": "IP Address disclosure",
-      "text": "IP 地址泄露",
+      "text": "IP 地址泄露。",
       "rule": "ios_ip_disclosure"
     },
     {
@@ -915,7 +915,7 @@
       "section": "ios-code",
       "field": "value",
       "source": "Files may contain hardcoded sensitive information like usernames, passwords, keys etc.",
-      "text": "文件可能含有硬编码的用户名、密码或密钥等敏感信息。",
+      "text": "文件中可能包含硬编码的敏感信息，例如用户名、密码或密钥。",
       "rule": "ios_hardcoded_info"
     },
     {
@@ -947,7 +947,7 @@
       "section": "ios-code",
       "field": "value",
       "source": "The App logs information. Sensitive information should never be logged.",
-      "text": "应用会记录日志，日志中不应包含敏感信息。",
+      "text": "应用包含日志输出。敏感信息不应写入日志。",
       "rule": "ios_swift_log"
     },
     {
@@ -2293,6 +2293,870 @@
       "source": "Malicious applications can use this to try and trick users into installing additional malicious packages.",
       "text": "允许应用请求安装软件包。恶意应用可能借此诱导用户安装其他恶意软件包。",
       "rule": "REQUEST_INSTALL_PACKAGES"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "send SMS messages",
+      "text": "发送短信",
+      "rule": "SEND_SMS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows application to send SMS messages. Malicious applications may cost you money by sending messages without your confirmation.",
+      "text": "允许应用发送短信。恶意应用可能未经确认发送短信并产生费用。",
+      "rule": "SEND_SMS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "send SMS messages",
+      "text": "无需确认即可发送短信",
+      "rule": "SEND_SMS_NO_CONFIRMATION"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "send SMS messages via the Messaging app with no user input or confirmation.",
+      "text": "允许应用通过短信应用发送短信，无需用户输入或确认。",
+      "rule": "SEND_SMS_NO_CONFIRMATION"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "directly call phone numbers",
+      "text": "直接拨打电话",
+      "rule": "CALL_PHONE"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows the application to call phone numbers without your intervention. Malicious applications may cause unexpected calls on your phone bill. Note that this does not allow the application to call emergency numbers.",
+      "text": "允许应用在无需用户操作的情况下拨打电话。恶意应用可能产生意外的通话费用。此权限不允许拨打紧急号码。",
+      "rule": "CALL_PHONE"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "receive SMS",
+      "text": "接收短信",
+      "rule": "RECEIVE_SMS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows application to receive and process SMS messages. Malicious applications may monitor your messages or delete them without showing them to you.",
+      "text": "允许应用接收并处理短信。恶意应用可能监视或删除短信，而不向用户显示。",
+      "rule": "RECEIVE_SMS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "receive MMS",
+      "text": "接收彩信",
+      "rule": "RECEIVE_MMS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows application to receive and process MMS messages. Malicious applications may monitor your messages or delete them without showing them to you.",
+      "text": "允许应用接收并处理彩信。恶意应用可能监视或删除消息，而不向用户显示。",
+      "rule": "RECEIVE_MMS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "read SMS or MMS",
+      "text": "读取短信或彩信",
+      "rule": "READ_SMS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows application to read SMS messages stored on your phone or SIM card. Malicious applications may read your confidential messages.",
+      "text": "允许应用读取手机或 SIM 卡中保存的短信。恶意应用可能读取私密消息。",
+      "rule": "READ_SMS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "edit SMS or MMS",
+      "text": "修改短信或彩信",
+      "rule": "WRITE_SMS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows application to write to SMS messages stored on your phone or SIM card. Malicious applications may delete your messages.",
+      "text": "允许应用写入手机或 SIM 卡中保存的短信。恶意应用可能删除用户消息。",
+      "rule": "WRITE_SMS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "receive WAP",
+      "text": "接收 WAP 消息",
+      "rule": "RECEIVE_WAP_PUSH"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows application to receive and process WAP messages. Malicious applications may monitor your messages or delete them without showing them to you.",
+      "text": "允许应用接收并处理 WAP 消息。恶意应用可能监视或删除消息，而不向用户显示。",
+      "rule": "RECEIVE_WAP_PUSH"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "read contact data",
+      "text": "读取联系人",
+      "rule": "READ_CONTACTS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to read all of the contact (address) data stored on your phone. Malicious applications can use this to send your data to other people.",
+      "text": "允许应用读取手机内保存的全部联系人数据。恶意应用可能把这些数据发送给他人。",
+      "rule": "READ_CONTACTS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "write contact data",
+      "text": "修改联系人",
+      "rule": "WRITE_CONTACTS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to modify the contact (address) data stored on your phone. Malicious applications can use this to erase or modify your contact data.",
+      "text": "允许应用修改手机内保存的联系人数据。恶意应用可能删除或篡改联系人。",
+      "rule": "WRITE_CONTACTS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "read the user's personal profile data",
+      "text": "读取个人资料",
+      "rule": "READ_PROFILE"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to read the user's personal profile data.",
+      "text": "允许应用读取用户个人资料。",
+      "rule": "READ_PROFILE"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "write the user's personal profile data",
+      "text": "写入个人资料",
+      "rule": "WRITE_PROFILE"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to write (but not read) the user's personal profile data.",
+      "text": "允许应用写入用户个人资料。此权限本身不提供读取能力。",
+      "rule": "WRITE_PROFILE"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "read from the user's social stream",
+      "text": "读取社交动态",
+      "rule": "READ_SOCIAL_STREAM"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to read from the user's social stream.",
+      "text": "允许应用读取用户的社交动态。",
+      "rule": "READ_SOCIAL_STREAM"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "write the user's social stream",
+      "text": "写入社交动态",
+      "rule": "WRITE_SOCIAL_STREAM"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to write (but not read) the user's social stream data.",
+      "text": "允许应用写入用户的社交动态。此权限本身不提供读取能力。",
+      "rule": "WRITE_SOCIAL_STREAM"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "read calendar events",
+      "text": "读取日历事件",
+      "rule": "READ_CALENDAR"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to read all of the calendar events stored on your phone. Malicious applications can use this to send your calendar events to other people.",
+      "text": "允许应用读取手机保存的全部日历事件。恶意应用可能把这些信息发送给他人。",
+      "rule": "READ_CALENDAR"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "add or modify calendar events and send emails to guests",
+      "text": "添加或修改日历事件",
+      "rule": "WRITE_CALENDAR"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to add or change the events on your calendar, which may send emails to guests. Malicious applications can use this to erase or modify your calendar events or to send emails to guests.",
+      "text": "允许应用添加或更改日历事件，可能会向来宾发送邮件。恶意应用可能删除事件或向来宾发送邮件。",
+      "rule": "WRITE_CALENDAR"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "read user-defined dictionary",
+      "text": "读取用户词典",
+      "rule": "READ_USER_DICTIONARY"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to read any private words, names and phrases that the user may have stored in the user dictionary.",
+      "text": "允许应用读取用户词典中保存的私有单词、姓名及短语。",
+      "rule": "READ_USER_DICTIONARY"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "read Browser's history and bookmarks",
+      "text": "读取浏览历史和书签",
+      "rule": "READ_HISTORY_BOOKMARKS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows the application to read all the URLs that the browser has visited and all of the browser's bookmarks.",
+      "text": "允许应用读取浏览器访问过的 URL 和保存的书签。",
+      "rule": "READ_HISTORY_BOOKMARKS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "write Browser's history and bookmarks",
+      "text": "修改浏览历史和书签",
+      "rule": "WRITE_HISTORY_BOOKMARKS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to modify the browser's history or bookmarks stored on your phone. Malicious applications can use this to erase or modify your browser's data.",
+      "text": "允许应用修改手机中保存的浏览历史或书签。恶意应用可能删除或更改这些数据。",
+      "rule": "WRITE_HISTORY_BOOKMARKS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "mock location sources for testing",
+      "text": "模拟定位（测试）",
+      "rule": "ACCESS_MOCK_LOCATION"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Create mock location sources for testing. Malicious applications can use this to override the location and/or status returned by real-location sources such as GPS or Network providers.",
+      "text": "允许应用创建模拟位置来源。恶意应用可能覆盖 GPS 或网络定位返回的位置或状态。",
+      "rule": "ACCESS_MOCK_LOCATION"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "make/receive Internet calls",
+      "text": "拨打或接听网络电话",
+      "rule": "USE_SIP"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to use the SIP service to make/receive Internet calls.",
+      "text": "允许应用使用 SIP 服务拨打或接听互联网电话。",
+      "rule": "USE_SIP"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "act as an account authenticator",
+      "text": "作为账号认证器运行",
+      "rule": "AUTHENTICATE_ACCOUNTS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to use the account authenticator capabilities of the Account Manager, including creating accounts as well as obtaining and setting their passwords.",
+      "text": "允许应用使用账号管理器的认证功能，包括创建账号，以及获取或设置这些账号的密码。",
+      "rule": "AUTHENTICATE_ACCOUNTS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "use the authentication credentials of an account",
+      "text": "使用账号认证凭据",
+      "rule": "USE_CREDENTIALS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to request authentication tokens.",
+      "text": "允许应用请求账号认证令牌。",
+      "rule": "USE_CREDENTIALS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "manage the accounts list",
+      "text": "管理账号列表",
+      "rule": "MANAGE_ACCOUNTS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to perform operations like adding and removing accounts and deleting their password.",
+      "text": "允许应用管理账号列表，例如添加、移除账号或删除账号密码。",
+      "rule": "MANAGE_ACCOUNTS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "intercept outgoing calls",
+      "text": "处理拨出的电话",
+      "rule": "PROCESS_OUTGOING_CALLS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows application to process outgoing calls and change the number to be dialled. Malicious applications may monitor, redirect or prevent outgoing calls.",
+      "text": "允许应用处理拨出电话并更改要拨打的号码。恶意应用可能监视、转接或阻止呼出。",
+      "rule": "PROCESS_OUTGOING_CALLS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "modify global animation speed",
+      "text": "调整系统动画速度",
+      "rule": "SET_ANIMATION_SCALE"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to change the global animation speed (faster or slower animations) at any time.",
+      "text": "允许应用随时调快或调慢系统动画。",
+      "rule": "SET_ANIMATION_SCALE"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "make application always run",
+      "text": "使应用持续运行",
+      "rule": "PERSISTENT_ACTIVITY"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to make parts of itself persistent, so that the system can't use it for other applications.",
+      "text": "允许应用将自身的一部分设为持久运行，系统无法将相关资源用于其他应用。",
+      "rule": "PERSISTENT_ACTIVITY"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "format external storage",
+      "text": "格式化外部存储",
+      "rule": "MOUNT_FORMAT_FILESYSTEMS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows the application to format removable storage.",
+      "text": "允许应用格式化可移动存储。",
+      "rule": "MOUNT_FORMAT_FILESYSTEMS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "write Access Point Name settings",
+      "text": "修改接入点设置",
+      "rule": "WRITE_APN_SETTINGS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to modify the APN settings, such as Proxy and Port of any APN.",
+      "text": "允许应用修改接入点名称（APN）的代理和端口等设置。",
+      "rule": "WRITE_APN_SETTINGS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "write subscribed feeds",
+      "text": "修改订阅源",
+      "rule": "SUBSCRIBED_FEEDS_WRITE"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to modify your currently synced feeds. This could allow a malicious application to change your synced feeds.",
+      "text": "允许应用改动正在同步的订阅源。恶意应用可能借此更改用户的订阅。",
+      "rule": "SUBSCRIBED_FEEDS_WRITE"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "enable application debugging",
+      "text": "启用应用调试",
+      "rule": "SET_DEBUG_APP"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to turn on debugging for another application. Malicious applications can use this to kill other applications.",
+      "text": "允许应用为其他应用开启调试。恶意应用可能借此终止其他应用。",
+      "rule": "SET_DEBUG_APP"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "limit number of running processes",
+      "text": "限制运行的进程数量",
+      "rule": "SET_PROCESS_LIMIT"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to control the maximum number of processes that will run. Never needed for common applications.",
+      "text": "允许应用设置运行进程数的上限。普通应用通常无需此权限。",
+      "rule": "SET_PROCESS_LIMIT"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "make all background applications close",
+      "text": "使后台 Activity 立即结束",
+      "rule": "SET_ALWAYS_FINISH"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to control whether activities are always finished as soon as they go to the background. Never needed for common applications.",
+      "text": "允许应用控制 Activity 是否在进入后台时立即结束。普通应用通常无需此权限。",
+      "rule": "SET_ALWAYS_FINISH"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "send Linux signals to applications",
+      "text": "向持久进程发送信号",
+      "rule": "SIGNAL_PERSISTENT_PROCESSES"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows application to request that the supplied signal be sent to all persistent processes.",
+      "text": "允许应用请求把指定的 Linux 信号发送给所有持久进程。",
+      "rule": "SIGNAL_PERSISTENT_PROCESSES"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "add voicemails into the system",
+      "text": "添加语音留言",
+      "rule": "ADD_VOICEMAIL"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to add voicemails into the system.",
+      "text": "允许应用向系统添加语音留言。",
+      "rule": "ADD_VOICEMAIL"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "enables a calling app to continue a call started in another app.",
+      "text": "接续其他应用的通话",
+      "rule": "ACCEPT_HANDOVER"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows a calling app to continue a call which was started in another app.  An example is a video calling app that wants to continue a voice call on the user's mobile network.",
+      "text": "允许通话应用接续在另一应用中发起的通话，例如视频通话应用希望通过用户的移动网络接续语音通话。",
+      "rule": "ACCEPT_HANDOVER"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "permits an app to answer incoming phone calls.",
+      "text": "接听来电",
+      "rule": "ANSWER_PHONE_CALLS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows the app to answer an incoming phone call.",
+      "text": "允许应用接听来电。",
+      "rule": "ANSWER_PHONE_CALLS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "grants access to body sensors, such as heart rate.",
+      "text": "访问身体传感器",
+      "rule": "BODY_SENSORS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to access data from sensors that the user uses to measure what is happening inside his/her body, such as heart rate.",
+      "text": "允许应用访问用于测量心率等身体指标的传感器数据。",
+      "rule": "BODY_SENSORS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "grants read access to the user's call log.",
+      "text": "读取通话记录",
+      "rule": "READ_CALL_LOG"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to read the user's call log.",
+      "text": "允许应用读取用户的通话记录。",
+      "rule": "READ_CALL_LOG"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "allows reading of the device's phone number(s).",
+      "text": "读取设备电话号码",
+      "rule": "READ_PHONE_NUMBERS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows read access to the device's phone number(s). This is a subset of the capabilities granted by READ_PHONE_STATE but is exposed to instant applications.",
+      "text": "允许应用读取设备电话号码。此权限是 READ_PHONE_STATE 能力的子集，并向免安装应用开放。",
+      "rule": "READ_PHONE_NUMBERS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "allows writing to (but not reading) the user's call log.",
+      "text": "写入通话记录",
+      "rule": "WRITE_CALL_LOG"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to write (but not read) the user's call log data.",
+      "text": "允许应用写入用户的通话记录。此权限本身不提供读取能力。",
+      "rule": "WRITE_CALL_LOG"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "access location in background",
+      "text": "在后台定位",
+      "rule": "ACCESS_BACKGROUND_LOCATION"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an app to access location in the background.",
+      "text": "允许应用在后台访问位置信息。",
+      "rule": "ACCESS_BACKGROUND_LOCATION"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "access any geographic locations",
+      "text": "访问媒体中的地理位置",
+      "rule": "ACCESS_MEDIA_LOCATION"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to access any geographic locations persisted in the user's shared collection.",
+      "text": "允许应用访问用户共享媒体收藏中保存的地理位置信息。",
+      "rule": "ACCESS_MEDIA_LOCATION"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "allow application to recognize physical activity",
+      "text": "识别身体活动",
+      "rule": "ACTIVITY_RECOGNITION"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to recognize physical activity.",
+      "text": "允许应用识别用户的身体活动。",
+      "rule": "ACTIVITY_RECOGNITION"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "allows read-only access to precise phone state.",
+      "text": "读取详细电话状态",
+      "rule": "READ_PRECISE_PHONE_STATE"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows read only access to precise phone state. Allows reading of detailed information about phone state for special-use applications such as dialers, carrier applications, or ims applications.",
+      "text": "提供对详细电话状态的只读访问，用于拨号器、运营商应用或 IMS 应用等特定用途。",
+      "rule": "READ_PRECISE_PHONE_STATE"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "required to advertise to nearby Bluetooth devices.",
+      "text": "向附近设备广播蓝牙信息",
+      "rule": "BLUETOOTH_ADVERTISE"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Required to be able to advertise to nearby Bluetooth devices.",
+      "text": "允许应用向附近的蓝牙设备广播。",
+      "rule": "BLUETOOTH_ADVERTISE"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "necessary for connecting to paired Bluetooth devices.",
+      "text": "连接已配对的蓝牙设备",
+      "rule": "BLUETOOTH_CONNECT"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Required to be able to connect to paired Bluetooth devices.",
+      "text": "允许应用连接已配对的蓝牙设备。",
+      "rule": "BLUETOOTH_CONNECT"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "required for discovering and pairing Bluetooth devices.",
+      "text": "发现及配对蓝牙设备",
+      "rule": "BLUETOOTH_SCAN"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Required to be able to discover and pair nearby Bluetooth devices.",
+      "text": "允许应用发现附近的蓝牙设备并与其配对。",
+      "rule": "BLUETOOTH_SCAN"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "grants background access to body sensors, like heart rate.",
+      "text": "在后台访问身体传感器",
+      "rule": "BODY_SENSORS_BACKGROUND"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to access data from sensors that the user uses to measure what is happening inside their body, such as heart rate. If you're requesting this permission, you must also request BODY_SENSORS . Requesting this permission by itself doesn't give you Body sensors access.",
+      "text": "允许应用在后台访问用于测量心率等指标的传感器数据。需要同时请求 BODY_SENSORS，单独申请此权限不会授予传感器访问权。",
+      "rule": "BODY_SENSORS_BACKGROUND"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "required for advertising and connecting to nearby devices via Wi-Fi.",
+      "text": "通过 Wi-Fi 发现和连接附近设备",
+      "rule": "NEARBY_WIFI_DEVICES"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Required to be able to advertise and connect to nearby devices via Wi-Fi.",
+      "text": "允许应用通过 Wi-Fi 广播并连接附近设备。",
+      "rule": "NEARBY_WIFI_DEVICES"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "allows an app to post notifications.",
+      "text": "发送通知",
+      "rule": "POST_NOTIFICATIONS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an app to post notifications",
+      "text": "允许应用发布通知。",
+      "rule": "POST_NOTIFICATIONS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "allows reading user-selected image or video files from external storage.",
+      "text": "读取用户选中的图片或视频",
+      "rule": "READ_MEDIA_VISUAL_USER_SELECTED"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to read image or video files from external storage that a user has selected via the permission prompt photo picker. Apps can check this permission to verify that a user has decided to use the photo picker, instead of granting access to READ_MEDIA_IMAGES or READ_MEDIA_VIDEO . It does not prevent apps from accessing the standard photo picker manually. This permission should be requested alongside READ_MEDIA_IMAGES and/or READ_MEDIA_VIDEO , depending on which type of media is desired.",
+      "text": "允许应用读取用户在授权提示的照片选择器中选中的媒体。应用可用此权限判断用户选择了照片选择器还是授予 READ_MEDIA_IMAGES 或 READ_MEDIA_VIDEO。它不妨碍应用主动打开系统照片选择器，且应与上述媒体权限一同请求。",
+      "rule": "READ_MEDIA_VISUAL_USER_SELECTED"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "required for ranging to devices using ultra-wideband.",
+      "text": "使用超宽带测距",
+      "rule": "UWB_RANGING"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Required to be able to range to devices using ultra-wideband.",
+      "text": "允许应用用超宽带（UWB）测量与其他设备的距离。",
+      "rule": "UWB_RANGING"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Range to nearby devices",
+      "text": "测量与附近设备的距离",
+      "rule": "RANGING"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Required to be able to range to devices using generic ranging module.",
+      "text": "允许应用使用通用测距模块测量设备间的距离。",
+      "rule": "RANGING"
     }
   ]
 }

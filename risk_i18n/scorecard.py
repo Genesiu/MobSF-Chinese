@@ -30,7 +30,21 @@ GEO_LABELS = {
     'city': '城市', 'latitude': '纬度', 'longitude': '经度',
     'zipcode': '邮政编码', 'zip_code': '邮政编码', 'time_zone': '时区',
     'timezone': '时区', 'ip': 'IP 地址', 'ip_address': 'IP 地址',
+    'isp': '网络服务提供商', 'domain': '域名', 'netspeed': '连接类型',
+    'idd_code': '国际拨号代码', 'area_code': '区号',
+    'weather_station_code': '气象站代码', 'weather_station_name': '气象站名称',
+    'weather_code': '气象站代码', 'weather_name': '气象站名称',
+    'mcc': '移动国家码', 'mnc': '移动网络码', 'mobile_brand': '移动运营商',
+    'elevation': '海拔', 'usage_type': '网络用途', 'address_type': '地址类型',
+    'category': '类别', 'district': '区县', 'asn': '自治系统编号',
+    'as_name': '自治系统名称', 'as': '自治系统名称',
+    'as_domain': '自治系统域名', 'as_usagetype': '自治系统用途',
+    'as_cidr': '自治系统 CIDR 网段',
 }
+GEO_UNAVAILABLE = (
+    'This parameter is unavailable in selected .BIN data file. '
+    'Please upgrade data file.'
+)
 ANDROID_PERMISSION = re.compile(
     r'^((?:android|com\.google)\.[\w.]+) \(dangerous\): ([^\n]*?) - ([^\n]*)$',
     re.MULTILINE,
@@ -83,6 +97,71 @@ def android_permission_scorecard(catalog, text):
         return f'{name}（高敏感权限）：{labels[0]} — {labels[1]}'
 
     return ANDROID_PERMISSION.sub(translate, text)
+
+
+def code_scorecard(risks, reports, item):
+    """Localize a reviewed code finding and its file and line labels."""
+    title, description = item.get('title', ''), item.get('description', '')
+    if not isinstance(title, str) or not isinstance(description, str):
+        return title, description
+    translations = {
+        entry['text'] for (section, _, field), entry in risks.entries.items()
+        if section == 'code' and field == 'description' and entry['source'] == title
+    }
+    translations.update(entry['text'] for entry in reports.entries
+                        if entry['section'] == 'ios-code' and entry['source'] == title)
+    if len(translations) != 1:
+        return title, description
+    chinese = translations.pop()
+    if description == title:
+        return chinese, chinese
+    if not description.startswith(title + '\n'):
+        return chinese, description
+    reference, marker, files = description[len(
+        title):].partition('\n\nFiles:\n')
+    if not marker:
+        return chinese, chinese + reference
+    lines = []
+    for record in files.split('\n'):
+        path, marker, positions = record.rpartition(', line(s) ')
+        lines.append(f'{path}，行号 {positions}' if marker else record)
+    return chinese, chinese + reference + '\n\n相关文件：\n' + '\n'.join(lines)
+
+
+def network_scorecard(catalog, item):
+    """Translate an Android scoped finding or an iOS ATS finding."""
+    title, description = item.get('title', ''), item.get('description', '')
+    if not isinstance(title, str) or not isinstance(description, str):
+        return title, description
+
+    def translate(value, section):
+        return catalog.translate({'section': section, 'value': value}, 'value')
+
+    if not description.startswith('Scope:\n'):
+        heading = translate(title, 'ats')
+        if title == 'NSExceptionDomains' and heading != title:
+            return heading, '例外域名：' + description
+        return heading, translate(description, 'ats')
+
+    scope, separator, details = description[len('Scope:\n'):].partition('\n\n')
+    if not separator:
+        return title, description
+    candidates = (title + '. ' + details, title + '.' + details) if details else (
+        title + '.', title)
+    translations = set()
+    for candidate in candidates:
+        translated = translate(candidate, 'network')
+        if translated != candidate:
+            translations.add(translated)
+    if len(translations) != 1:
+        return title, description
+    translated = translations.pop()
+    if not details:
+        return translated, '适用范围：\n' + scope
+    summary, stop, remainder = translated.partition('。')
+    if stop and remainder:
+        return summary, f'适用范围：\n{scope}\n\n{remainder}'
+    return translated, '适用范围：\n' + scope
 
 
 def source_hashes(root, origins=None):
@@ -170,6 +249,8 @@ class ScorecardCatalog:
         """Format scalar geolocation data as escaped text with Chinese labels."""
         if 'appsec' not in self.active or len(original) > 8192:
             return original
+        if original in ('None', '{}', ''):
+            return '未找到地理位置数据。'
         try:
             data = ast.literal_eval(original)
         except (ValueError, TypeError, SyntaxError, RecursionError, MemoryError):
@@ -179,7 +260,12 @@ class ScorecardCatalog:
                            and isinstance(v, (str, int, float, type(None)))
                            for k, v in data.items())):
             return original
-        return '\n'.join(f'{GEO_LABELS.get(k, k)}：{v}' for k, v in data.items())
+        lines = []
+        for key, value in data.items():
+            if key in GEO_LABELS and value == GEO_UNAVAILABLE:
+                value = '当前地理位置数据库未提供此字段。'
+            lines.append(f'{GEO_LABELS.get(key, key)}：{value}')
+        return '\n'.join(lines)
 
 
 def load_catalog(directory, root):

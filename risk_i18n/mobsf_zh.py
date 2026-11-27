@@ -12,7 +12,12 @@ from django import template
 
 from .mobsf_zh_engine import Catalog
 from .mobsf_zh_scorecard import SECTIONS, ScorecardCatalog, load_catalog, report_catalog
-from .mobsf_zh_scorecard import android_permission_scorecard, manifest_scorecard
+from .mobsf_zh_scorecard import (
+    android_permission_scorecard,
+    code_scorecard,
+    manifest_scorecard,
+    network_scorecard,
+)
 
 
 register = template.Library()
@@ -93,9 +98,17 @@ def scorecard_text(item, field):
         return original
     catalog = get_scorecard_catalog()
     section = item.get('section')
-    if 'appsec' in catalog.active and section == 'manifest':
-        title, description = manifest_scorecard(get_catalog(), item)
-        return title if field == 'title' else description
+    if 'appsec' in catalog.active:
+        if section == 'manifest':
+            title, description = manifest_scorecard(get_catalog(), item)
+            return title if field == 'title' else description
+        if section == 'code':
+            title, description = code_scorecard(
+                get_catalog(), get_report_catalog(), item)
+            return title if field == 'title' else description
+        if section == 'network':
+            title, description = network_scorecard(get_report_catalog(), item)
+            return title if field == 'title' else description
     result = catalog.translate(item, field)
     if 'appsec' in catalog.active:
         if section == 'permissions' and field == 'description':

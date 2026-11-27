@@ -7,11 +7,19 @@ from pathlib import Path
 from engine import Catalog, split_source
 
 from scorecard import ScorecardCatalog, android_permission_scorecard, manifest_scorecard
+from scorecard import code_scorecard, network_scorecard
 
 
 DATA = json.loads((Path(__file__).resolve().parent
                    / 'scorecard.zh-CN.json').read_text('utf-8'))
 ROOT = Path(__file__).resolve().parent
+
+
+def reviewed_reports():
+    """Load the reviewed report strings as if their source hashes matched."""
+    report = json.loads((ROOT / 'report.zh-CN.json').read_text('utf-8'))
+    hashes = {key: value['sha256'] for key, value in report['origins'].items()}
+    return ScorecardCatalog(dict(report, origins=hashes), hashes)
 
 
 class ScorecardTests(unittest.TestCase):
@@ -109,15 +117,49 @@ class ScorecardTests(unittest.TestCase):
         self.assertIn('[android:exported=true]', details)
 
     def test_android_permission_does_not_translate_custom_identifier(self):
-        report = json.loads((ROOT / 'report.zh-CN.json').read_text('utf-8'))
-        hashes = {key: value['sha256']
-                  for key, value in report['origins'].items()}
-        catalog = ScorecardCatalog(dict(report, origins=hashes), hashes)
+        catalog = reviewed_reports()
         original = ('android.permission.RECORD_AUDIO (dangerous): record audio - '
                     'Allows application to access the audio record path.')
         self.assertIn('录制音频', android_permission_scorecard(catalog, original))
         custom = original.replace('android.permission', 'example.permission')
         self.assertEqual(android_permission_scorecard(catalog, custom), custom)
+
+    def test_android_network_preserves_scope_and_all_arguments(self):
+        catalog = reviewed_reports()
+        for entry in catalog.entries:
+            if entry['section'] != 'network':
+                continue
+            source = entry['source']
+            slots = tuple(f'example{i}' for i in range(
+                len(split_source(source)) - 1))
+            original = source % slots if slots else source
+            heading, _, remainder = original.partition('.')
+            scope = 'Scope:\nexample.org\n\n'
+            result = network_scorecard(catalog, {
+                'title': heading, 'description': scope + remainder.strip()})
+            self.assertNotEqual(result[0], heading, source)
+            self.assertIn('适用范围：\nexample.org', result[1])
+            for argument in slots:
+                self.assertIn(argument, ''.join(result))
+
+    def test_ios_ats_keeps_domain_list(self):
+        domains = 'example.org, assets.example.org'
+        title, details = network_scorecard(reviewed_reports(), {
+            'title': 'NSExceptionDomains', 'description': domains})
+        self.assertIn('例外域名', title)
+        self.assertEqual(details, '例外域名：' + domains)
+
+    def test_code_scorecard_translates_shared_rules_and_file_labels(self):
+        reviewed = json.loads((ROOT / 'catalog.zh-CN.json').read_text('utf-8'))
+        source = json.loads((ROOT / 'sources/4.5.2.json').read_text('utf-8'))
+        rules = Catalog(reviewed, {'code': source['code']})
+        original = ('The App logs information. '
+                    'Sensitive information should never be logged.')
+        title, details = code_scorecard(rules, reviewed_reports(), {
+            'title': original,
+            'description': original + '\n\n\nFiles:\nexample.java, line(s) 14'})
+        self.assertIn('日志', title)
+        self.assertIn('相关文件：\nexample.java，行号 14', details)
 
 
 if __name__ == '__main__':
