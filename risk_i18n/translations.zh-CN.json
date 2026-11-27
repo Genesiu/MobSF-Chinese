@@ -1,0 +1,760 @@
+{
+  "locale": "zh-CN",
+  "code": {
+    "android_ip_disclosure": {
+      "description": {
+        "text": "IP 地址泄露。"
+      }
+    },
+    "android_hiddenui": {
+      "description": {
+        "text": "界面中的隐藏元素可用于向用户隐藏数据，但这些数据仍可能泄露。"
+      }
+    },
+    "android_insecure_ssl": {
+      "description": {
+        "text": "SSL 实现不安全。信任所有证书或接受自签名证书会形成严重安全隐患，应用易遭中间人攻击。"
+      }
+    },
+    "android_webview_external": {
+      "description": {
+        "text": "WebView 从外部存储加载文件；外部存储中的文件可能被其他应用修改。"
+      }
+    },
+    "android_write_app_dir": {
+      "description": {
+        "text": "应用可以向自身目录写入数据。敏感信息应加密存储。"
+      }
+    },
+    "android_insecure_random": {
+      "description": {
+        "text": "应用使用了不安全的随机数生成器。"
+      }
+    },
+    "android_logging": {
+      "description": {
+        "text": "应用包含日志输出。敏感信息不应写入日志。"
+      }
+    },
+    "android_sql_cipher": {
+      "description": {
+        "text": "应用使用了 SQLCipher。应确认密钥等秘密信息未硬编码在代码中。"
+      }
+    },
+    "android_tapjacking": {
+      "description": {
+        "text": "应用具备防御点击劫持（Tapjacking）攻击的能力。"
+      }
+    },
+    "android_read_write_external": {
+      "description": {
+        "text": "应用可以读写外部存储。写入外部存储的数据可能被其他应用读取。"
+      }
+    },
+    "android_temp_file": {
+      "description": {
+        "text": "应用会创建临时文件。敏感信息不应写入临时文件。"
+      }
+    },
+    "android_webview": {
+      "description": {
+        "text": "WebView 实现不安全。在 WebView 中执行用户可控代码会造成严重安全隐患。"
+      }
+    },
+    "android_webview_allow_file_from_url": {
+      "description": {
+        "text": "应确保用户可控 URL 不会传入 WebView。允许通过 URL 访问本地文件可能泄露文件系统中的敏感信息。"
+      }
+    },
+    "android_sql_cipher_aes256": {
+      "description": {
+        "text": "应用使用了 SQLCipher；SQLCipher 可通过 256 位 AES 加密 SQLite 数据库文件。"
+      }
+    },
+    "android_download_manager": {
+      "description": {
+        "text": "应用使用 Android Download Manager 下载文件。"
+      }
+    },
+    "android_db_encryption": {
+      "description": {
+        "text": "应用使用了启用加密的 Realm 数据库。"
+      }
+    },
+    "android_webview_debug": {
+      "description": {
+        "text": "应用启用了 WebView 远程调试。"
+      }
+    },
+    "android_aar_jar_debug_enabled": {
+      "description": {
+        "text": "应用启用了调试配置。生产构建不应允许调试。"
+      }
+    },
+    "android_clipboard_listen": {
+      "description": {
+        "text": "应用会监听剪贴板变化。部分恶意软件也会监听剪贴板变化。"
+      }
+    },
+    "android_clipboard_copy": {
+      "description": {
+        "text": "应用会将数据复制到剪贴板。其他应用可能访问剪贴板，因此不应将敏感数据复制到其中。"
+      }
+    },
+    "android_webview_ignore_ssl": {
+      "description": {
+        "text": "WebView 实现不安全：忽略 SSL 证书错误并接受任意 SSL 证书，应用易遭中间人攻击。"
+      }
+    },
+    "android_webview_mixed_content": {
+      "description": {
+        "text": "WebView 实现不安全：配置了 MIXED_CONTENT_ALWAYS_ALLOW，允许 HTTPS 页面加载不安全的 HTTP 内容，使应用面临中间人内容注入风险。"
+      }
+    },
+    "android_sql_raw_query": {
+      "description": {
+        "text": "应用使用 SQLite 并执行原始 SQL 查询。将不可信用户输入直接用于此类查询可能导致 SQL 注入；敏感信息还应加密后写入数据库。"
+      }
+    },
+    "android_detect_frida": {
+      "description": {
+        "text": "应用可以检测 Frida 服务端。"
+      }
+    },
+    "android_ssl_pinning": {
+      "description": {
+        "text": "应用使用 SSL 证书固定（Certificate Pinning），以检测或防御安全通信通道中的中间人攻击。"
+      }
+    },
+    "android_certificate_transparency": {
+      "description": {
+        "text": "应用实施了 TLS 证书透明度（Certificate Transparency），有助于发现证书颁发机构误签发或被恶意获取的 SSL 证书。"
+      }
+    },
+    "android_prevent_screenshot": {
+      "description": {
+        "text": "应用具备防止在最近任务记录、Now On Tap 等场景中被截屏的能力。"
+      }
+    },
+    "android_debuggable": {
+      "description": {
+        "text": "检测到 DexGuard 调试配置检测代码，用于判断应用是否允许调试。"
+      }
+    },
+    "android_debugger_detect": {
+      "description": {
+        "text": "检测到 DexGuard 调试器检测代码。"
+      }
+    },
+    "android_emulator_detect": {
+      "description": {
+        "text": "检测到 DexGuard 模拟器检测代码。"
+      }
+    },
+    "android_debug_sign": {
+      "description": {
+        "text": "检测到 DexGuard 调试签名检测代码，用于判断应用是否使用调试密钥签名。"
+      }
+    },
+    "android_dexguard_root_detection": {
+      "description": {
+        "text": "检测到 DexGuard Root 检测代码。"
+      }
+    },
+    "android_tamper_detect": {
+      "description": {
+        "text": "检测到 DexGuard 应用篡改检测代码。"
+      }
+    },
+    "android_certificate_tamper": {
+      "description": {
+        "text": "检测到 DexGuard 签名证书篡改检测代码。"
+      }
+    },
+    "android_package_tamper": {
+      "description": {
+        "text": "应用可能利用安装包签名检测篡改。"
+      }
+    },
+    "android_safetynet": {
+      "description": {
+        "text": "应用使用了 SafetyNet API。"
+      }
+    },
+    "android_su_detect": {
+      "description": {
+        "text": "应用可能请求 Root（超级用户）权限。"
+      }
+    },
+    "android_jackson_deserialize": {
+      "description": {
+        "text": "应用使用 Jackson 反序列化库。反序列化不可信输入可能导致任意代码执行。"
+      }
+    },
+    "android_aes_ecb": {
+      "description": {
+        "text": "应用使用了 ECB 加密模式。ECB 会将相同的明文块加密为相同的密文块，因此被认为是不安全的。"
+      }
+    },
+    "android_aws_ecb_default": {
+      "description": {
+        "text": "调用 Cipher.getInstance(\"AES\") 默认会使用 AES ECB 模式；相同明文块会产生相同密文块，因此该模式被认为是不安全的。"
+      }
+    },
+    "android_rsa_no_oaep": {
+      "description": {
+        "text": "应用使用了未采用 OAEP 填充的 RSA 加密。填充方案用于防御多种针对无填充 RSA 加密的攻击。"
+      }
+    },
+    "android_world_writable": {
+      "description": {
+        "text": "文件或 SharedPreferences 允许所有应用写入，其他应用可以修改其中的数据。"
+      }
+    },
+    "android_world_readable": {
+      "description": {
+        "text": "文件或 SharedPreferences 允许所有应用读取，其他应用可以获取其中的数据。"
+      }
+    },
+    "android_world_read_write": {
+      "description": {
+        "text": "文件允许所有应用读写，其他应用可以读取或修改其中的数据。"
+      }
+    },
+    "android_weak_hash": {
+      "description": {
+        "text": "应用使用了弱哈希算法。"
+      }
+    },
+    "android_weak_ciphers": {
+      "description": {
+        "text": "应用使用了弱加密算法。"
+      }
+    },
+    "cbc_padding_oracle": {
+      "description": {
+        "text": "应用使用 CBC 加密模式与 PKCS5/PKCS7 填充；这种配置存在填充预言机攻击风险。"
+      }
+    },
+    "android_md5": {
+      "description": {
+        "text": "MD5 是存在已知哈希碰撞问题的弱哈希算法。"
+      }
+    },
+    "android_sha1": {
+      "description": {
+        "text": "SHA-1 是存在已知哈希碰撞问题的弱哈希算法。"
+      }
+    },
+    "android_weak_iv": {
+      "description": {
+        "text": "应用可能使用了弱初始化向量（IV），例如全零序列或固定递增序列。未使用随机 IV 会使密文更容易被预测，并面临字典攻击风险。"
+      }
+    },
+    "android_detect_root": {
+      "description": {
+        "text": "应用可能具备 Root 检测能力。"
+      }
+    },
+    "android_hardcoded": {
+      "description": {
+        "text": "文件中可能包含硬编码的敏感信息，例如用户名、密码或密钥。"
+      }
+    }
+  },
+  "manifest": {
+    "well_known_assetlinks": {
+      "title": {
+        "text": "未找到 App Link 的 assetlinks.json 文件 [android:name={0}][android:host={1}]"
+      },
+      "description": {
+        "text": "未找到 App Link 资源验证 URL（{0}），或其配置不正确（状态码：{1}）。App Links 可将网页或邮件中的链接跳转至应用；若对应主机或域名的验证文件缺失或配置错误，恶意应用可能劫持这些链接，实施钓鱼攻击，或泄露 URI 中的个人信息、OAuth 令牌、免密登录链接及密码重置令牌等敏感数据。应在域名下部署 assetlinks.json，并在 Activity 的 intent-filter 中启用 android:autoVerify=\"true\"。"
+      }
+    },
+    "clear_text_traffic": {
+      "title": {
+        "text": "应用允许明文网络通信 [android:usesCleartextTraffic=true]"
+      },
+      "description": {
+        "text": "应用允许 HTTP、FTP、DownloadManager 和 MediaPlayer 等使用明文网络通信。目标 API 级别为 27 或更低时，此配置默认值为 true；目标 API 级别为 28 或更高时默认值为 false。明文通信缺乏机密性、真实性及防篡改保护，网络攻击者可能窃听或修改传输数据而不被发现。"
+      }
+    },
+    "direct_boot_aware": {
+      "title": {
+        "text": "应用支持直接启动模式 [android:directBootAware=true]"
+      },
+      "description": {
+        "text": "应用可以在用户解锁设备前运行。若使用自定义 Application 子类，且应用内任一组件支持直接启动，则整个自定义 Application 都被视为支持直接启动。在直接启动阶段，应用只能访问设备保护存储中的数据。"
+      }
+    },
+    "has_network_security": {
+      "title": {
+        "text": "应用配置了网络安全策略 [android:networkSecurityConfig={0}]"
+      },
+      "description": {
+        "text": "网络安全配置允许应用通过安全的声明式配置文件定制网络安全设置，无需修改应用代码；可以为特定域名或应用设置相应策略。"
+      }
+    },
+    "vulnerable_os_version": {
+      "title": {
+        "text": "应用可安装在存在未修复漏洞的 Android {0} 上 [minSdk={1}]"
+      },
+      "description": {
+        "text": "应用支持安装在存在多项未修复漏洞的旧版 Android 上，这些设备无法从 Google 获得足够的安全更新。按此规则的建议，应支持 Android 10（API 29）或更高版本，以获得合理的安全更新。"
+      }
+    },
+    "vulnerable_os_version2": {
+      "title": {
+        "text": "应用可安装在存在漏洞的 Android {0} 上 [minSdk={1}]"
+      },
+      "description": {
+        "text": "应用支持安装在存在多项漏洞的旧版 Android 上。按此规则的建议，应支持 Android 10（API 29）或更高版本，以获得合理的安全更新。"
+      }
+    },
+    "app_is_debuggable": {
+      "title": {
+        "text": "应用开启了调试模式 [android:debuggable=true]"
+      },
+      "description": {
+        "text": "应用启用了调试，使逆向分析者更容易附加调试器、获取堆栈信息并访问调试辅助类。"
+      }
+    },
+    "app_allowbackup": {
+      "title": {
+        "text": "应用允许备份数据 [android:allowBackup=true]"
+      },
+      "description": {
+        "text": "此配置允许通过 ADB 备份应用数据。启用 USB 调试的用户可以将应用数据从设备复制出来。"
+      }
+    },
+    "allowbackup_not_set": {
+      "title": {
+        "text": "应用未显式禁止数据备份，缺少 android:allowBackup 配置"
+      },
+      "description": {
+        "text": "应将 android:allowBackup 设置为 false。该配置默认值为 true，允许通过 ADB 备份应用数据；启用 USB 调试的用户可以将应用数据从设备复制出来。"
+      }
+    },
+    "app_in_test_mode": {
+      "title": {
+        "text": "应用处于测试模式 [android:testOnly=true]"
+      },
+      "description": {
+        "text": "测试模式可能向应用外部暴露功能或数据，造成安全隐患。"
+      }
+    },
+    "task_affinity_set": {
+      "title": {
+        "text": "Activity（{0}）设置了 taskAffinity"
+      },
+      "description": {
+        "text": "设置 taskAffinity 后，其他应用可能读取发往其他任务中 Activity 的 Intent。应保留默认设置，以包名作为任务亲和性，防止其他应用读取收发 Intent 中的敏感信息。"
+      }
+    },
+    "non_standard_launchmode": {
+      "title": {
+        "text": "Activity（{0}）未使用 standard 启动模式"
+      },
+      "description": {
+        "text": "Activity 使用 singleTask 或 singleInstance 启动模式时会成为任务根 Activity，其他应用可能读取调用它的 Intent 内容。当 Intent 包含敏感信息时，应使用 standard 启动模式。"
+      }
+    },
+    "task_hijacking": {
+      "title": {
+        "text": "Activity（{0}）存在 Android 任务劫持 / StrandHogg 风险"
+      },
+      "description": {
+        "text": "Activity 不应使用 singleTask 启动模式，否则其他应用可能将恶意 Activity 放到任务栈顶部，形成任务劫持 / StrandHogg 1.0 漏洞，使应用易受钓鱼攻击。可将启动模式设为 singleInstance，或设置空的 taskAffinity（taskAffinity=\"\"）；也可将当前目标 SDK（{0}）提升至 API 28 或更高，在平台层面修复该问题。"
+      }
+    },
+    "task_hijacking2": {
+      "title": {
+        "text": "Activity（{0}）存在 StrandHogg 2.0 任务劫持风险"
+      },
+      "description": {
+        "text": "检测到 Activity 存在 StrandHogg 2.0 任务劫持风险。其他应用可能将恶意 Activity 放到受影响应用的任务栈顶部，实施钓鱼攻击。可同时设置 singleInstance 启动模式和空的 taskAffinity（taskAffinity=\"\"）；也可将当前目标 SDK（{0}）提升至 API 29 或更高，在平台层面修复该问题。"
+      }
+    },
+    "improper_provider_permission": {
+      "title": {
+        "text": "Content Provider 权限配置不当 [{0}]"
+      },
+      "description": {
+        "text": "Content Provider 的权限配置允许设备上的其他应用访问它。内容提供者可能包含应用敏感信息，因此不应随意向外共享。"
+      }
+    },
+    "dialer_code_found": {
+      "title": {
+        "text": "发现拨号器秘密代码：{0} [android:scheme=\"android_secret_code\"]"
+      },
+      "description": {
+        "text": "清单中存在秘密代码。在拨号器中输入这些代码可能访问隐藏功能，其中可能包含敏感信息。"
+      }
+    },
+    "sms_receiver_port_found": {
+      "title": {
+        "text": "发现监听端口 {0} 的数据短信接收器 [android:port]"
+      },
+      "description": {
+        "text": "应用配置了监听指定端口的二进制短信接收器。发往设备的二进制短信会按开发者定义的方式处理；应用应严格校验短信数据，并将收到的短信视为来自不可信来源。"
+      }
+    },
+    "high_intent_priority_found": {
+      "title": {
+        "text": "Intent 优先级过高（{0}），命中 {1} 次 [android:priority]"
+      },
+      "description": {
+        "text": "将 Intent 优先级设置得高于其他 Intent，可能使应用覆盖其他请求。"
+      }
+    },
+    "high_action_priority_found": {
+      "title": {
+        "text": "Action 优先级过高（{0}）[android:priority]"
+      },
+      "description": {
+        "text": "将 Action 优先级设置得高于其他 Action，可能使应用覆盖其他请求。"
+      }
+    },
+    "exported_protected_permission_signature": {
+      "title": {
+        "text": "{0}（{1}）受权限保护。{2} [android:exported=true]"
+      },
+      "description": {
+        "text": "检测到导出的 {1} 组件。该组件受权限保护。",
+        "ignored_slots": [
+          0
+        ]
+      }
+    },
+    "exported_protected_permission_normal": {
+      "title": {
+        "text": "{0}（{1}）受权限保护；应核对权限保护级别。{2} [android:exported=true]"
+      },
+      "description": {
+        "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。组件受权限保护，但保护级别为 normal。恶意应用可能申请并获得该权限，进而与组件交互。若使用 signature 级别，则只有使用相同证书签名的应用才能获得权限。",
+        "ignored_slots": [
+          0
+        ]
+      }
+    },
+    "exported_protected_permission_dangerous": {
+      "title": {
+        "text": "{0}（{1}）受权限保护；应核对权限保护级别。{2} [android:exported=true]"
+      },
+      "description": {
+        "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。组件受权限保护，但保护级别为 dangerous。恶意应用可能申请并获得该权限，进而与组件交互。若使用 signature 级别，则只有使用相同证书签名的应用才能获得权限。",
+        "ignored_slots": [
+          0
+        ]
+      }
+    },
+    "exported_protected_permission_signatureorsystem": {
+      "title": {
+        "text": "{0}（{1}）受权限保护；应核对权限保护级别。{2} [android:exported=true]"
+      },
+      "description": {
+        "text": "检测到导出的 {1} 组件。组件受权限保护，但保护级别为 signatureOrSystem。建议改用 signature；该级别通常足够满足需求，且不依赖应用在设备上的安装位置。",
+        "ignored_slots": [
+          0
+        ]
+      }
+    },
+    "exported_protected_permission_not_defined": {
+      "title": {
+        "text": "{0}（{1}）受权限保护；应核对权限保护级别。{2} [android:exported=true]"
+      },
+      "description": {
+        "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。保护该组件的权限未在被分析应用中定义，应检查其定义处的保护级别。若为 normal 或 dangerous，恶意应用可能申请并获得权限，进而与组件交互；若为 signature，则只有使用相同证书签名的应用才能获得权限。",
+        "ignored_slots": [
+          0
+        ]
+      }
+    },
+    "exported_protected_permission_normal_app_level": {
+      "title": {
+        "text": "{0}（{1}）受应用级权限保护；应核对权限保护级别。{2} [android:exported=true]"
+      },
+      "description": {
+        "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。组件受应用级权限保护，但保护级别为 normal。恶意应用可能申请并获得该权限，进而与组件交互。若使用 signature 级别，则只有使用相同证书签名的应用才能获得权限。",
+        "ignored_slots": [
+          0
+        ]
+      }
+    },
+    "exported_protected_permission_dangerous_app_level": {
+      "title": {
+        "text": "{0}（{1}）受应用级权限保护；应核对权限保护级别。{2} [android:exported=true]"
+      },
+      "description": {
+        "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。组件受应用级权限保护，但保护级别为 dangerous。恶意应用可能申请并获得该权限，进而与组件交互。若使用 signature 级别，则只有使用相同证书签名的应用才能获得权限。",
+        "ignored_slots": [
+          0
+        ]
+      }
+    },
+    "exported_protected_permission": {
+      "title": {
+        "text": "{0}（{1}）受应用级权限保护。{2} [android:exported=true]"
+      },
+      "description": {
+        "text": "检测到导出的 {1} 组件。该组件受应用级权限保护。",
+        "ignored_slots": [
+          0
+        ]
+      }
+    },
+    "exported_protected_permission_signatureorsystem_app_level": {
+      "title": {
+        "text": "{0}（{1}）受应用级权限保护；应核对权限保护级别。{2} [android:exported=true]"
+      },
+      "description": {
+        "text": "检测到导出的 {1} 组件。组件受应用级权限保护，但保护级别为 signatureOrSystem。建议改用 signature；该级别通常足够满足需求，且不依赖应用在设备上的安装位置。",
+        "ignored_slots": [
+          0
+        ]
+      }
+    },
+    "exported_protected_permission_app_level": {
+      "title": {
+        "text": "{0}（{1}）受应用级权限保护；应核对权限保护级别。{2} [android:exported=true]"
+      },
+      "description": {
+        "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。保护该组件的应用级权限未在被分析应用中定义，应检查其定义处的保护级别。若为 normal 或 dangerous，恶意应用可能申请并获得权限，进而与组件交互；若为 signature，则只有使用相同证书签名的应用才能获得权限。",
+        "ignored_slots": [
+          0
+        ]
+      }
+    },
+    "explicitly_exported": {
+      "title": {
+        "text": "{0}（{1}）已导出且未受保护 [android:exported=true]"
+      },
+      "description": {
+        "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。",
+        "ignored_slots": [
+          0
+        ]
+      }
+    },
+    "exported_intent_filter_exists": {
+      "title": {
+        "text": "{0}（{1}）未受保护，并配置了 intent-filter"
+      },
+      "description": {
+        "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。存在 intent-filter，表明 {2} 已被显式导出。",
+        "ignored_slots": [
+          0
+        ]
+      }
+    },
+    "exported_provider": {
+      "title": {
+        "text": "{0}（{1}）未受保护 [Content Provider, targetSdkVersion < 17]"
+      },
+      "description": {
+        "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。该内容提供者的目标 API 低于 17，因此无论设备运行哪个 API 版本，默认都会导出。",
+        "ignored_slots": [
+          0
+        ]
+      }
+    },
+    "exported_provider_2": {
+      "title": {
+        "text": "{0}（{1}）在 API 低于 17 的设备上可能不受保护 [Content Provider, targetSdkVersion >= 17]"
+      },
+      "description": {
+        "text": "Content Provider（{0} {1}）在 API 低于 17 的设备上运行时会被导出，从而可被其他应用访问。"
+      }
+    },
+    "exported_provider_normal": {
+      "title": {
+        "text": "{0}（{1}）受权限保护；应核对权限保护级别。{2} [Content Provider, targetSdkVersion < 17]"
+      },
+      "description": {
+        "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。组件受权限保护，但保护级别为 normal。恶意应用可能申请并获得该权限，进而与组件交互。若使用 signature 级别，则只有使用相同证书签名的应用才能获得权限。",
+        "ignored_slots": [
+          0
+        ]
+      }
+    },
+    "exported_provider_danger": {
+      "title": {
+        "text": "{0}（{1}）受权限保护；应核对权限保护级别。{2} [Content Provider, targetSdkVersion < 17]"
+      },
+      "description": {
+        "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。组件受权限保护，但保护级别为 dangerous。恶意应用可能申请并获得该权限，进而与组件交互。若使用 signature 级别，则只有使用相同证书签名的应用才能获得权限。",
+        "ignored_slots": [
+          0
+        ]
+      }
+    },
+    "exported_provider_signature": {
+      "title": {
+        "text": "{0}（{1}）受权限保护。{2} [Content Provider, targetSdkVersion < 17]"
+      },
+      "description": {
+        "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。该组件受权限保护。",
+        "ignored_slots": [
+          0
+        ]
+      }
+    },
+    "exported_provider_signatureorsystem": {
+      "title": {
+        "text": "{0}（{1}）受权限保护；应核对权限保护级别。{2} [Content Provider, targetSdkVersion < 17]"
+      },
+      "description": {
+        "text": "检测到导出的 {1} 组件。组件受权限保护，但保护级别为 signatureOrSystem。建议改用 signature；该级别通常足够满足需求，且不依赖应用在设备上的安装位置。",
+        "ignored_slots": [
+          0
+        ]
+      }
+    },
+    "exported_provider_unknown": {
+      "title": {
+        "text": "{0}（{1}）受权限保护；应核对权限保护级别。{2} [Content Provider, targetSdkVersion < 17]"
+      },
+      "description": {
+        "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。保护该组件的权限未在被分析应用中定义，应检查其定义处的保护级别。若为 normal 或 dangerous，恶意应用可能申请并获得权限，进而与组件交互；若为 signature，则只有使用相同证书签名的应用才能获得权限。",
+        "ignored_slots": [
+          0
+        ]
+      }
+    },
+    "exported_provider_normal_app": {
+      "title": {
+        "text": "{0}（{1}）受应用级权限保护；应核对权限保护级别。{2} [Content Provider, targetSdkVersion < 17]"
+      },
+      "description": {
+        "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。组件受应用级权限保护，但保护级别为 normal。恶意应用可能申请并获得该权限，进而与组件交互。若使用 signature 级别，则只有使用相同证书签名的应用才能获得权限。",
+        "ignored_slots": [
+          0
+        ]
+      }
+    },
+    "exported_provider_danger_appl": {
+      "title": {
+        "text": "{0}（{1}）受应用级权限保护；应核对权限保护级别。{2} [Content Provider, targetSdkVersion < 17]"
+      },
+      "description": {
+        "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。组件受应用级权限保护，但保护级别为 dangerous。恶意应用可能申请并获得该权限，进而与组件交互。若使用 signature 级别，则只有使用相同证书签名的应用才能获得权限。",
+        "ignored_slots": [
+          0
+        ]
+      }
+    },
+    "exported_provider_signature_appl": {
+      "title": {
+        "text": "{0}（{1}）受应用级权限保护。{2} [Content Provider, targetSdkVersion < 17]"
+      },
+      "description": {
+        "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。该组件受应用级权限保护。",
+        "ignored_slots": [
+          0
+        ]
+      }
+    },
+    "exported_provider_signatureorsystem_app": {
+      "title": {
+        "text": "{0}（{1}）受应用级权限保护；应核对权限保护级别。{2} [Content Provider, targetSdkVersion < 17]"
+      },
+      "description": {
+        "text": "检测到导出的 {1} 组件。组件受应用级权限保护，但保护级别为 signatureOrSystem。建议改用 signature；该级别通常足够满足需求，且不依赖应用在设备上的安装位置。",
+        "ignored_slots": [
+          0
+        ]
+      }
+    },
+    "exported_provider_unknown_app": {
+      "title": {
+        "text": "{0}（{1}）受应用级权限保护；应核对权限保护级别。{2} [Content Provider, targetSdkVersion < 17]"
+      },
+      "description": {
+        "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。保护该组件的应用级权限未在被分析应用中定义，应检查其定义处的保护级别。若为 normal 或 dangerous，恶意应用可能申请并获得权限，进而与组件交互；若为 signature，则只有使用相同证书签名的应用才能获得权限。",
+        "ignored_slots": [
+          0
+        ]
+      }
+    },
+    "exported_provider_normal_new": {
+      "title": {
+        "text": "{0}（{1}）受权限保护；在 API 低于 17 的设备上应核对权限保护级别。{2} [Content Provider, targetSdkVersion >= 17]"
+      },
+      "description": {
+        "text": "Content Provider（{0}）在 API 低于 17 的设备上运行时会被导出，从而可被其他应用访问。组件受权限保护，但保护级别为 normal。恶意应用可能申请并获得该权限，进而与组件交互。若使用 signature 级别，则只有使用相同证书签名的应用才能获得权限。"
+      }
+    },
+    "exported_provider_danger_new": {
+      "title": {
+        "text": "{0}（{1}）受权限保护；在 API 低于 17 的设备上应核对权限保护级别。{2} [Content Provider, targetSdkVersion >= 17]"
+      },
+      "description": {
+        "text": "Content Provider（{0}）在 API 低于 17 的设备上运行时会被导出，从而可被其他应用访问。组件受权限保护，但保护级别为 dangerous。恶意应用可能申请并获得该权限，进而与组件交互。若使用 signature 级别，则只有使用相同证书签名的应用才能获得权限。"
+      }
+    },
+    "exported_provider_signature_new": {
+      "title": {
+        "text": "{0}（{1}）受权限保护。{2} [Content Provider, targetSdkVersion >= 17]"
+      },
+      "description": {
+        "text": "Content Provider（{0}）在 API 低于 17 的设备上运行时会被导出，从而可被其他应用访问。该组件受权限保护。"
+      }
+    },
+    "exported_provider_signatureorsystem_new": {
+      "title": {
+        "text": "{0}（{1}）受权限保护；应核对权限保护级别。{2} [Content Provider, targetSdkVersion >= 17]"
+      },
+      "description": {
+        "text": "Content Provider（{0}）在 API 低于 17 的设备上运行时会被导出，从而可被其他应用访问。组件受权限保护，但保护级别为 signatureOrSystem。建议改用 signature；该级别通常足够满足需求，且不依赖应用在设备上的安装位置。"
+      }
+    },
+    "exported_provider_unknown_new": {
+      "title": {
+        "text": "{0}（{1}）受权限保护；在 API 低于 17 的设备上应核对权限保护级别。{2} [Content Provider, targetSdkVersion >= 17]"
+      },
+      "description": {
+        "text": "Content Provider（{0}）在 API 低于 17 的设备上运行时会被导出，从而可被其他应用访问。保护该组件的权限未在被分析应用中定义，应检查其定义处的保护级别。若为 normal 或 dangerous，恶意应用可能申请并获得权限，进而与组件交互；若为 signature，则只有使用相同证书签名的应用才能获得权限。"
+      }
+    },
+    "exported_provider_normal_app_new": {
+      "title": {
+        "text": "{0}（{1}）受应用级权限保护；在 API 低于 17 的设备上应核对权限保护级别。{2} [Content Provider, targetSdkVersion >= 17]"
+      },
+      "description": {
+        "text": "Content Provider（{0}）在 API 低于 17 的设备上运行时会被导出，从而可被其他应用访问。组件受应用级权限保护，但保护级别为 normal。恶意应用可能申请并获得该权限，进而与组件交互。若使用 signature 级别，则只有使用相同证书签名的应用才能获得权限。"
+      }
+    },
+    "exported_provider_danger_app_new": {
+      "title": {
+        "text": "{0}（{1}）受应用级权限保护；在 API 低于 17 的设备上应核对权限保护级别。{2} [Content Provider, targetSdkVersion >= 17]"
+      },
+      "description": {
+        "text": "Content Provider（{0}）在 API 低于 17 的设备上运行时会被导出，从而可被其他应用访问。组件受应用级权限保护，但保护级别为 dangerous。恶意应用可能申请并获得该权限，进而与组件交互。若使用 signature 级别，则只有使用相同证书签名的应用才能获得权限。"
+      }
+    },
+    "exported_provider_signature_app_new": {
+      "title": {
+        "text": "{0}（{1}）受应用级权限保护。{2} [Content Provider, targetSdkVersion >= 17]"
+      },
+      "description": {
+        "text": "Content Provider（{0}）在 API 低于 17 的设备上运行时会被导出，从而可被其他应用访问。该组件受应用级权限保护。"
+      }
+    },
+    "exported_provider_signatureorsystem_app_new": {
+      "title": {
+        "text": "{0}（{1}）受应用级权限保护；应核对权限保护级别。{2} [Content Provider, targetSdkVersion >= 17]"
+      },
+      "description": {
+        "text": "Content Provider（{0}）在 API 低于 17 的设备上运行时会被导出，从而可被其他应用访问。组件受应用级权限保护，但保护级别为 signatureOrSystem。建议改用 signature；该级别通常足够满足需求，且不依赖应用在设备上的安装位置。"
+      }
+    },
+    "exported_provider_unknown_app_new": {
+      "title": {
+        "text": "{0}（{1}）受应用级权限保护；在 API 低于 17 的设备上应核对权限保护级别。{2} [Content Provider, targetSdkVersion >= 17]"
+      },
+      "description": {
+        "text": "Content Provider（{0}）在 API 低于 17 的设备上运行时会被导出，从而可被其他应用访问。保护该组件的应用级权限未在被分析应用中定义，应检查其定义处的保护级别。若为 normal 或 dangerous，恶意应用可能申请并获得权限，进而与组件交互；若为 signature，则只有使用相同证书签名的应用才能获得权限。"
+      }
+    }
+  }
+}

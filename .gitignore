@@ -21,3 +21,11 @@ fonts/*.ttf
 
 # Offline tool archives
 cache/
+
+# Generated adapters belong to a particular image, not to the translation source.
+__pycache__/
+risk_i18n/generated/
+
+# Local browser verification artifacts
+.playwright-cli/
+output/playwright/

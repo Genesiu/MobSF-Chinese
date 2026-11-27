@@ -1,0 +1,1082 @@
+{
+  "schema_version": 1,
+  "locale": "zh-CN",
+  "tested_versions": [
+    "4.5.2"
+  ],
+  "rules": {
+    "code": {
+      "android_ip_disclosure": {
+        "description": {
+          "text": "IP 地址泄露。",
+          "source": "IP Address disclosure",
+          "sha256": "bea65e3bef4c56412fc5220429ba2012833336abc1d79dc5c0af645f96247e15"
+        }
+      },
+      "android_hiddenui": {
+        "description": {
+          "text": "界面中的隐藏元素可用于向用户隐藏数据，但这些数据仍可能泄露。",
+          "source": "Hidden elements in view can be used to hide data from user. But this data can be leaked",
+          "sha256": "7861992c5486d989d06a39c64c6a0e87439904e5bf4be8e87240208420c2d0fe"
+        }
+      },
+      "android_insecure_ssl": {
+        "description": {
+          "text": "SSL 实现不安全。信任所有证书或接受自签名证书会形成严重安全隐患，应用易遭中间人攻击。",
+          "source": "Insecure Implementation of SSL. Trusting all the certificates or accepting self signed certificates is a critical Security Hole. This application is vulnerable to MITM attacks",
+          "sha256": "cfaff01ac9794cba491f763fd9a3ca7aa8bfe5b96fcdd54e784fc90e3048451a"
+        }
+      },
+      "android_webview_external": {
+        "description": {
+          "text": "WebView 从外部存储加载文件；外部存储中的文件可能被其他应用修改。",
+          "source": "WebView load files from external storage. Files in external storage can be modified by any application.",
+          "sha256": "0d8712bed7c14947a9a5d9b09dd3e575788ff11efc8981b551330565f0262dbf"
+        }
+      },
+      "android_write_app_dir": {
+        "description": {
+          "text": "应用可以向自身目录写入数据。敏感信息应加密存储。",
+          "source": "App can write to App Directory. Sensitive Information should be encrypted.",
+          "sha256": "212820cfeeff0599fb660cd14d84fe6dd5f4e3c1bdffc918fa77162d0ac20517"
+        }
+      },
+      "android_insecure_random": {
+        "description": {
+          "text": "应用使用了不安全的随机数生成器。",
+          "source": "The App uses an insecure Random Number Generator.",
+          "sha256": "25ba8a19d2e1815375771dd7870cf2d83ef7c4e8f1d1ac8f58413d85d2b99198"
+        }
+      },
+      "android_logging": {
+        "description": {
+          "text": "应用包含日志输出。敏感信息不应写入日志。",
+          "source": "The App logs information. Sensitive information should never be logged.",
+          "sha256": "a3d20dc4ba0ab484e597639c721f6c65fa6e624ac5b33418ac1f57f879ae963a"
+        }
+      },
+      "android_sql_cipher": {
+        "description": {
+          "text": "应用使用了 SQLCipher。应确认密钥等秘密信息未硬编码在代码中。",
+          "source": "This App uses SQL Cipher. Ensure that secrets are not hardcoded in code.",
+          "sha256": "7f217e27b5052f62f1c9f22a558ee3848905290cdbf3b562b386afc9a5c065d5"
+        }
+      },
+      "android_tapjacking": {
+        "description": {
+          "text": "应用具备防御点击劫持（Tapjacking）攻击的能力。",
+          "source": "This app has capabilities to prevent tapjacking attacks.",
+          "sha256": "ec4d025e1f66509eed4645787f6e41e589293af6178b7e11d404d4aaebec6f39"
+        }
+      },
+      "android_read_write_external": {
+        "description": {
+          "text": "应用可以读写外部存储。写入外部存储的数据可能被其他应用读取。",
+          "source": "App can read/write to External Storage. Any App can read data written to External Storage.",
+          "sha256": "f3d883dd6e62801072366a92795c7262ab447e85508d129a184413aa9542ab55"
+        }
+      },
+      "android_temp_file": {
+        "description": {
+          "text": "应用会创建临时文件。敏感信息不应写入临时文件。",
+          "source": "App creates temp file. Sensitive information should never be written into a temp file.",
+          "sha256": "4418ca8e0861bf297ab8f700d7e05e7b838e7a4c20dc870bec05e2692abfa4e2"
+        }
+      },
+      "android_webview": {
+        "description": {
+          "text": "WebView 实现不安全。在 WebView 中执行用户可控代码会造成严重安全隐患。",
+          "source": "Insecure WebView Implementation. Execution of user controlled code in WebView is a critical Security Hole.",
+          "sha256": "8a8b90ed416c3a7f7f6dedee051516f7fa6befcfbb760728e7baedb4475df549"
+        }
+      },
+      "android_webview_allow_file_from_url": {
+        "description": {
+          "text": "应确保用户可控 URL 不会传入 WebView。允许通过 URL 访问本地文件可能泄露文件系统中的敏感信息。",
+          "source": "Ensure that user controlled URLs never reaches the Webview. Enabling file access from URLs in WebView can leak sensitive information from the file system.",
+          "sha256": "7ad124f2bd6bfeb32880814e84bf0a3fd46b24320804740cd713898335323dac"
+        }
+      },
+      "android_sql_cipher_aes256": {
+        "description": {
+          "text": "应用使用了 SQLCipher；SQLCipher 可通过 256 位 AES 加密 SQLite 数据库文件。",
+          "source": "This App uses SQL Cipher. SQLCipher provides 256-bit AES encryption to sqlite database files.",
+          "sha256": "fdd7e85f9f73ef9d3904761aa77e9aef42da1bc2b9e64ce0605ff55eac3ae227"
+        }
+      },
+      "android_download_manager": {
+        "description": {
+          "text": "应用使用 Android Download Manager 下载文件。",
+          "source": "This App download files using Android Download Manager",
+          "sha256": "1d215737ee55b8ddf9ed81b1a6b1c1b7820aedd253f8ed97c3e565778c4d1029"
+        }
+      },
+      "android_db_encryption": {
+        "description": {
+          "text": "应用使用了启用加密的 Realm 数据库。",
+          "source": "This App use Realm Database with encryption.",
+          "sha256": "ca0d2cb105349aa8f98531c762e7641033e675eaa0e76d88d6d3854f13a5f18f"
+        }
+      },
+      "android_webview_debug": {
+        "description": {
+          "text": "应用启用了 WebView 远程调试。",
+          "source": "Remote WebView debugging is enabled.",
+          "sha256": "a946c5447fd2475ffd6c3a9b7e4498873389e45404e2de1e148d1e23cd07f74c"
+        }
+      },
+      "android_aar_jar_debug_enabled": {
+        "description": {
+          "text": "应用启用了调试配置。生产构建不应允许调试。",
+          "source": "Debug configuration enabled. Production builds must not be debuggable.",
+          "sha256": "35ad2dd3bb5d72c46260c3bf1d545bb28723b345117e33061265395e07bc4ee4"
+        }
+      },
+      "android_clipboard_listen": {
+        "description": {
+          "text": "应用会监听剪贴板变化。部分恶意软件也会监听剪贴板变化。",
+          "source": "This app listens to Clipboard changes. Some malware also listen to Clipboard changes.",
+          "sha256": "3c601494a1be146575c2be7853165c79b3e05d61e5aa375ae64d2736dcb5d0af"
+        }
+      },
+      "android_clipboard_copy": {
+        "description": {
+          "text": "应用会将数据复制到剪贴板。其他应用可能访问剪贴板，因此不应将敏感数据复制到其中。",
+          "source": "This App copies data to clipboard. Sensitive data should not be copied to clipboard as other applications can access it.",
+          "sha256": "a706981aa74db274dafc7e01521110230ec5432e5eea290c683f835adc9f1898"
+        }
+      },
+      "android_webview_ignore_ssl": {
+        "description": {
+          "text": "WebView 实现不安全：忽略 SSL 证书错误并接受任意 SSL 证书，应用易遭中间人攻击。",
+          "source": "Insecure WebView Implementation. WebView ignores SSL Certificate errors and accept any SSL Certificate. This application is vulnerable to MITM attacks",
+          "sha256": "c2629daca8a330873b1f721f896fec45479fa43913b5093cdef259400412adae"
+        }
+      },
+      "android_webview_mixed_content": {
+        "description": {
+          "text": "WebView 实现不安全：配置了 MIXED_CONTENT_ALWAYS_ALLOW，允许 HTTPS 页面加载不安全的 HTTP 内容，使应用面临中间人内容注入风险。",
+          "source": "Insecure WebView Implementation. WebView is configured with MIXED_CONTENT_ALWAYS_ALLOW, allowing a page loaded over HTTPS to load content from insecure HTTP origins. This exposes the application to man-in-the-middle content injection.",
+          "sha256": "187a454c96a721658dafd4280c3c6f8992a2a6ea9cb2b4c7bb9b250fbeeab7c2"
+        }
+      },
+      "android_sql_raw_query": {
+        "description": {
+          "text": "应用使用 SQLite 并执行原始 SQL 查询。将不可信用户输入直接用于此类查询可能导致 SQL 注入；敏感信息还应加密后写入数据库。",
+          "source": "App uses SQLite Database and execute raw SQL query. Untrusted user input in raw SQL queries can cause SQL Injection. Also sensitive information should be encrypted and written to the database.",
+          "sha256": "8290324955a884727ded9ccb895c52eab060f158aadd3fcc87c0d5f7944ec39e"
+        }
+      },
+      "android_detect_frida": {
+        "description": {
+          "text": "应用可以检测 Frida 服务端。",
+          "source": "This App detects frida server.",
+          "sha256": "95bf0f36c59887debdf275dbb700eefb7c4cb4387509f82fd8ad9a164784daf1"
+        }
+      },
+      "android_ssl_pinning": {
+        "description": {
+          "text": "应用使用 SSL 证书固定（Certificate Pinning），以检测或防御安全通信通道中的中间人攻击。",
+          "source": "This App uses SSL certificate pinning to detect or  prevent MITM attacks in secure communication channel.",
+          "sha256": "b5f6132725c5f516961777a9309b05c24fcc7254aecbe7933735755cc9460fe3"
+        }
+      },
+      "android_certificate_transparency": {
+        "description": {
+          "text": "应用实施了 TLS 证书透明度（Certificate Transparency），有助于发现证书颁发机构误签发或被恶意获取的 SSL 证书。",
+          "source": "This App enforce TLS Certificate Transparency which helps to  detect SSL certificates that have been mistakenly issued by a  certificate authority or maliciously acquired from an otherwise  unimpeachable certificate authority.",
+          "sha256": "983930c95edd0b1e528ebd5adb51a4e0a3f5c506c5ab82bc709f346571a319c1"
+        }
+      },
+      "android_prevent_screenshot": {
+        "description": {
+          "text": "应用具备防止在最近任务记录、Now On Tap 等场景中被截屏的能力。",
+          "source": "This App has capabilities to prevent against Screenshots from Recent Task History/ Now On Tap etc.",
+          "sha256": "d973d3a90522cdca2c69c009f80464910ef5d4ebf79a4ddaba80b00cf9bb0304"
+        }
+      },
+      "android_debuggable": {
+        "description": {
+          "text": "检测到 DexGuard 调试配置检测代码，用于判断应用是否允许调试。",
+          "source": "DexGuard Debug Detection code to detect whether an App is debuggable or not is identified.",
+          "sha256": "02e97240eb7a092a214494a875c3e41718e9673a4e27440f48109397148adbf0"
+        }
+      },
+      "android_debugger_detect": {
+        "description": {
+          "text": "检测到 DexGuard 调试器检测代码。",
+          "source": "DexGuard Debugger Detection code is identified.",
+          "sha256": "555a89a47d11267f94ca136b295fe5467d8224f70665f3675cb5c3c144a7605a"
+        }
+      },
+      "android_emulator_detect": {
+        "description": {
+          "text": "检测到 DexGuard 模拟器检测代码。",
+          "source": "DexGuard Emulator Detection code is identified.",
+          "sha256": "b1a073bd43914d31f3441ca1a1875275a51b92480c0ac803d0280c6eb0afbba0"
+        }
+      },
+      "android_debug_sign": {
+        "description": {
+          "text": "检测到 DexGuard 调试签名检测代码，用于判断应用是否使用调试密钥签名。",
+          "source": "DexGuard code to detect whether the App is signed with a debug key or not is identified.",
+          "sha256": "e98a823a38c86aa43093c0357ee63898280f248f29df24a6109ca148365edf13"
+        }
+      },
+      "android_dexguard_root_detection": {
+        "description": {
+          "text": "检测到 DexGuard Root 检测代码。",
+          "source": "DexGuard Root Detection code is identified.",
+          "sha256": "ee9fa07cdc5485a279961935dfcc26990e120f034ab2456bdcfd35c03913b266"
+        }
+      },
+      "android_tamper_detect": {
+        "description": {
+          "text": "检测到 DexGuard 应用篡改检测代码。",
+          "source": "DexGuard App Tamper Detection code is identified.",
+          "sha256": "282ba5b4dde080e643fce15b38d6b633d9a97e46437b5fac01cd9742af34d457"
+        }
+      },
+      "android_certificate_tamper": {
+        "description": {
+          "text": "检测到 DexGuard 签名证书篡改检测代码。",
+          "source": "DexGuard Signer Certificate Tamper Detection code is identified.",
+          "sha256": "235407ef3453855c53d96ecedc50b57ed69a4b2623f1ee0cb904d457f93a330f"
+        }
+      },
+      "android_package_tamper": {
+        "description": {
+          "text": "应用可能利用安装包签名检测篡改。",
+          "source": "The App may use package signature for tamper detection.",
+          "sha256": "5c5ccb1a08166595c50dc04cceaf0c57b1c45040a1a2817d1730012432c1bd18"
+        }
+      },
+      "android_safetynet": {
+        "description": {
+          "text": "应用使用了 SafetyNet API。",
+          "source": "This App uses SafetyNet API.",
+          "sha256": "e76b714ce6983c87da9baa28d3a3ddaeefb349aeca8fec3de4f19124b4ded43e"
+        }
+      },
+      "android_su_detect": {
+        "description": {
+          "text": "应用可能请求 Root（超级用户）权限。",
+          "source": "This App may request root (Super User) privileges.",
+          "sha256": "5d668b22542400e8a576c3a0946a2fed9c94712c231371bdb81c2ed04f5b0c84"
+        }
+      },
+      "android_jackson_deserialize": {
+        "description": {
+          "text": "应用使用 Jackson 反序列化库。反序列化不可信输入可能导致任意代码执行。",
+          "source": "The app uses jackson deserialization library. Deserialization of untrusted input can result in arbitrary code execution.",
+          "sha256": "e13ba7141cec0af874b141c750e3073655df7930d8f892f52a81b581f31503e8"
+        }
+      },
+      "android_aes_ecb": {
+        "description": {
+          "text": "应用使用了 ECB 加密模式。ECB 会将相同的明文块加密为相同的密文块，因此被认为是不安全的。",
+          "source": "The App uses ECB mode in Cryptographic encryption algorithm. ECB mode is known to be weak as it results in the same ciphertext for identical blocks of plaintext.",
+          "sha256": "6f246c60fc44de86083dc1c377454fce5d0cc5de43b6f63f52e2911326c4e9df"
+        }
+      },
+      "android_aws_ecb_default": {
+        "description": {
+          "text": "调用 Cipher.getInstance(\"AES\") 默认会使用 AES ECB 模式；相同明文块会产生相同密文块，因此该模式被认为是不安全的。",
+          "source": "Calling Cipher.getInstance(\"AES\") will return AES ECB mode by default. ECB mode is known to be weak as it results in the same ciphertext for identical blocks of plaintext.",
+          "sha256": "187a566c67c5ff5aba7ee39d7262552a1fa76ccb82c5bd7e69ee4a129255f72d"
+        }
+      },
+      "android_rsa_no_oaep": {
+        "description": {
+          "text": "应用使用了未采用 OAEP 填充的 RSA 加密。填充方案用于防御多种针对无填充 RSA 加密的攻击。",
+          "source": "This App uses RSA Crypto without OAEP padding. The purpose of the padding scheme is to prevent a number of attacks on RSA that only work when the encryption is performed without padding.",
+          "sha256": "9fe4b03e999893f2ede257050af5ed36649ece6670263ffe23f7ed7dd06b6a61"
+        }
+      },
+      "android_world_writable": {
+        "description": {
+          "text": "文件或 SharedPreferences 允许所有应用写入，其他应用可以修改其中的数据。",
+          "source": "The file or SharedPreference is World Writable. Any App can write to the file",
+          "sha256": "b1482e4de8310f8d1245f7600b9ff97e217f771f336dcc18b30ada12880544e6"
+        }
+      },
+      "android_world_readable": {
+        "description": {
+          "text": "文件或 SharedPreferences 允许所有应用读取，其他应用可以获取其中的数据。",
+          "source": "The file or SharedPreference is World Readable. Any App can read from the file",
+          "sha256": "e3e26574f8b3c87888fa59b9dccaf8031193db0b721c08c836d64646f5deeecc"
+        }
+      },
+      "android_world_read_write": {
+        "description": {
+          "text": "文件允许所有应用读写，其他应用可以读取或修改其中的数据。",
+          "source": "The file is World Readable and Writable. Any App can read/write to the file",
+          "sha256": "dc21a4fec155ce581ace57c6067d7973d35ff69eb59e8770afcecd1b4dc88d3b"
+        }
+      },
+      "android_weak_hash": {
+        "description": {
+          "text": "应用使用了弱哈希算法。",
+          "source": "Weak Hash algorithm used",
+          "sha256": "c775af3bf18c54e9814c621a87dcf63c41991ecbcc7a573d887157c657716332"
+        }
+      },
+      "android_weak_ciphers": {
+        "description": {
+          "text": "应用使用了弱加密算法。",
+          "source": "Weak Encryption algorithm used",
+          "sha256": "17be48c242e918362677a1df6e6d7433d35538fa284e9104a880155493f14fef"
+        }
+      },
+      "cbc_padding_oracle": {
+        "description": {
+          "text": "应用使用 CBC 加密模式与 PKCS5/PKCS7 填充；这种配置存在填充预言机攻击风险。",
+          "source": "The App uses the encryption mode CBC with PKCS5/PKCS7 padding. This configuration is vulnerable to padding oracle attacks.",
+          "sha256": "2b30f8f85bfe54afabd77441b28fbb856433fe6a03a11dc75892338120920481"
+        }
+      },
+      "android_md5": {
+        "description": {
+          "text": "MD5 是存在已知哈希碰撞问题的弱哈希算法。",
+          "source": "MD5 is a weak hash known to have hash collisions.",
+          "sha256": "bb06f928f88df46e3b1bd022fccaa8daab52c1a4b9cb6e4eff5f225dfa24a10f"
+        }
+      },
+      "android_sha1": {
+        "description": {
+          "text": "SHA-1 是存在已知哈希碰撞问题的弱哈希算法。",
+          "source": "SHA-1 is a weak hash known to have hash collisions.",
+          "sha256": "15756f78ccf4e49fe961197fee8753548350cefe9eb8f3ce4f58485d72367cdf"
+        }
+      },
+      "android_weak_iv": {
+        "description": {
+          "text": "应用可能使用了弱初始化向量（IV），例如全零序列或固定递增序列。未使用随机 IV 会使密文更容易被预测，并面临字典攻击风险。",
+          "source": "The App may use weak IVs like \"0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00\" or \"0x01,0x02,0x03,0x04,0x05,0x06,0x07\". Not using a random IV makes the resulting ciphertext much more predictable and susceptible to a dictionary attack.",
+          "sha256": "063a047bb797547de260e2d5c52dec72a84d493fa9574a9b6f5c1e065d1eb9ad"
+        }
+      },
+      "android_detect_root": {
+        "description": {
+          "text": "应用可能具备 Root 检测能力。",
+          "source": "This App may have root detection capabilities.",
+          "sha256": "37bb1e68a30263232bbde4bfcdf96d71668ca6778c6432eaf0803fd72dfc6f23"
+        }
+      },
+      "android_hardcoded": {
+        "description": {
+          "text": "文件中可能包含硬编码的敏感信息，例如用户名、密码或密钥。",
+          "source": "Files may contain hardcoded sensitive information like usernames, passwords, keys etc.",
+          "sha256": "254898a1417f9b5ebd14f52615c32aa0dd9474ba9ca7236cf086f39dc1b49ba4"
+        }
+      }
+    },
+    "manifest": {
+      "well_known_assetlinks": {
+        "title": {
+          "text": "未找到 App Link 的 assetlinks.json 文件 [android:name={0}][android:host={1}]",
+          "source": "App Link assetlinks.json file not found[android:name=%s][android:host=%s]",
+          "sha256": "80179ec02e0dbf49878cacbd331fdd72c0ea92dbe06c349aeba020bfa8be9546"
+        },
+        "description": {
+          "text": "未找到 App Link 资源验证 URL（{0}），或其配置不正确（状态码：{1}）。App Links 可将网页或邮件中的链接跳转至应用；若对应主机或域名的验证文件缺失或配置错误，恶意应用可能劫持这些链接，实施钓鱼攻击，或泄露 URI 中的个人信息、OAuth 令牌、免密登录链接及密码重置令牌等敏感数据。应在域名下部署 assetlinks.json，并在 Activity 的 intent-filter 中启用 android:autoVerify=\"true\"。",
+          "source": "App Link asset verification URL (%s) not found or configured incorrectly. (Status Code: %s). App Links allow users to redirect from a web URL/email to the mobile app. If this file is missing or incorrectly configured for the App Link host/domain, a malicious app can hijack such URLs. This may lead to phishing attacks, leak sensitive data in the URI, such as PII, OAuth tokens, magic link/password reset tokens and more. You must verify the App Link domain by hosting the assetlinks.json file and enabling verification via [android:autoVerify=\"true\"] in the Activity intent-filter.",
+          "sha256": "57aed0cca05cef0d80de361d5845fac6f454c908a8e162144cc700354292c0d1"
+        }
+      },
+      "clear_text_traffic": {
+        "title": {
+          "text": "应用允许明文网络通信 [android:usesCleartextTraffic=true]",
+          "source": "Clear text traffic is Enabled For App[android:usesCleartextTraffic=true]",
+          "sha256": "95e1aefc34200a9c86c14f9410687fa9ad3faf24de90e50f6a9e820c7bc89eb4"
+        },
+        "description": {
+          "text": "应用允许 HTTP、FTP、DownloadManager 和 MediaPlayer 等使用明文网络通信。目标 API 级别为 27 或更低时，此配置默认值为 true；目标 API 级别为 28 或更高时默认值为 false。明文通信缺乏机密性、真实性及防篡改保护，网络攻击者可能窃听或修改传输数据而不被发现。",
+          "source": "The app intends to use cleartext network traffic, such as cleartext HTTP, FTP stacks, DownloadManager, and MediaPlayer. The default value for apps that target API level 27 or lower is \"true\". Apps that target API level 28 or higher default to \"false\". The key reason for avoiding cleartext traffic is the lack of confidentiality, authenticity, and protections against tampering; a network attacker can eavesdrop on transmitted data and also modify it without being detected.",
+          "sha256": "9766a0771df66d7aa142103ccc820d4cdb65c2b9cfe9f275d88d3b4428ecadf9"
+        }
+      },
+      "direct_boot_aware": {
+        "title": {
+          "text": "应用支持直接启动模式 [android:directBootAware=true]",
+          "source": "App is direct-boot aware [android:directBootAware=true]",
+          "sha256": "1b8f3cf7c626796b453586ac4fb879ed39f3be0320c9c4335433c07878163277"
+        },
+        "description": {
+          "text": "应用可以在用户解锁设备前运行。若使用自定义 Application 子类，且应用内任一组件支持直接启动，则整个自定义 Application 都被视为支持直接启动。在直接启动阶段，应用只能访问设备保护存储中的数据。",
+          "source": "This app can run before the user unlocks the device. If you're using a custom subclass of Application, and if any component inside your application is direct - boot aware, then your entire custom application is considered to be direct - boot aware.During Direct Boot, your application can only access the data that is stored in device protected storage.",
+          "sha256": "6c4cfc955a3aadc8b1ff9f06a869e7aafcd8c1c3a27e07b7aa6fbd66cc65eae7"
+        }
+      },
+      "has_network_security": {
+        "title": {
+          "text": "应用配置了网络安全策略 [android:networkSecurityConfig={0}]",
+          "source": "App has a Network Security Configuration[android:networkSecurityConfig=%s]",
+          "sha256": "5591841cbf64ed92e6ed49af0bc147d0d10c39f9ed8da3a292935138cd98bd22"
+        },
+        "description": {
+          "text": "网络安全配置允许应用通过安全的声明式配置文件定制网络安全设置，无需修改应用代码；可以为特定域名或应用设置相应策略。",
+          "source": "The Network Security Configuration feature lets apps customize their network security settings in a safe, declarative configuration file without modifying app code. These settings can be configured for specific domains and for a specific app. ",
+          "sha256": "ce95cfa7d182331d2d1ca53d44be39f7f77d636c296d1cd9a256e76670618c5c"
+        }
+      },
+      "vulnerable_os_version": {
+        "title": {
+          "text": "应用可安装在存在未修复漏洞的 Android {0} 上 [minSdk={1}]",
+          "source": "App can be installed on a vulnerable unpatched Android version %s, [minSdk=%s]",
+          "sha256": "497511975a449b54dd06dc0f65ffd19595a7cab28a69cd237fcbeac8138d91bd"
+        },
+        "description": {
+          "text": "应用支持安装在存在多项未修复漏洞的旧版 Android 上，这些设备无法从 Google 获得足够的安全更新。按此规则的建议，应支持 Android 10（API 29）或更高版本，以获得合理的安全更新。",
+          "source": "This application can be installed on an older version of android that has multiple unfixed vulnerabilities. These devices won't receive reasonable security updates from Google. Support an Android version => 10, API 29 to receive reasonable security updates.",
+          "sha256": "9d780f2d76680f79f492596b207223cd05a40c8f8f3ef8dff6ac3aeb2a831a47"
+        }
+      },
+      "vulnerable_os_version2": {
+        "title": {
+          "text": "应用可安装在存在漏洞的 Android {0} 上 [minSdk={1}]",
+          "source": "App can be installed on a vulnerable Android version %s, minSdk=%s]",
+          "sha256": "859b8eda367d9ec02de0a97c29675bc470e6b6b06e1d01fda05c6fe8727f5419"
+        },
+        "description": {
+          "text": "应用支持安装在存在多项漏洞的旧版 Android 上。按此规则的建议，应支持 Android 10（API 29）或更高版本，以获得合理的安全更新。",
+          "source": "This application can be installed on an older version of android that has multiple vulnerabilities. Support an Android version => 10, API 29 to receive reasonable security updates.",
+          "sha256": "b0d311dcba30975b342689ec97eb40b7d608ac261d8055782ac8040c97637731"
+        }
+      },
+      "app_is_debuggable": {
+        "title": {
+          "text": "应用开启了调试模式 [android:debuggable=true]",
+          "source": "Debug Enabled For App [android:debuggable=true]",
+          "sha256": "6fc91664fb57c52d7b80543f790bdad639e8905035da697b9364dde610cc3e1f"
+        },
+        "description": {
+          "text": "应用启用了调试，使逆向分析者更容易附加调试器、获取堆栈信息并访问调试辅助类。",
+          "source": "Debugging was enabled on the app which makes it easier for reverse engineers to hook a debugger to it. This allows dumping a stack trace and accessing debugging helper classes.",
+          "sha256": "f304d3de98c855968a0ae4f10d37435b70aa4c33365aca3a655b9a1955ae1267"
+        }
+      },
+      "app_allowbackup": {
+        "title": {
+          "text": "应用允许备份数据 [android:allowBackup=true]",
+          "source": "Application Data can be Backed up [android:allowBackup=true]",
+          "sha256": "80f95673d49c790f8ef3ec6ce8fc0604aac9c1bde1cb87cd1df4ff13c0a244e6"
+        },
+        "description": {
+          "text": "此配置允许通过 ADB 备份应用数据。启用 USB 调试的用户可以将应用数据从设备复制出来。",
+          "source": "This flag allows anyone to backup your application data via adb. It allows users who have enabled USB debugging to copy application data off of the device.",
+          "sha256": "6abc0ab8d1362e2e5c3dda1639ae0c8c54326bcb8fe81b61102ae8944f41df0d"
+        }
+      },
+      "allowbackup_not_set": {
+        "title": {
+          "text": "应用未显式禁止数据备份，缺少 android:allowBackup 配置",
+          "source": "Application Data can be Backed up [android:allowBackup] flag is missing.",
+          "sha256": "ec366cd0974a2b3324efa3ae7d3384b5b59da030167cfd00befd24283e60cd3a"
+        },
+        "description": {
+          "text": "应将 android:allowBackup 设置为 false。该配置默认值为 true，允许通过 ADB 备份应用数据；启用 USB 调试的用户可以将应用数据从设备复制出来。",
+          "source": "The flag [android:allowBackup] should be set to false. By default it is set to true and allows anyone to backup your application data via adb. It allows users who have enabled USB debugging to copy application data off of the device.",
+          "sha256": "3fe4b8546708bacc98e753010b44eb1df9c59e3e019073bd3a821ec0b946d7eb"
+        }
+      },
+      "app_in_test_mode": {
+        "title": {
+          "text": "应用处于测试模式 [android:testOnly=true]",
+          "source": "Application is in Test Mode [android:testOnly=true]",
+          "sha256": "8f149734524259a420c0bd4e80c263c89c4b20c12bc98f3036dcfc763357d56a"
+        },
+        "description": {
+          "text": "测试模式可能向应用外部暴露功能或数据，造成安全隐患。",
+          "source": "It may expose functionality or data outside of itself that would cause a security hole.",
+          "sha256": "b99fd4839891f8b5c67f0e33015b5eb39cc0ddae8a9ef586e15048fab72d6aff"
+        }
+      },
+      "task_affinity_set": {
+        "title": {
+          "text": "Activity（{0}）设置了 taskAffinity",
+          "source": "TaskAffinity is set for activity (%s)",
+          "sha256": "be4555371f8b8428bee5f556caac88a30255bf9cce81a53b3496d0ad8de8e869"
+        },
+        "description": {
+          "text": "设置 taskAffinity 后，其他应用可能读取发往其他任务中 Activity 的 Intent。应保留默认设置，以包名作为任务亲和性，防止其他应用读取收发 Intent 中的敏感信息。",
+          "source": "If taskAffinity is set, then other application could read the Intents sent to Activities belonging to another task. Always use the default setting keeping the affinity as the package name in order to prevent sensitive information inside sent or received Intents from being read by another application.",
+          "sha256": "23748a320bfea0c79858ac3b3b5b934dc89154e74a19944cabf3b90966fbfed5"
+        }
+      },
+      "non_standard_launchmode": {
+        "title": {
+          "text": "Activity（{0}）未使用 standard 启动模式",
+          "source": "Launch Mode of activity (%s) is not standard.",
+          "sha256": "7fcb1a65e827afa013555351c78a8cea0b5d30bc274d1b3cabbdee9e32f7a6c6"
+        },
+        "description": {
+          "text": "Activity 使用 singleTask 或 singleInstance 启动模式时会成为任务根 Activity，其他应用可能读取调用它的 Intent 内容。当 Intent 包含敏感信息时，应使用 standard 启动模式。",
+          "source": "An Activity should not be having the launch mode attribute set to \"singleTask/singleInstance\" as it becomes root Activity and it is possible for other applications to read the contents of the calling Intent. So it is required to use the \"standard\" launch mode attribute when sensitive information is included in an Intent.",
+          "sha256": "ef527bad64050904bffb9bceea4b7d03befbfbc6c0fe2a6ca2c3de2d0b669d90"
+        }
+      },
+      "task_hijacking": {
+        "title": {
+          "text": "Activity（{0}）存在 Android 任务劫持 / StrandHogg 风险",
+          "source": "Activity (%s) is vulnerable to Android Task Hijacking/StrandHogg.",
+          "sha256": "677918b76158c289a853cf5fe4384b5d92db405698e733b2a1b72ece06100383"
+        },
+        "description": {
+          "text": "Activity 不应使用 singleTask 启动模式，否则其他应用可能将恶意 Activity 放到任务栈顶部，形成任务劫持 / StrandHogg 1.0 漏洞，使应用易受钓鱼攻击。可将启动模式设为 singleInstance，或设置空的 taskAffinity（taskAffinity=\"\"）；也可将当前目标 SDK（{0}）提升至 API 28 或更高，在平台层面修复该问题。",
+          "source": "An Activity should not be having the launch mode attribute set to \"singleTask\". It is then possible for other applications to place a malicious activity on top of the activity stack resulting in Task Hijacking/StrandHogg 1.0 vulnerability. This makes the application an easy target for phishing attacks. The vulnerability can be remediated by setting the launch mode attribute to \"singleInstance\" or by setting an empty taskAffinity (taskAffinity=\"\") attribute. You can also update the target SDK version (%s) of the app to 28 or higher to fix this issue at platform level.",
+          "sha256": "4acb61839e6b8bca08b3f12accbe4905e938a75a0013cc81f5baae95ab4b339f"
+        }
+      },
+      "task_hijacking2": {
+        "title": {
+          "text": "Activity（{0}）存在 StrandHogg 2.0 任务劫持风险",
+          "source": "Activity (%s) is vulnerable to StrandHogg 2.0",
+          "sha256": "10589fd2438fb1c5590ef0fb451247904d15f3f919d9bb032ed7e0e86465da7f"
+        },
+        "description": {
+          "text": "检测到 Activity 存在 StrandHogg 2.0 任务劫持风险。其他应用可能将恶意 Activity 放到受影响应用的任务栈顶部，实施钓鱼攻击。可同时设置 singleInstance 启动模式和空的 taskAffinity（taskAffinity=\"\"）；也可将当前目标 SDK（{0}）提升至 API 29 或更高，在平台层面修复该问题。",
+          "source": "Activity is found to be vulnerable to StrandHogg 2.0 task hijacking vulnerability. When vulnerable, it is possible for other applications to place a malicious activity on top of the activity stack of the vulnerable application. This makes the application an easy target for phishing attacks. The vulnerability can be remediated by setting the launch mode attribute to \"singleInstance\" and by setting an empty taskAffinity (taskAffinity=\"\"). You can also update the target SDK version (%s) of the app to 29 or higher to fix this issue at platform level.",
+          "sha256": "f0cb90dea58e7b1f4d5369724e0bcb267aa1d1a927a651d71a0932e5d314f2bb"
+        }
+      },
+      "improper_provider_permission": {
+        "title": {
+          "text": "Content Provider 权限配置不当 [{0}]",
+          "source": "Improper Content Provider Permissions [%s]",
+          "sha256": "4ea1879acf66b02205912713cd970129f19961bc3ae68bff0bc79fd72bc29f9c"
+        },
+        "description": {
+          "text": "Content Provider 的权限配置允许设备上的其他应用访问它。内容提供者可能包含应用敏感信息，因此不应随意向外共享。",
+          "source": "A content provider permission was set to allows access from any other app on the device. Content providers may contain sensitive information about an app and therefore should not be shared.",
+          "sha256": "ac7049e94f711527627215bdc815ad71af6fb6c7bd4ed7cd785bea7caffedb1a"
+        }
+      },
+      "dialer_code_found": {
+        "title": {
+          "text": "发现拨号器秘密代码：{0} [android:scheme=\"android_secret_code\"]",
+          "source": "Dailer Code: %s Found [android:scheme=\"android_secret_code\"]",
+          "sha256": "eb20a2a0690e6038f0d33ce41a6517120939b580f14457255bb63f04ed64ce28"
+        },
+        "description": {
+          "text": "清单中存在秘密代码。在拨号器中输入这些代码可能访问隐藏功能，其中可能包含敏感信息。",
+          "source": "A secret code was found in the manifest. These codes, when entered into the dialer grant access to hidden content that may contain sensitive information.",
+          "sha256": "2970d915b44d7c7d615f34a25da12367769a5fc1d15636e5b23d82897a0bba9f"
+        }
+      },
+      "sms_receiver_port_found": {
+        "title": {
+          "text": "发现监听端口 {0} 的数据短信接收器 [android:port]",
+          "source": "Data SMS Receiver Set on Port: %s Found [android:port]",
+          "sha256": "0f6d1fa7557c4d008748fca4bd8c00208c7bd85efcf5f58b23931e23c4771b1c"
+        },
+        "description": {
+          "text": "应用配置了监听指定端口的二进制短信接收器。发往设备的二进制短信会按开发者定义的方式处理；应用应严格校验短信数据，并将收到的短信视为来自不可信来源。",
+          "source": "A binary SMS receiver is configured to listen on a port. Binary SMS messages sent to a device are processed by the application in whichever way the developer choses. The data in this SMS should be properly validated by the application. Furthermore, the application should assume that the SMS being received is from an untrusted source.",
+          "sha256": "fb331dc5ee1602eaa669a032b969050f170c93ed4dc0c30d9b54a7ce80ee7ac8"
+        }
+      },
+      "high_intent_priority_found": {
+        "title": {
+          "text": "Intent 优先级过高（{0}），命中 {1} 次 [android:priority]",
+          "source": "High Intent Priority (%s) - {%s} Hit(s) [android:priority]",
+          "sha256": "8877741b7fbdabf85b5144febb2d7207c731fbb803cf771d022da3302072f92f"
+        },
+        "description": {
+          "text": "将 Intent 优先级设置得高于其他 Intent，可能使应用覆盖其他请求。",
+          "source": "By setting an intent priority higher than another intent, the app effectively overrides other requests.",
+          "sha256": "98934d727ecad23f39cdd2ce5d66e3ebba2e3c7ac922f4a2d56d6e86cfc64a74"
+        }
+      },
+      "high_action_priority_found": {
+        "title": {
+          "text": "Action 优先级过高（{0}）[android:priority]",
+          "source": "High Action Priority (%s)[android:priority] ",
+          "sha256": "0effc394c5146407027d737f0917b1850ccb6626a76ec033d09cf41f8f4153e7"
+        },
+        "description": {
+          "text": "将 Action 优先级设置得高于其他 Action，可能使应用覆盖其他请求。",
+          "source": "By setting an action priority higher than another action, the app effectively overrides other requests.",
+          "sha256": "53c1e5aa1107c365e78afec9688d03ac8641c3cf93ee092df581c54b406e3629"
+        }
+      },
+      "exported_protected_permission_signature": {
+        "title": {
+          "text": "{0}（{1}）受权限保护。{2} [android:exported=true]",
+          "source": "%s (%s) is Protected by a permission.%s [android:exported=true]",
+          "sha256": "5be715736958d0f55ec390ba21de38ec2a0a9ec0273b1408054fe5a86b7778ad"
+        },
+        "description": {
+          "text": "检测到导出的 {1} 组件。该组件受权限保护。",
+          "ignored_slots": [
+            0
+          ],
+          "source": "A%s %s is found to be exported, but is protected by permission.",
+          "sha256": "537dd754ace027924bf553b23b57ffe19b3be9f21f6327bcd8bafe2cb9ace74a"
+        }
+      },
+      "exported_protected_permission_normal": {
+        "title": {
+          "text": "{0}（{1}）受权限保护；应核对权限保护级别。{2} [android:exported=true]",
+          "source": "%s (%s) is Protected by a permission, but the protection level of the permission should be checked.%s [android:exported=true]",
+          "sha256": "be34f1dc5883702104b40420df477389a17d5f4c120cc69c2327506aaefef316"
+        },
+        "description": {
+          "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。组件受权限保护，但保护级别为 normal。恶意应用可能申请并获得该权限，进而与组件交互。若使用 signature 级别，则只有使用相同证书签名的应用才能获得权限。",
+          "ignored_slots": [
+            0
+          ],
+          "source": "A%s %s is found to be shared with other apps on the device therefore leaving it accessible to any other application on the device. It is protected by a permission. However, the protection level of the  permission is set to normal. This means that a malicious application can request and obtain the permission and interact with the component. If it was set to signature, only applications signed with the same certificate could obtain the permission.",
+          "sha256": "4d92561dd03bfb353c309f73a16c2e9815abc92f67c79a5a5449f47569099ce0"
+        }
+      },
+      "exported_protected_permission_dangerous": {
+        "title": {
+          "text": "{0}（{1}）受权限保护；应核对权限保护级别。{2} [android:exported=true]",
+          "source": "%s (%s) is Protected by a permission, but the protection level of the permission should be checked. %s [android:exported=true]",
+          "sha256": "f3104515ff7544411f2419ad11c5a9245de08530d9d9aa5c0ceac0b9cc702dc1"
+        },
+        "description": {
+          "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。组件受权限保护，但保护级别为 dangerous。恶意应用可能申请并获得该权限，进而与组件交互。若使用 signature 级别，则只有使用相同证书签名的应用才能获得权限。",
+          "ignored_slots": [
+            0
+          ],
+          "source": "A%s %s is found to be shared with other apps on the device therefore leaving it accessible to any other application on the device. It is protected by a permission. However, the protection level of the permission is set to dangerous. This means that a malicious application can request and obtain the permission and interact with the component. If it was set to signature, only applications signed with the same certificate could obtain the permission.",
+          "sha256": "10b4414ccffdf298b2e890928727b59d3f281f797b8fc40eaf15e029140eb44f"
+        }
+      },
+      "exported_protected_permission_signatureorsystem": {
+        "title": {
+          "text": "{0}（{1}）受权限保护；应核对权限保护级别。{2} [android:exported=true]",
+          "source": "%s (%s) is Protected by a permission, but the protection level of the permission should be checked. %s [android:exported=true]",
+          "sha256": "f3104515ff7544411f2419ad11c5a9245de08530d9d9aa5c0ceac0b9cc702dc1"
+        },
+        "description": {
+          "text": "检测到导出的 {1} 组件。组件受权限保护，但保护级别为 signatureOrSystem。建议改用 signature；该级别通常足够满足需求，且不依赖应用在设备上的安装位置。",
+          "ignored_slots": [
+            0
+          ],
+          "source": "A%s %s is found to be exported, but is protected by a permission. However, the protection level of the permission is set to signatureOrSystem. It is recommended that signature level is used instead. Signature level should suffice for most purposes, and does not depend on where the applications are installed on the device.",
+          "sha256": "c390e3df0ee99d84bf88d12a7aed90784df64f0e319435fa3ad56c575899ce14"
+        }
+      },
+      "exported_protected_permission_not_defined": {
+        "title": {
+          "text": "{0}（{1}）受权限保护；应核对权限保护级别。{2} [android:exported=true]",
+          "source": "%s (%s) is Protected by a permission, but the protection level of the permission should be checked. %s [android:exported=true]",
+          "sha256": "f3104515ff7544411f2419ad11c5a9245de08530d9d9aa5c0ceac0b9cc702dc1"
+        },
+        "description": {
+          "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。保护该组件的权限未在被分析应用中定义，应检查其定义处的保护级别。若为 normal 或 dangerous，恶意应用可能申请并获得权限，进而与组件交互；若为 signature，则只有使用相同证书签名的应用才能获得权限。",
+          "ignored_slots": [
+            0
+          ],
+          "source": "A%s %s is found to be shared with other apps on the device therefore leaving it accessible to any other application on the device. It is protected by a permission which is not defined in the analysed application. As a result, the protection level of the permission should be checked where it is defined. If it is set to normal or dangerous, a malicious application can request and obtain the permission and interact with the component. If it is set to signature, only applications signed with the same certificate can obtain the permission.",
+          "sha256": "0c9cfccf0c1a6273b26d14b8c13bdb875c1d0bdee58f2b25477decc24fe7802e"
+        }
+      },
+      "exported_protected_permission_normal_app_level": {
+        "title": {
+          "text": "{0}（{1}）受应用级权限保护；应核对权限保护级别。{2} [android:exported=true]",
+          "source": "%s (%s) is Protected by a permission at the application level, but the protection level of the permission should be checked. %s [android:exported=true]",
+          "sha256": "f95f1cc461759e484380035effc927ced81aa0d406daf98b6577a33170daa60a"
+        },
+        "description": {
+          "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。组件受应用级权限保护，但保护级别为 normal。恶意应用可能申请并获得该权限，进而与组件交互。若使用 signature 级别，则只有使用相同证书签名的应用才能获得权限。",
+          "ignored_slots": [
+            0
+          ],
+          "source": "A%s %s is found to be shared with other apps on the device therefore leaving it accessible to any other application on the device.  It is protected by a permission at the application level. However, the protection level of the permission is set to normal. This means that a malicious application can request and obtain the permission and interact with the component. If it was set to signature, only applications signed with the same certificate could obtain the permission.",
+          "sha256": "b40081b47d62fe9aaba674d211a752768a9a350e25d29aedca82a1e8a6d242e7"
+        }
+      },
+      "exported_protected_permission_dangerous_app_level": {
+        "title": {
+          "text": "{0}（{1}）受应用级权限保护；应核对权限保护级别。{2} [android:exported=true]",
+          "source": "%s (%s) is Protected by a permission at the application level, but the protection level of the permission should be checked. %s [android:exported=true]",
+          "sha256": "f95f1cc461759e484380035effc927ced81aa0d406daf98b6577a33170daa60a"
+        },
+        "description": {
+          "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。组件受应用级权限保护，但保护级别为 dangerous。恶意应用可能申请并获得该权限，进而与组件交互。若使用 signature 级别，则只有使用相同证书签名的应用才能获得权限。",
+          "ignored_slots": [
+            0
+          ],
+          "source": "A%s %s is found to be shared with other apps on the device therefore leaving it accessible to any other application on the device. It is protected by a permission at the application level. However, the protection level of the permission is set to dangerous. This means that a malicious application can request and obtain the permission and interact with the component. If it was set to signature, only applications signed with the same certificate could obtain the permission.",
+          "sha256": "8bbdee3a4dee9e8be6339c03a9e14e26f0bf9b79c98c925c34ec724d844ee1bb"
+        }
+      },
+      "exported_protected_permission": {
+        "title": {
+          "text": "{0}（{1}）受应用级权限保护。{2} [android:exported=true]",
+          "source": "%s (%s)  Protected by a permission at the application level. %s [android:exported=true]",
+          "sha256": "56bc588db679fcc1df23567d616d3df4c9069ad28c3f716a94a9b8adf2e54cbc"
+        },
+        "description": {
+          "text": "检测到导出的 {1} 组件。该组件受应用级权限保护。",
+          "ignored_slots": [
+            0
+          ],
+          "source": "A%s %s is found to be exported, but is protected by a permission at the application level.",
+          "sha256": "4d84c089d1c0cbf27607fa2a3ba4ddec0206b8b13de99cbc82c1dfdeeee3b978"
+        }
+      },
+      "exported_protected_permission_signatureorsystem_app_level": {
+        "title": {
+          "text": "{0}（{1}）受应用级权限保护；应核对权限保护级别。{2} [android:exported=true]",
+          "source": "%s (%s) is Protected by a permission at the application level, but the protection level of the permission should be checked. %s [android:exported=true]",
+          "sha256": "f95f1cc461759e484380035effc927ced81aa0d406daf98b6577a33170daa60a"
+        },
+        "description": {
+          "text": "检测到导出的 {1} 组件。组件受应用级权限保护，但保护级别为 signatureOrSystem。建议改用 signature；该级别通常足够满足需求，且不依赖应用在设备上的安装位置。",
+          "ignored_slots": [
+            0
+          ],
+          "source": "A%s %s is found to be exported, but is protected by a permission at the application level. However, the protection level of the permission is set to signatureOrSystem. It is recommended that signature level is used instead. Signature level should suffice for most purposes, and does not depend on where the applications are installed on the device.",
+          "sha256": "61beabdd113e81a63b22e39259b072b6397607bd90d3d609cdec89b40d885d12"
+        }
+      },
+      "exported_protected_permission_app_level": {
+        "title": {
+          "text": "{0}（{1}）受应用级权限保护；应核对权限保护级别。{2} [android:exported=true]",
+          "source": "%s (%s) is Protected by a permission at the application, but the protection level of the permission should be checked. %s [android:exported=true]",
+          "sha256": "c767962d789cbf3883ca8594eacfad0a2cb4fe74b80cf83ea81fdf98c120c07f"
+        },
+        "description": {
+          "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。保护该组件的应用级权限未在被分析应用中定义，应检查其定义处的保护级别。若为 normal 或 dangerous，恶意应用可能申请并获得权限，进而与组件交互；若为 signature，则只有使用相同证书签名的应用才能获得权限。",
+          "ignored_slots": [
+            0
+          ],
+          "source": "A%s %s is found to be shared with other apps on the device therefore leaving it accessible to any other application on the device. It is protected by a permission at the application level which is not defined in the analysed application. As a result, the protection level of the permission should be checked where it is defined. If it is set to normal or dangerous, a malicious application can request and obtain the permission and interact with the component. If it is set to signature, only applications signed with the same certificate can obtain the permission.",
+          "sha256": "b7fd3f8b698490212d42658ec3b4b54e65e2f8bb2471afcda8285bb691ac9a25"
+        }
+      },
+      "explicitly_exported": {
+        "title": {
+          "text": "{0}（{1}）已导出且未受保护 [android:exported=true]",
+          "source": "%s (%s) is not Protected. [android:exported=true]",
+          "sha256": "a623cb5f99a1a4307d95785b030f24b3f01bd9904ea937c9d74a1a494c6a7505"
+        },
+        "description": {
+          "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。",
+          "ignored_slots": [
+            0
+          ],
+          "source": "A%s %s is found to be shared with other apps on the device therefore leaving it accessible to any other application on the device.",
+          "sha256": "528b855797ebf43581e06d70c273acd83377d7bab54ff240d4ff3b08213f3341"
+        }
+      },
+      "exported_intent_filter_exists": {
+        "title": {
+          "text": "{0}（{1}）未受保护，并配置了 intent-filter",
+          "source": "%s (%s) is not Protected. An intent-filter exists.",
+          "sha256": "c7c406c1dbbf8806d261dda5ee397d2fbecb0e6ef9e7fc940fd659d8b4dab8d7"
+        },
+        "description": {
+          "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。存在 intent-filter，表明 {2} 已被显式导出。",
+          "ignored_slots": [
+            0
+          ],
+          "source": "A%s %s is found to be shared with other apps on the device therefore leaving it accessible to any other application on the device. The presence of intent-filter indicates that the %s is explicitly exported.",
+          "sha256": "712bb807c3397c3e68e4f43d896a079f8ede1cfafa1b7409cdb354b6c10acde0"
+        }
+      },
+      "exported_provider": {
+        "title": {
+          "text": "{0}（{1}）未受保护 [Content Provider, targetSdkVersion < 17]",
+          "source": "%s (%s) is not Protected. [Content Provider, targetSdkVersion < 17]",
+          "sha256": "02cb9c54ce7e952cbdae3acf8fd9cbae1253cb66b95b8f052af4ae385f23de56"
+        },
+        "description": {
+          "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。该内容提供者的目标 API 低于 17，因此无论设备运行哪个 API 版本，默认都会导出。",
+          "ignored_slots": [
+            0
+          ],
+          "source": "A%s %s is found to be shared with other apps on the device therefore leaving it accessible to any other application on the device. It is a Content Provider that targets an API level under 17, which makes it exported by default, regardless of the API level of the system that the application runs on.",
+          "sha256": "dc8610c620a0cca355a3f5b7db0d7dc6067e4f6d9d2bc4b9075c87ca1716a552"
+        }
+      },
+      "exported_provider_2": {
+        "title": {
+          "text": "{0}（{1}）在 API 低于 17 的设备上可能不受保护 [Content Provider, targetSdkVersion >= 17]",
+          "source": "%s (%s) would not be Protected if the application ran on a device where the the API level was less than 17. [Content Provider, targetSdkVersion >= 17]",
+          "sha256": "0867c6aff4b4ddc826b0ce72172489378bd595ede90e1c676945c91a37d98694"
+        },
+        "description": {
+          "text": "Content Provider（{0} {1}）在 API 低于 17 的设备上运行时会被导出，从而可被其他应用访问。",
+          "source": "The Content Provider(%s %s) would be exported if the application ran on a device where the the API level was less than 17. In that situation, it would be shared with other apps on the device therefore leaving it accessible to any other application on the device.",
+          "sha256": "52547e251a5691d42236a49ca356fdc663598dddde588c5b06be669a34079cbf"
+        }
+      },
+      "exported_provider_normal": {
+        "title": {
+          "text": "{0}（{1}）受权限保护；应核对权限保护级别。{2} [Content Provider, targetSdkVersion < 17]",
+          "source": "%s (%s) is Protected by a permission, but the protection level of the permission should be checked. %s [Content Provider, targetSdkVersion < 17]",
+          "sha256": "c53485b0d8836c9d8268f93af1434d28333199615a2c8d70d06e29f138479d9b"
+        },
+        "description": {
+          "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。组件受权限保护，但保护级别为 normal。恶意应用可能申请并获得该权限，进而与组件交互。若使用 signature 级别，则只有使用相同证书签名的应用才能获得权限。",
+          "ignored_slots": [
+            0
+          ],
+          "source": "A%s %s is found to be shared with other apps on the device therefore leaving it accessible to any other application on the device. It is protected by a permission. However, the protection level of the permission is set to normal. This means that a malicious application can request and obtain the permission and interact with the component. If it was set to signature, only applications signed with the same certificate could obtain the permission.",
+          "sha256": "1594145e4d3ba5f233bf2f4f38961f998bea39b316fe8b4642e33f9360e212e1"
+        }
+      },
+      "exported_provider_danger": {
+        "title": {
+          "text": "{0}（{1}）受权限保护；应核对权限保护级别。{2} [Content Provider, targetSdkVersion < 17]",
+          "source": "%s (%s) is Protected by a permission, but the protection level of the permission should be checked. %s [Content Provider, targetSdkVersion < 17]",
+          "sha256": "c53485b0d8836c9d8268f93af1434d28333199615a2c8d70d06e29f138479d9b"
+        },
+        "description": {
+          "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。组件受权限保护，但保护级别为 dangerous。恶意应用可能申请并获得该权限，进而与组件交互。若使用 signature 级别，则只有使用相同证书签名的应用才能获得权限。",
+          "ignored_slots": [
+            0
+          ],
+          "source": "A%s %s is found to be shared with other apps on the device therefore leaving it accessible to any other application on the device. It is protected by a permission. However, the protection level of the permission is set to dangerous. This means that a malicious application can request and obtain the permission and interact with the component. If it was set to signature, only applications signed with the same certificate could obtain the permission.",
+          "sha256": "10b4414ccffdf298b2e890928727b59d3f281f797b8fc40eaf15e029140eb44f"
+        }
+      },
+      "exported_provider_signature": {
+        "title": {
+          "text": "{0}（{1}）受权限保护。{2} [Content Provider, targetSdkVersion < 17]",
+          "source": "%s (%s) is Protected by a permission. %s [Content Provider, targetSdkVersion < 17]",
+          "sha256": "f31b8c1457bebbc50c033c9da726ad27e51f3b362f15b3fe9b6cb81a01e5f850"
+        },
+        "description": {
+          "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。该组件受权限保护。",
+          "ignored_slots": [
+            0
+          ],
+          "source": "A%s %s is found to be shared with other apps on the device therefore leaving it accessible to any other application on the device. It is protected by permission.",
+          "sha256": "2558bb8c47a4b82e6915db38f7d2a10ac8aba421dc9049afef5292231e9d7cb7"
+        }
+      },
+      "exported_provider_signatureorsystem": {
+        "title": {
+          "text": "{0}（{1}）受权限保护；应核对权限保护级别。{2} [Content Provider, targetSdkVersion < 17]",
+          "source": "%s (%s) is Protected by a permission, but the protection level of the permission should be checked. %s [Content Provider, targetSdkVersion < 17]",
+          "sha256": "c53485b0d8836c9d8268f93af1434d28333199615a2c8d70d06e29f138479d9b"
+        },
+        "description": {
+          "text": "检测到导出的 {1} 组件。组件受权限保护，但保护级别为 signatureOrSystem。建议改用 signature；该级别通常足够满足需求，且不依赖应用在设备上的安装位置。",
+          "ignored_slots": [
+            0
+          ],
+          "source": "A%s %s is found to be exported, but is protected by a permission. However, the protection level of the permission is set to signatureOrSystem. It is recommended that signature level is used instead. Signature level should suffice for most purposes, and does not depend on where the applications are installed on the device.",
+          "sha256": "c390e3df0ee99d84bf88d12a7aed90784df64f0e319435fa3ad56c575899ce14"
+        }
+      },
+      "exported_provider_unknown": {
+        "title": {
+          "text": "{0}（{1}）受权限保护；应核对权限保护级别。{2} [Content Provider, targetSdkVersion < 17]",
+          "source": "%s (%s) is Protected by a permission, but the protection level of the permission should be checked. %s [Content Provider, targetSdkVersion < 17]",
+          "sha256": "c53485b0d8836c9d8268f93af1434d28333199615a2c8d70d06e29f138479d9b"
+        },
+        "description": {
+          "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。保护该组件的权限未在被分析应用中定义，应检查其定义处的保护级别。若为 normal 或 dangerous，恶意应用可能申请并获得权限，进而与组件交互；若为 signature，则只有使用相同证书签名的应用才能获得权限。",
+          "ignored_slots": [
+            0
+          ],
+          "source": "A%s %s is found to be shared with other apps on the device therefore leaving it accessible to any other application on the device. It is protected by a permission which is not defined in the analysed application. As a result, the protection level of the permission should be checked where it is defined. If it is set to normal or dangerous, a malicious application can request and obtain the permission and interact with the component. If it is set to signature, only applications signed with the same certificate can obtain the permission.",
+          "sha256": "0c9cfccf0c1a6273b26d14b8c13bdb875c1d0bdee58f2b25477decc24fe7802e"
+        }
+      },
+      "exported_provider_normal_app": {
+        "title": {
+          "text": "{0}（{1}）受应用级权限保护；应核对权限保护级别。{2} [Content Provider, targetSdkVersion < 17]",
+          "source": "%s (%s) is Protected by a permission at the application level, but the protection level of the permission should be checked. %s [Content Provider, targetSdkVersion < 17]",
+          "sha256": "237f62993fbb4dcef855dbf4d62ae993cb929ae20ea078c64fa922d2d81240ef"
+        },
+        "description": {
+          "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。组件受应用级权限保护，但保护级别为 normal。恶意应用可能申请并获得该权限，进而与组件交互。若使用 signature 级别，则只有使用相同证书签名的应用才能获得权限。",
+          "ignored_slots": [
+            0
+          ],
+          "source": "A%s %s is found to be shared with other apps on the device therefore leaving it accessible to any other application on the device. It is protected by a permission at the application level. However, the protection level of the permission is set to normal. This means that a malicious application can request and obtain the permission and interact with the component. If it was set to signature, only applications signed with the same certificate could obtain the permission.",
+          "sha256": "4a127b289b703641d9e826878398736a23c67758f274b7e0a832620590d88190"
+        }
+      },
+      "exported_provider_danger_appl": {
+        "title": {
+          "text": "{0}（{1}）受应用级权限保护；应核对权限保护级别。{2} [Content Provider, targetSdkVersion < 17]",
+          "source": "%s (%s) is Protected by a permission at the application level, but the protection level of the permission should be checked. %s [Content Provider, targetSdkVersion < 17]",
+          "sha256": "237f62993fbb4dcef855dbf4d62ae993cb929ae20ea078c64fa922d2d81240ef"
+        },
+        "description": {
+          "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。组件受应用级权限保护，但保护级别为 dangerous。恶意应用可能申请并获得该权限，进而与组件交互。若使用 signature 级别，则只有使用相同证书签名的应用才能获得权限。",
+          "ignored_slots": [
+            0
+          ],
+          "source": "A%s %s is found to be shared with other apps on the device therefore leaving it accessible to any other application on the device. It is protected by a permission at the application level. However, the protection level of the permission is set to dangerous. This means that a malicious application can request and obtain the permission and interact with the component. If it was set to signature, only applications signed with the same certificate could obtain the permission.",
+          "sha256": "8bbdee3a4dee9e8be6339c03a9e14e26f0bf9b79c98c925c34ec724d844ee1bb"
+        }
+      },
+      "exported_provider_signature_appl": {
+        "title": {
+          "text": "{0}（{1}）受应用级权限保护。{2} [Content Provider, targetSdkVersion < 17]",
+          "source": "%s (%s) is Protected by a permission at the application level. %s [Content Provider, targetSdkVersion < 17]",
+          "sha256": "35487bf0d41bcaaf39f12544a41ed277407548b284b23b7e737ae96d0dc193fe"
+        },
+        "description": {
+          "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。该组件受应用级权限保护。",
+          "ignored_slots": [
+            0
+          ],
+          "source": "A%s %s is found to be shared with other apps on the device therefore leaving it accessible to any other application on the device. It is protected by permission at the application level.",
+          "sha256": "66af7f522e20f5f461cd030e4b800edb0108f8c8f4661fc1362b00c25dbfe677"
+        }
+      },
+      "exported_provider_signatureorsystem_app": {
+        "title": {
+          "text": "{0}（{1}）受应用级权限保护；应核对权限保护级别。{2} [Content Provider, targetSdkVersion < 17]",
+          "source": "%s (%s) is Protected by a permission at the application level, but the protection level of the permission should be checked. %s [Content Provider, targetSdkVersion < 17]",
+          "sha256": "237f62993fbb4dcef855dbf4d62ae993cb929ae20ea078c64fa922d2d81240ef"
+        },
+        "description": {
+          "text": "检测到导出的 {1} 组件。组件受应用级权限保护，但保护级别为 signatureOrSystem。建议改用 signature；该级别通常足够满足需求，且不依赖应用在设备上的安装位置。",
+          "ignored_slots": [
+            0
+          ],
+          "source": "A%s %s is found to be exported, but is protected by a permission at the application level. However, the protection level of the permission is set to signatureOrSystem. It is recommended that signature level is used instead. Signature level should suffice for most purposes, and does not depend on where the applications are installed on the device.",
+          "sha256": "61beabdd113e81a63b22e39259b072b6397607bd90d3d609cdec89b40d885d12"
+        }
+      },
+      "exported_provider_unknown_app": {
+        "title": {
+          "text": "{0}（{1}）受应用级权限保护；应核对权限保护级别。{2} [Content Provider, targetSdkVersion < 17]",
+          "source": "%s (%s) is Protected by a permission at application level, but the protection level of the permission should be checked. %s [Content Provider, targetSdkVersion < 17]",
+          "sha256": "257774c4eab0a5706735f651c4903467eb8f4a2613920034db5d74842f2a82ad"
+        },
+        "description": {
+          "text": "检测到导出的 {1} 组件，可被设备上的其他应用访问。保护该组件的应用级权限未在被分析应用中定义，应检查其定义处的保护级别。若为 normal 或 dangerous，恶意应用可能申请并获得权限，进而与组件交互；若为 signature，则只有使用相同证书签名的应用才能获得权限。",
+          "ignored_slots": [
+            0
+          ],
+          "source": "A%s %s is found to be shared with other apps on the device therefore leaving it accessible to any other application on the device. It is protected by a permission at application level which is not defined in the analysed application. As a result, the protection level of the permission should be checked where it is defined. If it is set to normal or dangerous, a malicious application can request and obtain the permission and interact with the component. If it is set to signature, only applications signed with the same certificate can obtain the permission.",
+          "sha256": "9b8da982f58b7ef6d19c52fda96b6e9cf8376fef350359a74fee00f58796a56f"
+        }
+      },
+      "exported_provider_normal_new": {
+        "title": {
+          "text": "{0}（{1}）受权限保护；在 API 低于 17 的设备上应核对权限保护级别。{2} [Content Provider, targetSdkVersion >= 17]",
+          "source": "%s (%s) is Protected by a permission, but the protection level of the permission should be checked if the application runs on a device where the the API level is less than 17 %s [Content Provider, targetSdkVersion >= 17]",
+          "sha256": "56fcc0c307998d0fc134773045a8600acbb8e5b4787812ac0f529278bc003760"
+        },
+        "description": {
+          "text": "Content Provider（{0}）在 API 低于 17 的设备上运行时会被导出，从而可被其他应用访问。组件受权限保护，但保护级别为 normal。恶意应用可能申请并获得该权限，进而与组件交互。若使用 signature 级别，则只有使用相同证书签名的应用才能获得权限。",
+          "source": "The Content Provider (%s) would be exported if the application ran on a device where the the API level was less than 17. In that situation, it would still be protected by a permission. However, the protection level of the permission is set to normal. This means that a malicious application could request and obtain the permission and interact with the component. If it was set to signature, only applications signed with the same certificate could obtain the permission.",
+          "sha256": "cc60cfacd655f3daee19833397a027bcd933ed867b735bc0553af5ab9d9dbaaa"
+        }
+      },
+      "exported_provider_danger_new": {
+        "title": {
+          "text": "{0}（{1}）受权限保护；在 API 低于 17 的设备上应核对权限保护级别。{2} [Content Provider, targetSdkVersion >= 17]",
+          "source": "%s (%s) is Protected by a permission, but the protection level of the permission should be checked if the application runs on a device where the API level is less than 17. %s [Content Provider, targetSdkVersion >= 17]",
+          "sha256": "5165d575fae4b05ac9e292db6eb45c86fed2a0211979cd335487dee298348894"
+        },
+        "description": {
+          "text": "Content Provider（{0}）在 API 低于 17 的设备上运行时会被导出，从而可被其他应用访问。组件受权限保护，但保护级别为 dangerous。恶意应用可能申请并获得该权限，进而与组件交互。若使用 signature 级别，则只有使用相同证书签名的应用才能获得权限。",
+          "source": "The Content Provider(%s) would be exported if the application ran on a device where the the API level was less than 17. In that situation, it would still be protected by a permission. However, the protection level of the permission is set to dangerous. This means that a malicious application could request and obtain the permission and interact with the component. If it was set to signature, only applications signed with the same certificate could obtain the permission.",
+          "sha256": "345c252f854ccb5dd113ac65a3277994cf3aa02c5a71e53f809da901bb9ba69e"
+        }
+      },
+      "exported_provider_signature_new": {
+        "title": {
+          "text": "{0}（{1}）受权限保护。{2} [Content Provider, targetSdkVersion >= 17]",
+          "source": "%s (%s) is Protected by a permission. %s [Content Provider, targetSdkVersion >= 17]",
+          "sha256": "e18fc124405777f5ceac5173f2f421d4f079686572497aa8004fa15de848764d"
+        },
+        "description": {
+          "text": "Content Provider（{0}）在 API 低于 17 的设备上运行时会被导出，从而可被其他应用访问。该组件受权限保护。",
+          "source": "The Content Provider(%s) would be exported if the application ran on a device where the the API level was less than 17. Nevertheless, it is protected by a permission.",
+          "sha256": "6dced52c9b1766a5f11046304c5c3314d353d7ea28d7741e35253439811205f6"
+        }
+      },
+      "exported_provider_signatureorsystem_new": {
+        "title": {
+          "text": "{0}（{1}）受权限保护；应核对权限保护级别。{2} [Content Provider, targetSdkVersion >= 17]",
+          "source": "%s (%s) is Protected by a permission, but the protection level of the permission should be checked. %s [Content Provider, targetSdkVersion >= 17]",
+          "sha256": "5647393f326739e717beaa7d47a8b2481b7a3ee63434f0fc4d11e52408231911"
+        },
+        "description": {
+          "text": "Content Provider（{0}）在 API 低于 17 的设备上运行时会被导出，从而可被其他应用访问。组件受权限保护，但保护级别为 signatureOrSystem。建议改用 signature；该级别通常足够满足需求，且不依赖应用在设备上的安装位置。",
+          "source": "The Content Provider(%s) would be exported if the application ran on a device where the API level was less than 17. In that situation, it would still be protected by a permission. However, the protection level of the permission is set to signatureOrSystem. It is recommended that signature level is used instead. Signature level should suffice for most purposes, and does not depend on where the applications are installed on the device.",
+          "sha256": "17bac7e89267eab87816223f1986e29657bf70d24b09d55b778ecf8ec801bcaf"
+        }
+      },
+      "exported_provider_unknown_new": {
+        "title": {
+          "text": "{0}（{1}）受权限保护；在 API 低于 17 的设备上应核对权限保护级别。{2} [Content Provider, targetSdkVersion >= 17]",
+          "source": "%s (%s) is Protected by a permission, but the protection level of the permission should be checked if the application runs on a device where the the API level is less than 17. %s [Content Provider, targetSdkVersion >= 17]",
+          "sha256": "d5a19f6bedf6c82b1be98f785201d848eaec6991f1220d30a4b9680d3b479b67"
+        },
+        "description": {
+          "text": "Content Provider（{0}）在 API 低于 17 的设备上运行时会被导出，从而可被其他应用访问。保护该组件的权限未在被分析应用中定义，应检查其定义处的保护级别。若为 normal 或 dangerous，恶意应用可能申请并获得权限，进而与组件交互；若为 signature，则只有使用相同证书签名的应用才能获得权限。",
+          "source": "The Content Provider(%s) would be exported if the application ran on a device where the the API level was less than 17. In that situation, it would still be protected by a permission which is not defined in the analysed application. As a result, the protection level of the permission should be checked where it is defined. If it is set to normal or dangerous, a malicious application can request and obtain the permission and interact with the component. If it is set to signature, only applications signed with the same certificate can obtain the permission.",
+          "sha256": "1e1f02820d1697f3de9b70b54b5003410c078b9d21242fea7f88d849afa7f461"
+        }
+      },
+      "exported_provider_normal_app_new": {
+        "title": {
+          "text": "{0}（{1}）受应用级权限保护；在 API 低于 17 的设备上应核对权限保护级别。{2} [Content Provider, targetSdkVersion >= 17]",
+          "source": "%s (%s) is Protected by a permission at the application level, but the protection level of the permission should be checked if the application runs on a device where the the API level is less than 17 %s [Content Provider, targetSdkVersion >= 17]",
+          "sha256": "3d8b56a165e93370a062adf26aef7d8811e515cf6065e9d0839e99fd98e89dbf"
+        },
+        "description": {
+          "text": "Content Provider（{0}）在 API 低于 17 的设备上运行时会被导出，从而可被其他应用访问。组件受应用级权限保护，但保护级别为 normal。恶意应用可能申请并获得该权限，进而与组件交互。若使用 signature 级别，则只有使用相同证书签名的应用才能获得权限。",
+          "source": "The Content Provider (%s) would be exported if the application ran on a device where the the API level was less than 17. In that situation, it would still be protected by a permission. However, the protection level of the permission is set to normal. This means that a malicious application could request and obtain the permission and interact with the component. If it was set to signature, only applications signed with the same certificate could obtain the permission.",
+          "sha256": "cc60cfacd655f3daee19833397a027bcd933ed867b735bc0553af5ab9d9dbaaa"
+        }
+      },
+      "exported_provider_danger_app_new": {
+        "title": {
+          "text": "{0}（{1}）受应用级权限保护；在 API 低于 17 的设备上应核对权限保护级别。{2} [Content Provider, targetSdkVersion >= 17]",
+          "source": "%s (%s) is Protected by a permission at the application level, but the protection level of the permission should be checked if the application runs on a device where the the API level is less than 17. %s [Content Provider, targetSdkVersion >= 17]",
+          "sha256": "b4f0939e36dcd39483059de06bd04a374b81bd1f5ec42ea43ec0d7f5f093aecb"
+        },
+        "description": {
+          "text": "Content Provider（{0}）在 API 低于 17 的设备上运行时会被导出，从而可被其他应用访问。组件受应用级权限保护，但保护级别为 dangerous。恶意应用可能申请并获得该权限，进而与组件交互。若使用 signature 级别，则只有使用相同证书签名的应用才能获得权限。",
+          "source": "The Content Provider(%s) would be exported if the application ran on a device where the the API level was less than 17. In that situation, it would still be protected by a permission. However, the protection level of the permission is set to dangerous. This means that a malicious application could request and obtain the permission and interact with the component. If it was set to signature, only applications signed with the same certificate could obtain the permission.",
+          "sha256": "345c252f854ccb5dd113ac65a3277994cf3aa02c5a71e53f809da901bb9ba69e"
+        }
+      },
+      "exported_provider_signature_app_new": {
+        "title": {
+          "text": "{0}（{1}）受应用级权限保护。{2} [Content Provider, targetSdkVersion >= 17]",
+          "source": "%s (%s) is Protected by a permission at the application level. %s [Content Provider, targetSdkVersion >= 17]",
+          "sha256": "85bf2650770cf079aa79d1fd71993061b51c83870b93420dd6703a679b535df8"
+        },
+        "description": {
+          "text": "Content Provider（{0}）在 API 低于 17 的设备上运行时会被导出，从而可被其他应用访问。该组件受应用级权限保护。",
+          "source": "The Content Provider(%s) would be exported if the application ran on a device where the the API level was less than 17. Nevertheless, it is protected by a permission.",
+          "sha256": "6dced52c9b1766a5f11046304c5c3314d353d7ea28d7741e35253439811205f6"
+        }
+      },
+      "exported_provider_signatureorsystem_app_new": {
+        "title": {
+          "text": "{0}（{1}）受应用级权限保护；应核对权限保护级别。{2} [Content Provider, targetSdkVersion >= 17]",
+          "source": "%s (%s) is Protected by a permission at the application level, but the protection level of the permission should be checked. %s [Content Provider, targetSdkVersion >= 17]",
+          "sha256": "773e18073e5ab345fff9d3c83b083ffd368782f8fd8df446b5b83cff4b797dfb"
+        },
+        "description": {
+          "text": "Content Provider（{0}）在 API 低于 17 的设备上运行时会被导出，从而可被其他应用访问。组件受应用级权限保护，但保护级别为 signatureOrSystem。建议改用 signature；该级别通常足够满足需求，且不依赖应用在设备上的安装位置。",
+          "source": "The Content Provider(%s) would be exported if the application ran on a device where the API level was less than 17. In that situation, it would still be protected by a permission. However, the protection level of the permission is set to signatureOrSystem. It is recommended that signature level is used instead. Signature level should suffice for most purposes, and does not depend on where the applications are installed on the device.",
+          "sha256": "17bac7e89267eab87816223f1986e29657bf70d24b09d55b778ecf8ec801bcaf"
+        }
+      },
+      "exported_provider_unknown_app_new": {
+        "title": {
+          "text": "{0}（{1}）受应用级权限保护；在 API 低于 17 的设备上应核对权限保护级别。{2} [Content Provider, targetSdkVersion >= 17]",
+          "source": "%s (%s) is Protected by a permission at the application level, but the protection level of the permission should be checked  if the application runs on a device where the the API level is less than 17. %s [Content Provider, targetSdkVersion >= 17]",
+          "sha256": "e08988f1645b33ba47c6435f277b3b5686ec589b6851c0374b0fe3edb0db1258"
+        },
+        "description": {
+          "text": "Content Provider（{0}）在 API 低于 17 的设备上运行时会被导出，从而可被其他应用访问。保护该组件的应用级权限未在被分析应用中定义，应检查其定义处的保护级别。若为 normal 或 dangerous，恶意应用可能申请并获得权限，进而与组件交互；若为 signature，则只有使用相同证书签名的应用才能获得权限。",
+          "source": "The Content Provider(%s) would be exported if the application ran on a device where the the API level was less than 17. In that situation, it would still be protected by a permission which is not defined in the analysed application. As a result, the protection level of the permission should be checked where it is defined. If it is set to normal or dangerous, a malicious application can request and obtain the permission and interact with the component. If it is set to signature, only applications signed with the same certificate can obtain the permission.",
+          "sha256": "1e1f02820d1697f3de9b70b54b5003410c078b9d21242fea7f88d849afa7f461"
+        }
+      }
+    }
+  }
+}

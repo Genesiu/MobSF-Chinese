@@ -169,3 +169,7 @@ MobSF 内部使用 <code>wkhtmltopdf</code> 渲染 PDF 报告。官方 Docker �
 ## 📜 开源协议
 
 本项目遵循 **[GNU General Public License v3.0 (GPL-3.0)](LICENSE)** 协议开源。
+
+## 风险正文汉化（Android）
+
+独立的显示层外挂覆盖 Android 清单与代码规则、Android 和 iOS 常规报告及 PDF、应用安全计分卡，以及已审校的 Windows 内置提示。安装时从目标镜像生成模板，按原文指纹识别可用译文。新增或变更的文案回退英文。可用 MOBSF_IMAGE 固定目标镜像版本。[安装、版本兼容及回滚说明](risk_i18n/README.md)

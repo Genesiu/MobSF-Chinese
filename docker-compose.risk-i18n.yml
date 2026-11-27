@@ -1,0 +1,22 @@
+# Generate these files from the selected image with risk_i18n/prepare.sh first.
+# Compose merges volumes by container target, replacing the old PDF override.
+services:
+  mobsf:
+    volumes:
+      - ./risk_i18n/generated/current/mobsf/StaticAnalyzer/templatetags/mobsf_zh_report.json:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/StaticAnalyzer/templatetags/mobsf_zh_report.json:ro
+      - ./risk_i18n/generated/current/mobsf/templates/pdf/windows_report.html:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/templates/pdf/windows_report.html:ro
+      - ./risk_i18n/generated/current/mobsf/templates/static_analysis/windows_binary_analysis.html:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/templates/static_analysis/windows_binary_analysis.html:ro
+      - ./risk_i18n/generated/current/mobsf/templates/pdf/ios_report.html:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/templates/pdf/ios_report.html:ro
+      - ./risk_i18n/generated/current/mobsf/templates/static_analysis/ios_source_analysis.html:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/templates/static_analysis/ios_source_analysis.html:ro
+      - ./risk_i18n/generated/current/mobsf/templates/static_analysis/ios_binary_analysis.html:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/templates/static_analysis/ios_binary_analysis.html:ro
+      - ./risk_i18n/generated/current/mobsf/templates/static_analysis/appsec_dashboard.html:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/templates/static_analysis/appsec_dashboard.html:ro
+      - ./risk_i18n/generated/current/mobsf/StaticAnalyzer/templatetags/mobsf_zh_scorecard.py:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/StaticAnalyzer/templatetags/mobsf_zh_scorecard.py:ro
+      - ./risk_i18n/generated/current/mobsf/StaticAnalyzer/templatetags/mobsf_zh_scorecard.json:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/StaticAnalyzer/templatetags/mobsf_zh_scorecard.json:ro
+      - ./risk_i18n/generated/current/mobsf/templates/static_analysis/android_binary_analysis.html:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/templates/static_analysis/android_binary_analysis.html:ro
+      - ./risk_i18n/generated/current/mobsf/templates/static_analysis/android_source_analysis.html:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/templates/static_analysis/android_source_analysis.html:ro
+      - ./risk_i18n/generated/current/mobsf/templates/pdf/android_report.html:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/templates/pdf/android_report.html:ro
+      - ./risk_i18n/generated/current/mobsf/StaticAnalyzer/templatetags/mobsf_zh.py:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/StaticAnalyzer/templatetags/mobsf_zh.py:ro
+      - ./risk_i18n/generated/current/mobsf/StaticAnalyzer/templatetags/mobsf_zh_engine.py:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/StaticAnalyzer/templatetags/mobsf_zh_engine.py:ro
+      - ./risk_i18n/generated/current/mobsf/StaticAnalyzer/templatetags/mobsf_zh_catalog.json:/home/mobsf/Mobile-Security-Framework-MobSF/mobsf/StaticAnalyzer/templatetags/mobsf_zh_catalog.json:ro
+    environment:
+      - MOBSF_RISK_LOCALE=zh-CN

@@ -184,17 +184,6 @@
 <script src="{% static "adminlte/plugins/sweetalert2/sweetalert2.min.js" %}"></script>
 <script>
 
-    // Escape HTML
-    function escapeHtml(unsafe)
-    {
-        return unsafe
-            .replace(/&/g, "&amp;")
-            .replace(/&lt;/g, "&lt;")
-            .replace(/&gt;/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
-    }
-
     // Diff functions
     var diff_first_md5 = '';
     var diff_first_name = '';
@@ -242,9 +231,9 @@
     }
 
     function diff_cleanup() {
-        first_td_id = diff_first_md5 + '_' + escapeHtml(diff_first_name);
-        $('[id="' + first_td_id + '"]').closest("tr").removeClass("selected");
-        $('[id="' + first_td_id + '"]').closest("tbody").removeClass("selectable_table");
+        var first_button = document.getElementById(diff_first_md5 + '_' + diff_first_name);
+        $(first_button).closest("tr").removeClass("selected");
+        $(first_button).closest("tbody").removeClass("selectable_table");
         diff_first_md5 = "";
         diff_first_name = "";
         enable_diff_button();
@@ -264,9 +253,7 @@
         Swal.fire({
             title: '<strong>比对确认</strong>',
             type: 'info',
-            html:
-                '<strong>您确定要比对以下两个应用吗？</strong><br />' + escapeHtml(diff_first_name) +
-                '<br /> <strong>与 <br /> </strong>' + escapeHtml(diff_second_name),
+            text: '您确定要比对以下两个应用吗？ ' + diff_first_name + ' 与 ' + diff_second_name,
 
             showCancelButton: true,
             cancelButtonText: '取消',

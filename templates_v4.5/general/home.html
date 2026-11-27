@@ -119,7 +119,7 @@
                     _("status").innerText = '正在尝试下载软件包...';
                     show_loader();
                     $.ajax({
-                        url : '/download_scan/', 
+                        url : '{% url "download_scan" %}',
                         type : "POST",
                         dataType: "json", 
                         data : {

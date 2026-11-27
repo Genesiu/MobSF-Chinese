@@ -1,0 +1,514 @@
+{
+  "schema_version": 1,
+  "tested_versions": [
+    "4.5.2"
+  ],
+  "origins": {
+    "appsec": "aab37e3d5124f49070e639c951ee29fea7d4454170e9f9b09f40a5b9feec67f1",
+    "macho": "5ecbeb1a1598d94768d2a457ce98d8ec60944ba3006a0841cdeac7074b477400",
+    "ipa": "48eb6d2b3cedce3a435887c9fd1a0c9499627c8fdfc7943430255e1a0679d64b",
+    "permissions": "b0e7d246d079a25ea454eab4b9868fe91b24256e0e6cc3d0e42a1ae3b12da9d8"
+  },
+  "translations": [
+    {
+      "section": "binary",
+      "field": "title",
+      "source": "Binary makes use of insecure API(s)",
+      "text": "二进制使用了不安全的 API",
+      "origin": "ipa"
+    },
+    {
+      "section": "binary",
+      "field": "description",
+      "source": "The binary may contain the following insecure API(s) %s",
+      "text": "二进制可能使用以下不安全的 API：{0}",
+      "origin": "ipa"
+    },
+    {
+      "section": "binary",
+      "field": "title",
+      "source": "Binary makes use of some weak Crypto API(s)",
+      "text": "二进制使用了弱加密 API",
+      "origin": "ipa"
+    },
+    {
+      "section": "binary",
+      "field": "description",
+      "source": "The binary may use the following weak crypto API(s) %s",
+      "text": "二进制可能使用以下弱加密 API：{0}",
+      "origin": "ipa"
+    },
+    {
+      "section": "binary",
+      "field": "title",
+      "source": "Binary makes use of the following Crypto API(s)",
+      "text": "二进制使用了加密 API",
+      "origin": "ipa"
+    },
+    {
+      "section": "binary",
+      "field": "description",
+      "source": "The binary may use the following crypto API(s) %s",
+      "text": "二进制可能使用以下加密 API：{0}",
+      "origin": "ipa"
+    },
+    {
+      "section": "binary",
+      "field": "title",
+      "source": "Binary makes use of some weak Hashing API(s)",
+      "text": "二进制使用了弱哈希 API",
+      "origin": "ipa"
+    },
+    {
+      "section": "binary",
+      "field": "description",
+      "source": "The binary may use the following weak hash API(s) %s",
+      "text": "二进制可能使用以下弱哈希 API：{0}",
+      "origin": "ipa"
+    },
+    {
+      "section": "binary",
+      "field": "title",
+      "source": "Binary makes use of the following Hash API(s)",
+      "text": "二进制使用了哈希 API",
+      "origin": "ipa"
+    },
+    {
+      "section": "binary",
+      "field": "description",
+      "source": "The binary may use the following hash API(s) %s",
+      "text": "二进制可能使用以下哈希 API：{0}",
+      "origin": "ipa"
+    },
+    {
+      "section": "binary",
+      "field": "title",
+      "source": "Binary makes use of the insecure Random function(s)",
+      "text": "二进制使用了不安全的随机数函数",
+      "origin": "ipa"
+    },
+    {
+      "section": "binary",
+      "field": "description",
+      "source": "The binary may use the following insecure Random function(s) %s",
+      "text": "二进制可能使用以下不安全的随机数函数：{0}",
+      "origin": "ipa"
+    },
+    {
+      "section": "binary",
+      "field": "title",
+      "source": "Binary makes use of Logging function",
+      "text": "二进制使用了日志函数",
+      "origin": "ipa"
+    },
+    {
+      "section": "binary",
+      "field": "description",
+      "source": "The binary may use %s function for logging.",
+      "text": "二进制可能使用 {0} 函数记录日志。",
+      "origin": "ipa"
+    },
+    {
+      "section": "binary",
+      "field": "title",
+      "source": "Binary makes use of malloc function",
+      "text": "二进制使用了 malloc 函数",
+      "origin": "ipa"
+    },
+    {
+      "section": "binary",
+      "field": "description",
+      "source": "The binary may use %s function instead of calloc",
+      "text": "二进制可能使用 {0} 函数，而非 calloc。",
+      "origin": "ipa"
+    },
+    {
+      "section": "binary",
+      "field": "title",
+      "source": "Binary calls ptrace() function for anti-debugging.",
+      "text": "二进制调用 ptrace() 函数进行反调试",
+      "origin": "ipa"
+    },
+    {
+      "section": "binary",
+      "field": "description",
+      "source": "The binary may use ptrace() function. It can be used to detect and prevent debuggers. Ptrace is not a public API and apps that use non-public APIs will be rejected from AppStore.",
+      "text": "二进制可能使用 ptrace() 函数检测并阻止调试器。Ptrace 不是公开 API；按此规则的说明，使用非公开 API 的应用会被 App Store 拒绝。",
+      "origin": "ipa"
+    },
+    {
+      "section": "binary",
+      "field": "title",
+      "source": "Binary uses WebView Component.",
+      "text": "二进制使用了 WebView 组件",
+      "origin": "ipa"
+    },
+    {
+      "section": "binary",
+      "field": "description",
+      "source": "The binary may use UIWebView Component.",
+      "text": "二进制可能使用 UIWebView 组件。",
+      "origin": "ipa"
+    },
+    {
+      "section": "macho",
+      "field": "title",
+      "source": "NX bit is not set properly for this application",
+      "text": "应用未正确设置 NX 位",
+      "origin": "appsec"
+    },
+    {
+      "section": "macho",
+      "field": "title",
+      "source": "PIE flag is not configured securely for this application binary",
+      "text": "应用二进制的 PIE 标志配置不安全",
+      "origin": "appsec"
+    },
+    {
+      "section": "macho",
+      "field": "title",
+      "source": "Stack Canary is not properly configured for this application",
+      "text": "应用的栈保护（Stack Canary）配置不完善",
+      "origin": "appsec"
+    },
+    {
+      "section": "macho",
+      "field": "title",
+      "source": "Application binary is not compiled with ARC flag",
+      "text": "应用二进制未启用 ARC 编译标志",
+      "origin": "appsec"
+    },
+    {
+      "section": "macho",
+      "field": "title",
+      "source": "Application binary has rpath set",
+      "text": "应用二进制设置了 rpath 搜索路径",
+      "origin": "appsec"
+    },
+    {
+      "section": "macho",
+      "field": "title",
+      "source": "Application binary does not have symbols stripped",
+      "text": "应用二进制未剥离调试符号",
+      "origin": "appsec"
+    },
+    {
+      "section": "macho",
+      "field": "description",
+      "source": "The binary has NX bit set. This marks a memory page non-executable making attacker injected shellcode non-executable.",
+      "text": "二进制已设置 NX 位，将内存页标记为不可执行，使攻击者注入的 shellcode 无法执行。",
+      "origin": "macho"
+    },
+    {
+      "section": "macho",
+      "field": "description",
+      "source": "The binary does not have NX bit set. NX bit offer protection against exploitation of memory corruption vulnerabilities by marking memory page as non-executable. However iOS never allows an app to execute from writeable memory. You do not need to specifically enable the ‘NX bit’ because it’s always enabled for all third-party code.",
+      "text": "二进制未设置 NX 位。NX 通过将内存页标记为不可执行来防御内存破坏漏洞利用。不过，iOS 不允许应用执行可写内存中的代码，第三方代码始终受此保护，因此无需单独启用 NX 位。",
+      "origin": "macho"
+    },
+    {
+      "section": "macho",
+      "field": "description",
+      "source": "The binary is build with -fPIC flag which enables Position independent code. This makes Return Oriented Programming (ROP) attacks much more difficult to execute reliably.",
+      "text": "二进制使用 -fPIC 标志构建，启用了位置无关代码，使返回导向编程（ROP）攻击更难可靠执行。",
+      "origin": "macho"
+    },
+    {
+      "section": "macho",
+      "field": "description",
+      "source": "The binary is built without Position Independent Code flag. In order to prevent an attacker from reliably jumping to, for example, a particular exploited function in memory, Address space layout randomization (ASLR) randomly arranges the address space positions of key data areas of a process, including the base of the executable and the positions of the stack,heap and libraries. Use compiler option -fPIC to enable Position Independent Code. Not applicable for dylibs and static libraries.",
+      "text": "二进制未启用位置无关代码。地址空间布局随机化（ASLR）会随机安排可执行文件、栈、堆及库等关键数据区域的位置，增加攻击者可靠跳转到特定内存函数的难度。可使用编译选项 -fPIC 启用位置无关代码。此检查不适用于动态库和静态库。",
+      "origin": "macho"
+    },
+    {
+      "section": "macho",
+      "field": "description",
+      "source": "This binary has a stack canary value added to the stack so that it will be overwritten by a stack buffer that overflows the return address. This allows detection of overflows by verifying the integrity of the canary before function return.",
+      "text": "二进制在栈中加入了 Canary 值；栈缓冲区溢出并覆盖返回地址时，该值也会被覆盖。在函数返回前检查 Canary 的完整性，可以检测栈溢出。",
+      "origin": "macho"
+    },
+    {
+      "section": "macho",
+      "field": "description",
+      "source": "The binary is compiled with Automatic Reference Counting (ARC) flag. ARC is a compiler feature that provides automatic memory management of Objective-C objects and is an exploit mitigation mechanism against memory corruption vulnerabilities.",
+      "text": "二进制启用了自动引用计数（ARC）编译标志。ARC 自动管理 Objective-C 对象的内存，可缓解内存破坏漏洞的利用。",
+      "origin": "macho"
+    },
+    {
+      "section": "macho",
+      "field": "description",
+      "source": "The binary has Runpath Search Path (@rpath) set. In certain cases an attacker can abuse this feature to run arbitrary executable for code execution and privilege escalation. Remove the compiler option -rpath to remove @rpath.",
+      "text": "二进制设置了运行时搜索路径（@rpath）。在某些情况下，攻击者可滥用该功能运行任意可执行文件，造成代码执行或权限提升。可移除编译选项 -rpath 来移除 @rpath。",
+      "origin": "macho"
+    },
+    {
+      "section": "macho",
+      "field": "description",
+      "source": "The binary does not have Runpath Search Path (@rpath) set.",
+      "text": "二进制未设置运行时搜索路径（@rpath）。",
+      "origin": "macho"
+    },
+    {
+      "section": "macho",
+      "field": "description",
+      "source": "This binary has a code signature.",
+      "text": "二进制包含代码签名。",
+      "origin": "macho"
+    },
+    {
+      "section": "macho",
+      "field": "description",
+      "source": "This binary does not have a code signature.",
+      "text": "二进制未包含代码签名。",
+      "origin": "macho"
+    },
+    {
+      "section": "macho",
+      "field": "description",
+      "source": "This binary is encrypted.",
+      "text": "二进制已加密。",
+      "origin": "macho"
+    },
+    {
+      "section": "macho",
+      "field": "description",
+      "source": "This binary is not encrypted.",
+      "text": "二进制未加密。",
+      "origin": "macho"
+    },
+    {
+      "section": "macho",
+      "field": "description",
+      "source": "Debug Symbols are stripped",
+      "text": "调试符号已剥离。",
+      "origin": "macho"
+    },
+    {
+      "section": "macho",
+      "field": "description",
+      "source": "Debug Symbols are available. To strip debugging symbols, set Strip Debug Symbols During Copy to YES, Deployment Postprocessing to YES, and Strip Linked Product to YES in project's build settings.",
+      "text": "二进制保留了调试符号。可在项目构建设置中将 Strip Debug Symbols During Copy、Deployment Postprocessing 和 Strip Linked Product 均设置为 YES，剥离调试符号。",
+      "origin": "macho"
+    },
+    {
+      "section": "macho",
+      "field": "description",
+      "source": "This binary has debug symbols stripped. We cannot identify whether stack canary is enabled or not.",
+      "text": "二进制已剥离调试符号，无法判断是否启用了栈保护（Stack Canary）。",
+      "origin": "macho"
+    },
+    {
+      "section": "macho",
+      "field": "description",
+      "source": "This binary has debug symbols stripped. We cannot identify whether ARC is enabled or not.",
+      "text": "二进制已剥离调试符号，无法判断是否启用了自动引用计数（ARC）。",
+      "origin": "macho"
+    },
+    {
+      "section": "macho",
+      "field": "description",
+      "source": "The binary is not compiled with Automatic Reference Counting (ARC) flag. ARC is a compiler feature that provides automatic memory management of Objective-C objects and protects from memory corruption vulnerabilities. Use compiler option -fobjc-arc to enable ARC or set Objective-C Automatic Reference Counting to YES in project configuration.",
+      "text": "二进制未启用自动引用计数（ARC）编译标志。ARC 自动管理 Objective-C 对象的内存，有助于防御内存破坏漏洞。可使用 -fobjc-arc 编译选项，或在项目中将 Objective-C Automatic Reference Counting 设置为 YES。",
+      "origin": "macho"
+    },
+    {
+      "section": "macho",
+      "field": "description",
+      "source": "This binary does not have a stack canary value added to the stack. Stack canaries are used to detect and prevent exploits from overwriting return address. Use the option -fstack-protector-all to enable stack canaries.",
+      "text": "二进制未启用栈保护（Stack Canary）。栈保护用于检测并阻止对返回地址的覆盖利用。可使用 -fstack-protector-all 编译选项启用。",
+      "origin": "macho"
+    },
+    {
+      "section": "macho",
+      "field": "description",
+      "source": "This binary does not have a stack canary value added to the stack. Stack canaries are used to detect and prevent exploits from overwriting return address. Use the option -fstack-protector-all to enable stack canaries. This might be okey for pure Swift dylibs.",
+      "text": "二进制未启用栈保护（Stack Canary）。栈保护用于检测并阻止对返回地址的覆盖利用。可使用 -fstack-protector-all 编译选项启用。 对纯 Swift 动态库而言，这种情况可能是正常的。",
+      "origin": "macho"
+    },
+    {
+      "section": "permissions",
+      "field": "title",
+      "source": "Found %s critical permission(s)",
+      "text": "发现 {0} 项高敏感权限",
+      "origin": "appsec"
+    },
+    {
+      "section": "permissions",
+      "field": "description",
+      "source": "Ensure that these permissions are required by the application.\n\n%s",
+      "text": "请确认应用确实需要以下权限。\n\n{0}",
+      "origin": "appsec"
+    },
+    {
+      "section": "files",
+      "field": "title",
+      "source": "Found %s certificate/key file(s)",
+      "text": "发现 {0} 个证书或密钥文件",
+      "origin": "appsec"
+    },
+    {
+      "section": "files",
+      "field": "description",
+      "source": "Ensure that these files does not contain any private information or sensitive key materials.\n\n%s",
+      "text": "请确认以下文件不包含私密信息或敏感密钥材料。\n\n{0}",
+      "origin": "appsec"
+    },
+    {
+      "section": "domains",
+      "field": "title",
+      "source": "Malicious domain found - %s",
+      "text": "发现恶意域名：{0}",
+      "origin": "appsec"
+    },
+    {
+      "section": "domains",
+      "field": "title",
+      "source": "App may communicate to a server (%s) in OFAC sanctioned country (%s)",
+      "text": "应用可能与位于 OFAC 制裁国家或地区（{1}）的服务器（{0}）通信",
+      "origin": "appsec"
+    },
+    {
+      "section": "trackers",
+      "field": "title",
+      "source": "Application contains Privacy Trackers",
+      "text": "应用包含隐私追踪组件",
+      "origin": "appsec"
+    },
+    {
+      "section": "trackers",
+      "field": "title",
+      "source": "This application has no privacy trackers",
+      "text": "静态分析未发现隐私追踪组件",
+      "origin": "appsec"
+    },
+    {
+      "section": "trackers",
+      "field": "description",
+      "source": "This app has more than %s privacy trackers. Trackers can track device or users and are privacy concerns for end users.",
+      "text": "应用包含超过 {0} 个隐私追踪组件。追踪组件可以跟踪设备或用户，可能影响用户隐私。",
+      "origin": "appsec"
+    },
+    {
+      "section": "trackers",
+      "field": "description",
+      "source": "This app has %s privacy trackers. Trackers can track device or users and are privacy concerns for end users.",
+      "text": "应用包含 {0} 个隐私追踪组件。追踪组件可以跟踪设备或用户，可能影响用户隐私。",
+      "origin": "appsec"
+    },
+    {
+      "section": "trackers",
+      "field": "description",
+      "source": "This application does not include any user or device trackers. Unable to find trackers during static analysis.",
+      "text": "静态分析未发现用户或设备追踪组件。",
+      "origin": "appsec"
+    },
+    {
+      "section": "secrets",
+      "field": "title",
+      "source": "This app may contain hardcoded secrets",
+      "text": "应用可能包含硬编码密钥或敏感信息",
+      "origin": "appsec"
+    },
+    {
+      "section": "secrets",
+      "field": "description",
+      "source": "The following secrets were identified from the app. Ensure that these are not secrets or private information.\n%s",
+      "text": "从应用中识别出以下疑似密钥内容，请核实其是否属于密钥或私密信息。\n{0}",
+      "origin": "appsec"
+    }
+  ],
+  "permission_info": {
+    "NETestAppMapping": {
+      "source": "Enables testing of per-app VPN app extensions without using an MDM server.",
+      "text": "无需 MDM 服务器即可测试按应用配置的 VPN 扩展。"
+    },
+    "NFCReaderUsageDescription": {
+      "source": "Access device's NFC reader.",
+      "text": "访问设备 NFC 读卡器。"
+    },
+    "NSAppleMusicUsageDescription": {
+      "source": "Access Apple Media Library.",
+      "text": "访问 Apple 媒体资料库。"
+    },
+    "NSBluetoothPeripheralUsageDescription": {
+      "source": "Access Bluetooth Interface.",
+      "text": "访问蓝牙接口。"
+    },
+    "NSCalendarsUsageDescription": {
+      "source": "Access Calendars.",
+      "text": "访问日历。"
+    },
+    "NSCameraUsageDescription": {
+      "source": "Access the Camera.",
+      "text": "访问相机。"
+    },
+    "NSContactsUsageDescription": {
+      "source": "Access Contacts.",
+      "text": "访问通讯录。"
+    },
+    "NSFaceIDUsageDescription": {
+      "source": "Access the ability to authenticate with Face ID.",
+      "text": "使用 Face ID 进行身份验证。"
+    },
+    "NSHealthClinicalHealthRecordsShareUsageDescription": {
+      "source": "Access user's clinical health records.",
+      "text": "访问用户的临床健康记录。"
+    },
+    "NSHealthShareUsageDescription": {
+      "source": "Read Health Data.",
+      "text": "读取健康数据。"
+    },
+    "NSHealthUpdateUsageDescription": {
+      "source": "Write Health Data.",
+      "text": "写入健康数据。"
+    },
+    "NSHomeKitUsageDescription": {
+      "source": "Access HomeKit configuration data.",
+      "text": "访问 HomeKit 配置数据。"
+    },
+    "NSLocationAlwaysUsageDescription": {
+      "source": "Access location information at all times.",
+      "text": "持续访问位置信息。"
+    },
+    "NSLocationUsageDescription": {
+      "source": "Access location information at all times (< iOS 8).",
+      "text": "持续访问位置信息（iOS 8 之前）。"
+    },
+    "NSLocationWhenInUseUsageDescription": {
+      "source": "Access location information when app is in the foreground.",
+      "text": "在应用位于前台时访问位置信息。"
+    },
+    "NSMicrophoneUsageDescription": {
+      "source": "Access microphone.",
+      "text": "访问麦克风。"
+    },
+    "NSMotionUsageDescription": {
+      "source": "Access the device's accelerometer.",
+      "text": "访问设备加速度计。"
+    },
+    "NSPhotoLibraryUsageDescription": {
+      "source": "Access the user's photo library.",
+      "text": "访问用户照片图库。"
+    },
+    "NSRemindersUsageDescription": {
+      "source": "Access the user's reminders.",
+      "text": "访问用户提醒事项。"
+    },
+    "NSSiriUsageDescription": {
+      "source": "Allow app to send user data to Siri",
+      "text": "允许应用将用户数据发送给 Siri。"
+    },
+    "NSSpeechRecognitionUsageDescription": {
+      "source": "Allow app to send user data to Apple's speech recognition servers.",
+      "text": "允许应用将用户数据发送给 Apple 语音识别服务器。"
+    },
+    "NSVideoSubscriberAccountUsageDescription": {
+      "source": "Access the user's TV provider account.",
+      "text": "访问用户的电视服务商账号。"
+    },
+    "NSLocalNetworkUsageDescription": {
+      "source": "Allow app to request access to the local network.",
+      "text": "允许应用请求访问本地网络。"
+    }
+  }
+}

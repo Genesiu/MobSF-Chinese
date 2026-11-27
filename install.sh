@@ -69,7 +69,6 @@ chmod 600 /data/mobsf_data/secret
 if command -v chown > /dev/null 2>&1; then
   chown -R 9901:9901 /data/mobsf_data 2>/dev/null || true
 fi
-echo "MOBSF_DATA_DIR=/data/mobsf_data" > "$SCRIPT_DIR/.env"
 echo "  -> 持久化目录与真实 JADX 工具已就绪。"
 
 # 3. 检查权限边界 (针对 MobSF 非特权用户 UID 9901)
@@ -81,7 +80,7 @@ fi
 
 # 4. MobSF 版本检测与汉化架构自适应判断 (Version Compatibility Matrix)
 echo "[4/6] 智能检测 MobSF 镜像与架构版本..."
-MOBSF_IMAGE="opensecurity/mobile-security-framework-mobsf:latest"
+export MOBSF_IMAGE="${MOBSF_IMAGE:-opensecurity/mobile-security-framework-mobsf:latest}"
 
 # 优先拉取或确认镜像存在
 if ! docker image inspect "$MOBSF_IMAGE" >/dev/null 2>&1; then
@@ -138,7 +137,14 @@ fi
 
 # 5. 安全启动容器 (仅监听 8000 端口，防御性清理历史残留端点)
 echo "[5/6] 停止旧容器并以 8000 端口启动 MobSF 汉化版..."
-docker compose up -d
+COMPOSE_ARGS=(-f "$SCRIPT_DIR/docker-compose.yml")
+if [ "${MOBSF_RISK_I18N:-1}" = "1" ]; then
+  echo "  -> 从当前镜像生成风险正文汉化，并检查规则和模板兼容性..."
+  bash "$SCRIPT_DIR/risk_i18n/prepare.sh" "$MOBSF_IMAGE"
+  COMPOSE_ARGS+=(-f "$SCRIPT_DIR/docker-compose.risk-i18n.yml")
+fi
+printf '%s\n' 'MOBSF_DATA_DIR=/data/mobsf_data' "MOBSF_IMAGE=$MOBSF_IMAGE" > "$SCRIPT_DIR/.env"
+docker compose "${COMPOSE_ARGS[@]}" up -d
 
 # 6. 轮询健康状态 (仅探活 8000 端口)
 echo "[6/6] 等待服务初始化与数据库迁移 (网络较慢时可能需要数分钟)..."

@@ -1,0 +1,2298 @@
+{
+  "schema_version": 1,
+  "origins": {
+    "android-network": {
+      "path": "mobsf/StaticAnalyzer/views/android/network_security.py",
+      "sha256": "e6c4db250d3b8b27bb9a9ee458dab4b74a40173465c266ee18c1b5d917a46049"
+    },
+    "android-cert": {
+      "path": "mobsf/StaticAnalyzer/views/android/cert_analysis.py",
+      "sha256": "89a54acc277c358723cc4a4062921488ff581a0f2d2cacd92fcdedec2e124f0a"
+    },
+    "ios-ats": {
+      "path": "mobsf/StaticAnalyzer/views/ios/app_transport_security.py",
+      "sha256": "1bcda0edff4d6deac4418366b980f5e12d04d2995aa18d362208fa21bc66103f"
+    },
+    "ios-file": {
+      "path": "mobsf/StaticAnalyzer/views/ios/file_analysis.py",
+      "sha256": "c602283b5ce3bb7b96b527d7ea15ea13cc34c9db61bccabb899a34c8753f6bc2"
+    },
+    "ios-objc": {
+      "path": "mobsf/StaticAnalyzer/views/ios/rules/objective_c_rules.yaml",
+      "sha256": "6fc85ac7fd9fd6e2d9480ca1910aa3510a23625db7561ca6f1fd7432f1a51124"
+    },
+    "ios-swift": {
+      "path": "mobsf/StaticAnalyzer/views/ios/rules/swift_rules.yaml",
+      "sha256": "f5946465bc3df2e7be8a92ba01d2339268c0f5072577966c47d5f6eb6842f5fb"
+    },
+    "ios-api": {
+      "path": "mobsf/StaticAnalyzer/views/ios/rules/ios_apis.yaml",
+      "sha256": "b01f5df22f1ad82ba4c0c5d12c5c6724e105527b4418b00e4747e0e51acc6ec3"
+    },
+    "elf": {
+      "path": "mobsf/StaticAnalyzer/views/common/binary/elf.py",
+      "sha256": "3961d408570c5c5667b564ef63f3c840d91eddeecd8b218c3c65036d7105c733"
+    },
+    "firebase": {
+      "path": "mobsf/StaticAnalyzer/views/common/firebase.py",
+      "sha256": "ad39a325b9e8129de8bd24086069fd5efa1c928420b64d243e903b65661d1a65"
+    },
+    "windows": {
+      "path": "mobsf/StaticAnalyzer/views/windows/windows.py",
+      "sha256": "a5a93c0b73246d7223b7f129ec66999cdff70913dd31f2f2681cea95350ffd45"
+    },
+    "android-api": {
+      "path": "mobsf/StaticAnalyzer/views/android/rules/android_apis.yaml",
+      "sha256": "f8a59d2bf5d1ee7d01504ab36ac43b04a1b2b548b3776c94a8b398ead2ebc3f3"
+    },
+    "android-permissions": {
+      "path": "mobsf/StaticAnalyzer/views/android/kb/dvm_permissions.py",
+      "sha256": "0c2dfe0d8781dc6439430bd2b60e7d48dc83792cccd24258f4cdff8329b08d6d"
+    }
+  },
+  "translations": [
+    {
+      "origin": "ios-ats",
+      "section": "ats",
+      "field": "value",
+      "source": "App Transport Security AllowsArbitraryLoads is allowed",
+      "text": "应用传输安全（ATS）允许任意加载"
+    },
+    {
+      "origin": "ios-ats",
+      "section": "ats",
+      "field": "value",
+      "source": "App Transport Security restrictions are disabled for all network connections. Disabling ATS means that unsecured HTTP connections are allowed. HTTPS connections are also allowed, and are still subject to default server trust evaluation. However, extended security checks like requiring a minimum Transport Layer Security (TLS) protocol version—are disabled. This setting is not applicable to domains listed in NSExceptionDomains.",
+      "text": "所有网络连接均关闭了 ATS 限制，允许不安全的 HTTP。HTTPS 仍可使用并接受默认的服务器信任评估，但最低 TLS 版本等附加检查已关闭。此设置不适用于 NSExceptionDomains 中的域名。"
+    },
+    {
+      "origin": "ios-ats",
+      "section": "ats",
+      "field": "value",
+      "source": "Insecure media load is allowed",
+      "text": "允许不安全的媒体加载"
+    },
+    {
+      "origin": "ios-ats",
+      "section": "ats",
+      "field": "value",
+      "source": "App Transport Security restrictions are disabled for media loaded using the AVFoundation framework, without affecting your URLSession connections. This setting is not applicable to domains listed in NSExceptionDomains.",
+      "text": "通过 AVFoundation 加载媒体时关闭 ATS 限制。此设置不影响 URLSession 连接，也不适用于 NSExceptionDomains 中的域名。"
+    },
+    {
+      "origin": "ios-ats",
+      "section": "ats",
+      "field": "value",
+      "source": "Insecure WebView load is allowed",
+      "text": "允许不安全的 WebView 加载"
+    },
+    {
+      "origin": "ios-ats",
+      "section": "ats",
+      "field": "value",
+      "source": "App Transport Security restrictions are disabled for requests made from WebViews without affecting your URLSession connections. This setting is not applicable to domains listed in NSExceptionDomains.",
+      "text": "WebView 发出的请求关闭了 ATS 限制。此设置不影响 URLSession 连接，也不适用于 NSExceptionDomains 中的域名。"
+    },
+    {
+      "origin": "ios-ats",
+      "section": "ats",
+      "field": "value",
+      "source": "Insecure local networking is allowed",
+      "text": "允许不安全的本地网络请求"
+    },
+    {
+      "origin": "ios-ats",
+      "section": "ats",
+      "field": "value",
+      "source": "App Transport Security restrictions are disabled for requests made from local networking without affecting your URLSession connections. This setting is not applicable to domains listed in NSExceptionDomains.",
+      "text": "本地网络请求关闭了 ATS 限制。此设置不影响 URLSession 连接，也不适用于 NSExceptionDomains 中的域名。"
+    },
+    {
+      "origin": "ios-ats",
+      "section": "ats",
+      "field": "value",
+      "source": "NSExceptionDomains",
+      "text": "ATS 例外域名（NSExceptionDomains）"
+    },
+    {
+      "origin": "ios-ats",
+      "section": "ats",
+      "field": "value",
+      "source": "Insecure communication to %s is allowed",
+      "text": "允许与 {0} 进行不安全的通信"
+    },
+    {
+      "origin": "ios-ats",
+      "section": "ats",
+      "field": "value",
+      "source": "NSExceptionAllowsInsecureHTTPLoads allows insecure HTTP loads to %s, or to be able to loosen the server trust evaluation requirements for HTTPS connections to the domain.",
+      "text": "NSExceptionAllowsInsecureHTTPLoads 允许对 {0} 使用不安全的 HTTP，或放宽该域名 HTTPS 连接的服务器信任评估要求。"
+    },
+    {
+      "origin": "ios-ats",
+      "section": "ats",
+      "field": "value",
+      "source": "NSIncludesSubdomains set to TRUE for %s",
+      "text": "{0} 的 NSIncludesSubdomains 已设为 TRUE"
+    },
+    {
+      "origin": "ios-ats",
+      "section": "ats",
+      "field": "value",
+      "source": "NSIncludesSubdomains applies the ATS exceptions for the given domain to all subdomains as well. For example, the ATS exceptions in the domain exception dictionary apply to %s, as well as math.%s, history.%s, and so on. Otherwise, if the value is NO, the exceptions apply only to %s.",
+      "text": "NSIncludesSubdomains 将指定域名的 ATS 例外扩展至所有子域名。例如，例外适用于 {0}，以及 math.{1}、history.{2} 等。设为 NO 时，例外仅适用于 {3}。"
+    },
+    {
+      "origin": "ios-ats",
+      "section": "ats",
+      "field": "value",
+      "source": "NSExceptionMinimumTLSVersion set to %s on %s",
+      "text": "{1} 的最低 TLS 版本（NSExceptionMinimumTLSVersion）设为 {0}"
+    },
+    {
+      "origin": "ios-ats",
+      "section": "ats",
+      "field": "value",
+      "source": "The minimum Transport Layer Security (TLS) version for network connections sent to %s is set to %s. This version is deemed to be insecure",
+      "text": "与 {0} 通信时，最低传输层安全协议（TLS）版本设为 {1}。扫描规则认为此版本不安全。"
+    },
+    {
+      "origin": "ios-ats",
+      "section": "ats",
+      "field": "value",
+      "source": "The minimum Transport Layer Security (TLS) version for network connections sent to %s is set to %s. This version is vulnerable to attacks such as POODLE, FREAK, or CurveSwap etc.",
+      "text": "与 {0} 通信时，最低传输层安全协议（TLS）版本设为 {1}。原规则提示此配置涉及 POODLE、FREAK 或 CurveSwap 等风险，需结合实际协议和密码套件核查。"
+    },
+    {
+      "origin": "ios-ats",
+      "section": "ats",
+      "field": "value",
+      "source": "The minimum Transport Layer Security (TLS) version for network connections sent to %s is set to %s.",
+      "text": "与 {0} 通信时，最低传输层安全协议（TLS）版本设为 {1}。"
+    },
+    {
+      "origin": "ios-ats",
+      "section": "ats",
+      "field": "value",
+      "source": "NSExceptionRequiresForwardSecrecy set to NO for %s",
+      "text": "{0} 的前向保密要求（NSExceptionRequiresForwardSecrecy）设为 NO"
+    },
+    {
+      "origin": "ios-ats",
+      "section": "ats",
+      "field": "value",
+      "source": "NSExceptionRequiresForwardSecrecy limits the accepted ciphers to those that support perfect forward secrecy (PFS) through the Elliptic Curve Diffie-Hellman Ephemeral (ECDHE) key exchange. Set the value for this key to NO to override the requirement that a server must support PFS for the given domain. This key is optional. The default value is YES, which limits the accepted ciphers to those that support PFS through Elliptic Curve Diffie-Hellman Ephemeral (ECDHE) key exchange.",
+      "text": "此设置将可用密码套件限制为通过 ECDHE 临时密钥交换实现完全前向保密（PFS）的套件。设为 NO 可取消指定域名的该项要求。此键可选，默认值为 YES。"
+    },
+    {
+      "origin": "ios-ats",
+      "section": "ats",
+      "field": "value",
+      "source": "NSRequiresCertificateTransparency set to NO for %s",
+      "text": "{0} 的证书透明度要求（NSRequiresCertificateTransparency）设为 NO"
+    },
+    {
+      "origin": "ios-ats",
+      "section": "ats",
+      "field": "value",
+      "source": "Certificate Transparency (CT) is a protocol that ATS can use to identify mistakenly or maliciously issued X.509 certificates. Set the value for the NSRequiresCertificateTransparency key to YES to require that for a given domain, server certificates are supported by valid, signed CT timestamps from at least two CT logs trusted by Apple. This key is optional. The default value is NO.",
+      "text": "证书透明度（CT）可帮助 ATS 发现误签发或恶意签发的 X.509 证书。将 NSRequiresCertificateTransparency 设为 YES 后，该域名的服务器证书须具有至少两份来自 Apple 信任的 CT 日志的有效签名时间戳。此键可选，默认值为 NO。"
+    },
+    {
+      "origin": "ios-ats",
+      "section": "ats",
+      "field": "value",
+      "source": "NSRequiresCertificateTransparency set to YES for %s",
+      "text": "{0} 的证书透明度要求（NSRequiresCertificateTransparency）设为 YES"
+    },
+    {
+      "origin": "elf",
+      "section": "elf",
+      "field": "value",
+      "source": "The binary has NX bit set. This marks a memory page non-executable making attacker injected shellcode non-executable.",
+      "text": "二进制启用了 NX 位，将内存页标记为不可执行，从而防止执行注入到该页的代码。"
+    },
+    {
+      "origin": "elf",
+      "section": "elf",
+      "field": "value",
+      "source": "The binary does not have NX bit set. NX bit offer protection against exploitation of memory corruption vulnerabilities by marking memory page as non-executable. Use option --noexecstack or -z noexecstack to mark stack as non executable.",
+      "text": "二进制未启用 NX 位。NX 通过将内存页标记为不可执行来缓解内存破坏漏洞。可用 --noexecstack 或 -z noexecstack 将栈标记为不可执行。"
+    },
+    {
+      "origin": "elf",
+      "section": "elf",
+      "field": "value",
+      "source": "The shared object is build with -fPIC flag which enables Position independent code. This makes Return Oriented Programming (ROP) attacks much more difficult to execute reliably.",
+      "text": "共享库用 -fPIC 构建，启用了位置无关代码，增加可靠实施返回导向编程（ROP）攻击的难度。"
+    },
+    {
+      "origin": "elf",
+      "section": "elf",
+      "field": "value",
+      "source": "The shared object is built without Position Independent Code flag. In order to prevent an attacker from reliably jumping to, for example, a particular exploited function in memory, Address space layout randomization (ASLR) randomly arranges the address space positions of key data areas of a process, including the base of the executable and the positions of the stack,heap and libraries. Use compiler option -fPIC to enable Position Independent Code.",
+      "text": "共享库未启用位置无关代码。地址空间布局随机化（ASLR）会随机安排可执行文件、栈、堆和库的位置，使攻击者难以可靠跳转到指定内存地址。可用 -fPIC 启用位置无关代码。"
+    },
+    {
+      "origin": "elf",
+      "section": "elf",
+      "field": "value",
+      "source": "This binary has a stack canary value added to the stack so that it will be overwritten by a stack buffer that overflows the return address. This allows detection of overflows by verifying the integrity of the canary before function return.",
+      "text": "二进制启用了栈保护（Stack Canary）。当栈缓冲区溢出并覆盖返回地址时，也会覆盖 Canary 值。函数返回前检查其完整性可检测溢出。"
+    },
+    {
+      "origin": "elf",
+      "section": "elf",
+      "field": "value",
+      "source": "This binary does not have a stack canary value added to the stack. Stack canaries are used to detect and prevent exploits from overwriting return address. Use the option -fstack-protector-all to enable stack canaries. Not applicable for Dart/Flutter libraries unless Dart FFI is used.",
+      "text": "二进制未启用栈保护（Stack Canary）。它可检测并阻止对返回地址的覆盖。可用 -fstack-protector-all 启用。此检查不适用于 Dart/Flutter 库，使用 Dart FFI 的情况除外。"
+    },
+    {
+      "origin": "elf",
+      "section": "elf",
+      "field": "value",
+      "source": "RELRO checks are not applicable for Flutter/Dart binaries",
+      "text": "RELRO 检查不适用于 Flutter/Dart 二进制文件。"
+    },
+    {
+      "origin": "elf",
+      "section": "elf",
+      "field": "value",
+      "source": "This shared object has full RELRO enabled. RELRO ensures that the GOT cannot be overwritten in vulnerable ELF binaries. In Full RELRO, the entire GOT (.got and .got.plt both) is marked as read-only.",
+      "text": "共享库启用了完整 RELRO，整个全局偏移表（.got 和 .got.plt）均为只读，可防止相关条目被覆盖。"
+    },
+    {
+      "origin": "elf",
+      "section": "elf",
+      "field": "value",
+      "source": "This shared object has partial RELRO enabled. RELRO ensures that the GOT cannot be overwritten in vulnerable ELF binaries. In partial RELRO, the non-PLT part of the GOT section is read only but .got.plt is still writeable. Use the option -z,relro,-z,now to enable full RELRO.",
+      "text": "共享库启用了部分 RELRO。非 PLT 的 GOT 部分为只读，但 .got.plt 仍可写。可用 -z,relro,-z,now 启用完整 RELRO。"
+    },
+    {
+      "origin": "elf",
+      "section": "elf",
+      "field": "value",
+      "source": "This shared object does not have RELRO enabled. The entire GOT (.got and .got.plt both) are writable. Without this compiler flag, buffer overflows on a global variable can overwrite GOT entries. Use the option -z,relro,-z,now to enable full RELRO and only -z,relro to enable partial RELRO.",
+      "text": "共享库未启用 RELRO，.got 和 .got.plt 均可写，全局变量缓冲区溢出可能覆盖 GOT 条目。可用 -z,relro,-z,now 启用完整 RELRO，或用 -z,relro 启用部分 RELRO。"
+    },
+    {
+      "origin": "elf",
+      "section": "elf",
+      "field": "value",
+      "source": "The binary has RPATH set. In certain cases, an attacker can abuse this feature to run arbitrary libraries for code execution and privilege escalation. The only time a library should set RPATH is when it is linked to private libraries in the same package. Remove the compiler option -rpath to remove RPATH.",
+      "text": "二进制设置了 RPATH。在某些条件下，这可能导致加载任意库，造成代码执行或权限提升。通常仅当链接同一软件包的私有库时才应设置。可移除 -rpath 编译选项。"
+    },
+    {
+      "origin": "elf",
+      "section": "elf",
+      "field": "value",
+      "source": "The binary does not have run-time search path or RPATH set.",
+      "text": "二进制未设置运行时搜索路径（RPATH）。"
+    },
+    {
+      "origin": "elf",
+      "section": "elf",
+      "field": "value",
+      "source": "The binary has RUNPATH set. In certain cases, an attacker can abuse this feature and or modify environment variables to run arbitrary libraries for code execution and privilege escalation. The only time a library should set RUNPATH is when it is linked to private libraries in the same package. Remove the compiler option --enable-new-dtags,-rpath to remove RUNPATH.",
+      "text": "二进制设置了 RUNPATH。在某些条件下，这可能被滥用，或通过环境变量改动而加载任意库，造成代码执行或权限提升。通常仅当链接同一软件包的私有库时才应设置。可移除 --enable-new-dtags,-rpath 编译选项。"
+    },
+    {
+      "origin": "elf",
+      "section": "elf",
+      "field": "value",
+      "source": "The binary does not have RUNPATH set.",
+      "text": "二进制未设置 RUNPATH。"
+    },
+    {
+      "origin": "elf",
+      "section": "elf",
+      "field": "value",
+      "source": "The binary has the following fortified functions: %s",
+      "text": "二进制包含以下经过加固的函数：{0}"
+    },
+    {
+      "origin": "elf",
+      "section": "elf",
+      "field": "value",
+      "source": "The binary does not have any fortified functions. Fortified functions provides buffer overflow checks against glibc's commons insecure functions like strcpy, gets etc. Use the compiler option -D_FORTIFY_SOURCE=2 to fortify functions. This check is not applicable for Dart/Flutter libraries.",
+      "text": "二进制未使用加固函数。这类函数为 glibc 中的 strcpy、gets 等函数提供缓冲区溢出检查。可用 -D_FORTIFY_SOURCE=2 编译选项启用。此检查不适用于 Dart/Flutter 库。"
+    },
+    {
+      "origin": "elf",
+      "section": "elf",
+      "field": "value",
+      "source": "Symbols are stripped.",
+      "text": "符号已剥离。"
+    },
+    {
+      "origin": "elf",
+      "section": "elf",
+      "field": "value",
+      "source": "Symbols are available.",
+      "text": "二进制保留了符号。"
+    },
+    {
+      "origin": "firebase",
+      "section": "firebase",
+      "field": "value",
+      "source": "Open Firebase database",
+      "text": "Firebase 数据库公开访问"
+    },
+    {
+      "origin": "firebase",
+      "section": "firebase",
+      "field": "value",
+      "source": "The Firebase database at %s is exposed to internet without any authentication",
+      "text": "Firebase 数据库 {0} 对互联网开放，且无需身份验证。"
+    },
+    {
+      "origin": "firebase",
+      "section": "firebase",
+      "field": "value",
+      "source": "App talks to a Firebase database",
+      "text": "应用与 Firebase 数据库通信"
+    },
+    {
+      "origin": "firebase",
+      "section": "firebase",
+      "field": "value",
+      "source": "The app talks to Firebase database at %s",
+      "text": "应用与 Firebase 数据库 {0} 通信。"
+    },
+    {
+      "origin": "firebase",
+      "section": "firebase",
+      "field": "value",
+      "source": "Firebase DB check failed",
+      "text": "Firebase 数据库检查失败"
+    },
+    {
+      "origin": "firebase",
+      "section": "firebase",
+      "field": "value",
+      "source": "Failed to check Firebase DB URL. Error: %s",
+      "text": "无法检查 Firebase 数据库 URL。错误：{0}"
+    },
+    {
+      "origin": "firebase",
+      "section": "firebase",
+      "field": "value",
+      "source": "Firebase Remote Config enabled",
+      "text": "Firebase 远程配置已启用"
+    },
+    {
+      "origin": "firebase",
+      "section": "firebase",
+      "field": "value",
+      "source": "The Firebase Remote Config at %s is enabled. Ensure that the configurations are not sensitive. This is indicated by the response: %s",
+      "text": "Firebase 远程配置 {0} 已启用。请核实配置中没有敏感信息。原始响应：{1}"
+    },
+    {
+      "origin": "firebase",
+      "section": "firebase",
+      "field": "value",
+      "source": "Firebase Remote Config disabled",
+      "text": "Firebase 远程配置已禁用"
+    },
+    {
+      "origin": "firebase",
+      "section": "firebase",
+      "field": "value",
+      "source": "Firebase Remote Config is disabled for %s. This is indicated by the response: %s",
+      "text": "{0} 的 Firebase 远程配置已禁用。原始响应：{1}"
+    },
+    {
+      "origin": "firebase",
+      "section": "firebase",
+      "field": "value",
+      "source": "Firebase Remote Config check failed",
+      "text": "Firebase 远程配置检查失败"
+    },
+    {
+      "origin": "firebase",
+      "section": "firebase",
+      "field": "value",
+      "source": "Failed to check for Firebase Remote Config. Please verify this manually. Error: %s",
+      "text": "无法检查 Firebase 远程配置，请手动核查。错误：{0}"
+    },
+    {
+      "origin": "android-network",
+      "section": "network",
+      "field": "value",
+      "source": "Base config is insecurely configured to permit clear text traffic to all domains.",
+      "text": "基础配置允许向所有域名发送明文流量，存在安全风险。"
+    },
+    {
+      "origin": "android-network",
+      "section": "network",
+      "field": "value",
+      "source": "Base config is configured to disallow clear text traffic to all domains.",
+      "text": "基础配置禁止向所有域名发送明文流量。"
+    },
+    {
+      "origin": "android-network",
+      "section": "network",
+      "field": "value",
+      "source": "Base config is configured to trustbundled certs %s.",
+      "text": "基础配置配置为信任应用内置证书 {0}。"
+    },
+    {
+      "origin": "android-network",
+      "section": "network",
+      "field": "value",
+      "source": "Base config is configured to trust system certificates.",
+      "text": "基础配置配置为信任系统证书。"
+    },
+    {
+      "origin": "android-network",
+      "section": "network",
+      "field": "value",
+      "source": "Base config is configured to trust user installed certificates.",
+      "text": "基础配置配置为信任用户安装的证书。"
+    },
+    {
+      "origin": "android-network",
+      "section": "network",
+      "field": "value",
+      "source": "Base config is configured to bypass certificate pinning.",
+      "text": "基础配置允许绕过证书固定校验。"
+    },
+    {
+      "origin": "android-network",
+      "section": "network",
+      "field": "value",
+      "source": "Domain config is insecurely configured to permit clear text traffic to these domains in scope.",
+      "text": "域名配置允许向所列域名发送明文流量，存在安全风险。"
+    },
+    {
+      "origin": "android-network",
+      "section": "network",
+      "field": "value",
+      "source": "Domain config is securely configured to disallow clear text traffic to these domains in scope.",
+      "text": "域名配置禁止向所列域名发送明文流量。"
+    },
+    {
+      "origin": "android-network",
+      "section": "network",
+      "field": "value",
+      "source": "Domain config is configured to trust bundled certs %s.",
+      "text": "域名配置配置为信任应用内置证书 {0}。"
+    },
+    {
+      "origin": "android-network",
+      "section": "network",
+      "field": "value",
+      "source": "Domain config is configured to trust system certificates.",
+      "text": "域名配置配置为信任系统证书。"
+    },
+    {
+      "origin": "android-network",
+      "section": "network",
+      "field": "value",
+      "source": "Domain config is configured to trust user installed certificates.",
+      "text": "域名配置配置为信任用户安装的证书。"
+    },
+    {
+      "origin": "android-network",
+      "section": "network",
+      "field": "value",
+      "source": "Domain config is configured to bypass certificate pinning.",
+      "text": "域名配置允许绕过证书固定校验。"
+    },
+    {
+      "origin": "android-network",
+      "section": "network",
+      "field": "value",
+      "source": "Certificate pinning expires on %s. After this date pinning will be disabled. [%s]",
+      "text": "证书固定将于 {0} 到期，届时将关闭固定校验。证书固定值：[{1}]"
+    },
+    {
+      "origin": "android-network",
+      "section": "network",
+      "field": "value",
+      "source": "Certificate pinning does not have an expiry. Ensure that pins are updated before certificate expire. [%s]",
+      "text": "证书固定未设置到期时间。请在证书到期前更新固定值。证书固定值：[{0}]"
+    },
+    {
+      "origin": "android-network",
+      "section": "network",
+      "field": "value",
+      "source": "Debug override is configured to permit clear text traffic to all domains and the app is debuggable.",
+      "text": "应用可调试，调试覆盖配置允许向所有域名发送明文流量。"
+    },
+    {
+      "origin": "android-network",
+      "section": "network",
+      "field": "value",
+      "source": "Debug override is configured to trust bundled debug certs %s.",
+      "text": "调试覆盖配置为信任内置调试证书 {0}。"
+    },
+    {
+      "origin": "android-network",
+      "section": "network",
+      "field": "value",
+      "source": "Debug override is configured to bypass certificate pinning.",
+      "text": "调试覆盖配置允许绕过证书固定校验。"
+    },
+    {
+      "origin": "android-cert",
+      "section": "cert",
+      "field": "value",
+      "source": "Application is signed with a code signing certificate",
+      "text": "应用已使用代码签名证书签名。"
+    },
+    {
+      "origin": "android-cert",
+      "section": "cert",
+      "field": "value",
+      "source": "Signed Application",
+      "text": "应用已签名"
+    },
+    {
+      "origin": "android-cert",
+      "section": "cert",
+      "field": "value",
+      "source": "Code signing certificate not found",
+      "text": "未找到代码签名证书。"
+    },
+    {
+      "origin": "android-cert",
+      "section": "cert",
+      "field": "value",
+      "source": "Missing Code Signing certificate",
+      "text": "缺少代码签名证书"
+    },
+    {
+      "origin": "android-cert",
+      "section": "cert",
+      "field": "value",
+      "source": "Application is signed with v1 signature scheme, making it vulnerable to Janus vulnerability on Android 5.0-8.0, if signed only with v1 signature scheme. Applications running on Android 5.0-7.0 signed with v1, and v2/v3 scheme is also vulnerable.",
+      "text": "应用采用 v1 签名方案。如果仅使用 v1，应用在 Android 5.0 至 8.0 上可能受到 Janus 漏洞影响。Android 5.0 至 7.0 上，即使同时使用 v2 或 v3，也可能受影响。"
+    },
+    {
+      "origin": "android-cert",
+      "section": "cert",
+      "field": "value",
+      "source": "Application vulnerable to Janus Vulnerability",
+      "text": "应用可能受到 Janus 漏洞影响"
+    },
+    {
+      "origin": "android-cert",
+      "section": "cert",
+      "field": "value",
+      "source": "Application signed with a debug certificate. Production application must not be shipped with a debug certificate.",
+      "text": "应用使用调试证书签名。正式发布时应使用发布证书。"
+    },
+    {
+      "origin": "android-cert",
+      "section": "cert",
+      "field": "value",
+      "source": "Application signed with debug certificate",
+      "text": "应用使用调试证书签名"
+    },
+    {
+      "origin": "android-cert",
+      "section": "cert",
+      "field": "value",
+      "source": "Application is signed with SHA1withRSA. SHA1 hash algorithm is known to have collision issues.",
+      "text": "应用使用 SHA1withRSA 签名。SHA-1 哈希算法存在已知碰撞问题。"
+    },
+    {
+      "origin": "android-cert",
+      "section": "cert",
+      "field": "value",
+      "source": "Application is signed with SHA1withRSA. SHA1 hash algorithm is known to have collision issues. The manifest file indicates SHA256withRSA is in use.",
+      "text": "应用签名中发现 SHA1withRSA。SHA-1 存在已知碰撞问题。清单文件同时表明使用了 SHA256withRSA。"
+    },
+    {
+      "origin": "android-cert",
+      "section": "cert",
+      "field": "value",
+      "source": "Certificate algorithm vulnerable to hash collision",
+      "text": "证书算法存在哈希碰撞风险"
+    },
+    {
+      "origin": "android-cert",
+      "section": "cert",
+      "field": "value",
+      "source": "Certificate algorithm might be vulnerable to hash collision",
+      "text": "证书算法可能存在哈希碰撞风险"
+    },
+    {
+      "origin": "android-cert",
+      "section": "cert",
+      "field": "value",
+      "source": "Application is signed with MD5. MD5 hash algorithm is known to have collision issues.",
+      "text": "应用使用 MD5 签名。MD5 哈希算法存在已知碰撞问题。"
+    },
+    {
+      "origin": "android-cert",
+      "section": "file",
+      "field": "value",
+      "source": "Certificate/Key files hardcoded inside the app.",
+      "text": "应用内包含硬编码的证书或密钥文件。"
+    },
+    {
+      "origin": "android-cert",
+      "section": "file",
+      "field": "value",
+      "source": "Hardcoded Keystore found.",
+      "text": "发现硬编码的密钥库文件。"
+    },
+    {
+      "origin": "ios-file",
+      "section": "file",
+      "field": "value",
+      "source": "SQLite Files",
+      "text": "SQLite 数据库文件"
+    },
+    {
+      "origin": "ios-file",
+      "section": "file",
+      "field": "value",
+      "source": "Plist Files",
+      "text": "Plist 配置文件"
+    },
+    {
+      "origin": "ios-file",
+      "section": "file",
+      "field": "value",
+      "source": "Certificate/Key Files Hardcoded inside the App.",
+      "text": "应用内包含硬编码的证书或密钥文件。"
+    },
+    {
+      "origin": "windows",
+      "section": "windows",
+      "field": "value",
+      "source": "Possible Insecure Function",
+      "text": "可能不安全的函数"
+    },
+    {
+      "origin": "windows",
+      "section": "windows",
+      "field": "value",
+      "source": "Possible Insecure Function detected: %s",
+      "text": "检测到可能不安全的函数：{0}"
+    },
+    {
+      "origin": "windows",
+      "section": "windows",
+      "field": "value",
+      "source": "VM is not configured. Please read the readme.md in MobSF/install/windows.",
+      "text": "Windows 虚拟机未配置。请参阅 MobSF/install/windows 中的 readme.md。"
+    },
+    {
+      "origin": "windows",
+      "section": "windows",
+      "field": "value",
+      "source": "No Binskim-Results",
+      "text": "无 BinSkim 检查结果"
+    },
+    {
+      "origin": "windows",
+      "section": "windows",
+      "field": "value",
+      "source": "No results from Binskim.",
+      "text": "BinSkim 未返回检查结果。"
+    },
+    {
+      "origin": "windows",
+      "section": "windows",
+      "field": "value",
+      "source": "No description provided by analysing tool.",
+      "text": "分析工具未提供说明。"
+    },
+    {
+      "origin": "ios-objc",
+      "section": "ios-code",
+      "field": "value",
+      "source": "IP Address disclosure",
+      "text": "IP 地址泄露",
+      "rule": "ios_ip_disclosure"
+    },
+    {
+      "origin": "ios-objc",
+      "section": "ios-code",
+      "field": "value",
+      "source": "Files may contain hardcoded sensitive information like usernames, passwords, keys etc.",
+      "text": "文件可能含有硬编码的用户名、密码或密钥等敏感信息。",
+      "rule": "ios_hardcoded_info"
+    },
+    {
+      "origin": "ios-objc",
+      "section": "ios-code",
+      "field": "value",
+      "source": "App uses SQLite Database. Sensitive Information should be encrypted.",
+      "text": "应用使用 SQLite 数据库，敏感信息应加密存储。",
+      "rule": "ios_sqlite"
+    },
+    {
+      "origin": "ios-objc",
+      "section": "ios-code",
+      "field": "value",
+      "source": "User input in \"loadHTMLString\" will result in JavaScript Injection.",
+      "text": "将用户输入传入 loadHTMLString 可能导致 JavaScript 注入。",
+      "rule": "ios_load_html_string"
+    },
+    {
+      "origin": "ios-objc",
+      "section": "ios-code",
+      "field": "value",
+      "source": "This App may have Jailbreak detection capabilities.",
+      "text": "应用可能具有越狱检测能力。",
+      "rule": "ios_jailbreak_detect"
+    },
+    {
+      "origin": "ios-objc",
+      "section": "ios-code",
+      "field": "value",
+      "source": "The App may contain banned API(s). These API(s) are insecure and must not be used.",
+      "text": "应用可能使用了被禁用的 API。这些 API 不安全，应避免使用。",
+      "rule": "ios_banned_api"
+    },
+    {
+      "origin": "ios-objc",
+      "section": "ios-code",
+      "field": "value",
+      "source": "App allows self signed or invalid SSL certificates. App is vulnerable to MITM attacks.",
+      "text": "应用允许自签名或无效的 SSL 证书，存在中间人攻击风险。",
+      "rule": "ios_self_signed_ssl"
+    },
+    {
+      "origin": "ios-objc",
+      "section": "ios-code",
+      "field": "value",
+      "source": "UIWebView in App ignore SSL errors and accept any SSL Certificate. App is vulnerable to MITM attacks.",
+      "text": "应用的 UIWebView 忽略 SSL 错误并接受任意 SSL 证书，存在中间人攻击风险。",
+      "rule": "ios_webview_ignore_ssl"
+    },
+    {
+      "origin": "ios-objc",
+      "section": "ios-code",
+      "field": "value",
+      "source": "The App logs information. Sensitive information should never be logged.",
+      "text": "应用会记录日志，日志中不应包含敏感信息。",
+      "rule": "ios_app_logging"
+    },
+    {
+      "origin": "ios-objc",
+      "section": "ios-code",
+      "field": "value",
+      "source": "This app listens to Clipboard changes. Some malware also listen to Clipboard changes.",
+      "text": "应用监听剪贴板变化。部分恶意软件也会监听剪贴板变化。",
+      "rule": "ios_clipboard_listen"
+    },
+    {
+      "origin": "ios-objc",
+      "section": "ios-code",
+      "field": "value",
+      "source": "Untrusted user input to \"NSTemporaryDirectory()\" will result in path traversal vulnerability.",
+      "text": "将不可信输入用于 NSTemporaryDirectory() 可能导致路径遍历风险。",
+      "rule": "ios_temp_dir"
+    },
+    {
+      "origin": "ios-objc",
+      "section": "ios-code",
+      "field": "value",
+      "source": "File is stored in an encrypted format on disk and cannot be read from or written to while the device is locked or booting.",
+      "text": "文件在磁盘上加密保存。设备锁定或启动期间，无法读取或写入该文件。",
+      "rule": "ios_file_enc_locked"
+    },
+    {
+      "origin": "ios-objc",
+      "section": "ios-code",
+      "field": "value",
+      "source": "File is stored in an encrypted format on disk after it is closed.",
+      "text": "文件关闭后会以加密形式存储在磁盘上。",
+      "rule": "ios_file_enc_closed"
+    },
+    {
+      "origin": "ios-objc",
+      "section": "ios-code",
+      "field": "value",
+      "source": "File is stored in an encrypted format on disk and cannot be accessed until after the device has booted.",
+      "text": "文件在磁盘上加密保存，设备启动完成后才可访问。",
+      "rule": "ios_file_enc_boot"
+    },
+    {
+      "origin": "ios-objc",
+      "section": "ios-code",
+      "field": "value",
+      "source": "The file has no special protections associated with it.",
+      "text": "该文件未配置额外的保护。",
+      "rule": "ios_file_perm"
+    },
+    {
+      "origin": "ios-objc",
+      "section": "ios-code",
+      "field": "value",
+      "source": "SFAntiPiracy Jailbreak checks found",
+      "text": "发现 SFAntiPiracy 越狱检测代码。",
+      "rule": "ios_jailbreak_check"
+    },
+    {
+      "origin": "ios-objc",
+      "section": "ios-code",
+      "field": "value",
+      "source": "SFAntiPiracy Piracy checks found",
+      "text": "发现 SFAntiPiracy 盗版检测代码。",
+      "rule": "ios_piracy_check"
+    },
+    {
+      "origin": "ios-objc",
+      "section": "ios-code",
+      "field": "value",
+      "source": "MD5 is a weak hash known to have hash collisions.",
+      "text": "MD5 是存在已知哈希碰撞问题的弱哈希算法。",
+      "rule": "ios_md5_collision"
+    },
+    {
+      "origin": "ios-objc",
+      "section": "ios-code",
+      "field": "value",
+      "source": "SHA1 is a weak hash known to have hash collisions.",
+      "text": "SHA-1 是存在已知哈希碰撞问题的弱哈希算法。",
+      "rule": "ios_sha1_collision"
+    },
+    {
+      "origin": "ios-objc",
+      "section": "ios-code",
+      "field": "value",
+      "source": "The App uses ECB mode in Cryptographic encryption algorithm. ECB mode is known to be weak as it results in the same ciphertext for identical blocks of plaintext.",
+      "text": "应用使用 ECB 加密模式。相同明文块会产生相同密文块，因此 ECB 被认为不安全。",
+      "rule": "ios_aes_ecb"
+    },
+    {
+      "origin": "ios-objc",
+      "section": "ios-code",
+      "field": "value",
+      "source": "The App has anti-debugger code using ptrace() ",
+      "text": "应用通过 ptrace() 实现反调试。",
+      "rule": "ios_ptrace"
+    },
+    {
+      "origin": "ios-objc",
+      "section": "ios-code",
+      "field": "value",
+      "source": "This App has anti-debugger code using Mach Exception Ports.",
+      "text": "应用使用 Mach 异常端口实现反调试。",
+      "rule": "ios_mach_ports"
+    },
+    {
+      "origin": "ios-objc",
+      "section": "ios-code",
+      "field": "value",
+      "source": "This App copies data to clipboard. Sensitive data should not be copied to clipboard as other applications can access it.",
+      "text": "应用将数据复制到剪贴板。其他应用可能访问剪贴板，因此不应复制敏感信息。",
+      "rule": "ios_clipboard_copy"
+    },
+    {
+      "origin": "ios-objc",
+      "section": "ios-code",
+      "field": "value",
+      "source": "App uses Realm Database. Sensitive Information should be encrypted.",
+      "text": "应用使用 Realm 数据库，敏感信息应加密存储。",
+      "rule": "ios_realm_db"
+    },
+    {
+      "origin": "ios-objc",
+      "section": "ios-code",
+      "field": "value",
+      "source": "Biometric authentication should be hardware and keychain backed, local authentication returns a boolean that can be bypassed by runtime instrumentation tools like Frida. This is not applicable if authentication data in keychain is protected with a biometric only access control.",
+      "text": "生物识别认证应由硬件与钥匙串保护。本地认证返回的布尔值可能被运行时插桩工具绕过。如果钥匙串中的认证数据已设置仅允许生物识别访问，则此规则不适用。",
+      "rule": "ios_biometric_bool"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "IP Address disclosure",
+      "text": "IP 地址泄露",
+      "rule": "ios_ip_disclosure"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "Files may contain hardcoded sensitive information like usernames, passwords, keys etc.",
+      "text": "文件可能含有硬编码的用户名、密码或密钥等敏感信息。",
+      "rule": "ios_hardcoded_info"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "App uses SQLite Database. Sensitive Information should be encrypted.",
+      "text": "应用使用 SQLite 数据库，敏感信息应加密存储。",
+      "rule": "ios_sqlite"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "User input in \"loadHTMLString\" will result in JavaScript Injection.",
+      "text": "将用户输入传入 loadHTMLString 可能导致 JavaScript 注入。",
+      "rule": "ios_load_html_string"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "This App may have Jailbreak detection capabilities.",
+      "text": "应用可能具有越狱检测能力。",
+      "rule": "ios_jailbreak_detect"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "The App logs information. Sensitive information should never be logged.",
+      "text": "应用会记录日志，日志中不应包含敏感信息。",
+      "rule": "ios_swift_log"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "SHA1 is a weak hash known to have hash collisions.",
+      "text": "SHA-1 是存在已知哈希碰撞问题的弱哈希算法。",
+      "rule": "ios_swift_sha1_collision"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "MD2 is a weak hash known to have hash collisions.",
+      "text": "MD2 是存在已知哈希碰撞问题的弱哈希算法。",
+      "rule": "ios_md2_collision"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "MD4 is a weak hash known to have hash collisions.",
+      "text": "MD4 是存在已知哈希碰撞问题的弱哈希算法。",
+      "rule": "ios_md4_collision"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "MD5 is a weak hash known to have hash collisions.",
+      "text": "MD5 是存在已知哈希碰撞问题的弱哈希算法。",
+      "rule": "ios_swift_md5_collision"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "MD6 is a weak hash known to have hash collisions.",
+      "text": "MD6 是存在已知哈希碰撞问题的弱哈希算法。",
+      "rule": "ios_md6_collision"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "This App may have custom keyboards disabled.",
+      "text": "应用可能禁用了自定义键盘。",
+      "rule": "ios_custom_keyboard_disabled"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "Keyboard cache should be disabled for all sensitive data inputs.",
+      "text": "所有敏感数据输入都应关闭键盘缓存。",
+      "rule": "ios_keyboard_cache"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "It is recommended to use WKWebView instead of SFSafariViewController or UIWebView.",
+      "text": "建议使用 WKWebView，替代 SFSafariViewController 或 UIWebView。",
+      "rule": "ios_uiwebview_safari_view"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "This App may have Reverse engineering detection capabilities.",
+      "text": "应用可能具有逆向工程检测能力。",
+      "rule": "ios_detect_reversing"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "This App may have Simulator detection capabilities.",
+      "text": "应用可能具有模拟器检测能力。",
+      "rule": "ios_detect_simulator"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "Biometric authentication uses `.biometryCurrentSet`. This will remove data protected with this ACL from Keychain when device biometry is updated.",
+      "text": "生物识别认证使用 .biometryCurrentSet。设备生物识别信息改变时，受此访问控制保护的数据会从钥匙串移除。",
+      "rule": "ios_biometry_hardened"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "Biometric authentication should be hardware and keychain backed, local authentication returns a boolean that can be bypassed by runtime instrumentation tools like Frida. This is not applicable if authentication data in keychain is protected with a biometric only access control.",
+      "text": "生物识别认证应由硬件与钥匙串保护。本地认证返回的布尔值可能被运行时插桩工具绕过。如果钥匙串中的认证数据已设置仅允许生物识别访问，则此规则不适用。",
+      "rule": "ios_biometric_bool"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "Weak biometric ACL flag is associated with a key stored in Keychain. With `.biometryAny/.userPresence/.touchIDAny` flag, an attacker with the ability to add a biometry to the device can authenticate as the user. Use `.biometryCurrentSet/.touchIDCurrentSet` instead.",
+      "text": "钥匙串密钥使用了较弱的生物识别访问控制。使用 .biometryAny、.userPresence 或 .touchIDAny 时，能够向设备添加生物特征的人可能以用户身份通过认证。可改用 .biometryCurrentSet 或 .touchIDCurrentSet。",
+      "rule": "ios_biometric_acl"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "A key stored in the Keychain is not making use of stronger biometric backed ACL. Use `.biometryCurrentSet` instead.",
+      "text": "钥匙串内的密钥未使用较强的生物识别访问控制。可改用 .biometryCurrentSet。",
+      "rule": "ios_keychain_weak_acl_device_passcode"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "A key stored in the Keychain is using a weak accessibility value. Use stronger ACLs like `kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly/kSecAttrAccessibleWhenUnlocked/kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly`.",
+      "text": "钥匙串内的密钥使用了较弱的可访问性配置。可考虑 kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly、kSecAttrAccessibleWhenUnlocked 或 kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly。",
+      "rule": "ios_keychain_weak_accessibility_value"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "The App uses an insecure Random Number Generator.",
+      "text": "应用使用了不安全的随机数生成器。",
+      "rule": "ios_insecure_random_no_generator"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "The file has no special protections associated with it.",
+      "text": "该文件未配置额外的保护。",
+      "rule": "ios_file_no_special"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "This application uses UIPasteboard, improper use of this class can lead to security issues.",
+      "text": "应用使用 UIPasteboard。使用不当可能带来安全风险。",
+      "rule": "ios_uipaste_sec"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "Usage of generalPasteboard should be avoided.",
+      "text": "应避免使用 generalPasteboard。",
+      "rule": "ios_general_paste"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "The app should not export sensitive functionality via custom URL schemes, unless these mechanisms are properly protected.",
+      "text": "应用应保护通过自定义 URL 方案暴露的敏感功能。",
+      "rule": "ios_custom_url"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "Some UI controls have secure text entry configured.",
+      "text": "部分界面控件配置了安全文本输入。",
+      "rule": "ios_secure_text"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "This App may have Certificate Pinning mechanism.",
+      "text": "应用可能具备证书固定机制。",
+      "rule": "ios_cert_pinning"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "App uses Realm Database. Sensitive Information should be encrypted.",
+      "text": "应用使用 Realm 数据库，敏感信息应加密存储。",
+      "rule": "ios_realm_enable_enc"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "App uses CoreData Database. Sensitive Information should be encrypted.",
+      "text": "应用使用 Core Data 数据库，敏感信息应加密存储。",
+      "rule": "ios_core_data"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "Used Realm database has configured encryption.",
+      "text": "使用的 Realm 数据库已配置加密。",
+      "rule": "ios_realm_db_enc_enabled"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "Copy feature may be disabled in some UI controls.",
+      "text": "部分界面控件可能禁用了复制功能。",
+      "rule": "ios_ui_controls_disabled"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "Opening App with URLs can lead to potential security leaks.",
+      "text": "通过 URL 打开应用可能导致信息泄露。",
+      "rule": "ios_open_urls"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "Sensitive data shouldn't be included in backups generated by the mobile operating system.",
+      "text": "操作系统生成的备份不应包含敏感数据。",
+      "rule": "ios_sensitive_backup"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "JavaScript should be disabled in WebViews unless explicitly required.",
+      "text": "除非确有需要，WebView 应禁用 JavaScript。",
+      "rule": "ios_webview_disable_js"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "TLS 1.3 should be used. Detected old version",
+      "text": "建议使用 TLS 1.3，检测到较旧版本。",
+      "rule": "ios_tls3_not_used"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "TLS 1.3 should be used. Detected old version - TLS 1.2.",
+      "text": "建议使用 TLS 1.3，检测到较旧版本 TLS 1.2。",
+      "rule": "ios_tls12_used"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "DTLS 1.2 should be used. Detected old version - DTLS 1.0.",
+      "text": "建议使用 DTLS 1.2，检测到较旧版本 DTLS 1.0。",
+      "rule": "ios_dtls1_used"
+    },
+    {
+      "origin": "ios-swift",
+      "section": "ios-code",
+      "field": "value",
+      "source": "Use of deprecated property tlsMinimumSupportedProtocol. To avoid potential security risks, use tlsMinimumSupportedProtocolVersion",
+      "text": "使用了已弃用的 tlsMinimumSupportedProtocol 属性。为避免潜在风险，可改用 tlsMinimumSupportedProtocolVersion。",
+      "rule": "ios_depr_tls_min"
+    },
+    {
+      "origin": "ios-api",
+      "section": "ios-api",
+      "field": "value",
+      "source": "Network Calls",
+      "text": "网络调用",
+      "rule": "api_network_calls"
+    },
+    {
+      "origin": "ios-api",
+      "section": "ios-api",
+      "field": "value",
+      "source": "Keychain Access",
+      "text": "钥匙串访问",
+      "rule": "api_keychain_access"
+    },
+    {
+      "origin": "ios-api",
+      "section": "ios-api",
+      "field": "value",
+      "source": "WebView Component",
+      "text": "WebView 组件",
+      "rule": "api_webview"
+    },
+    {
+      "origin": "ios-api",
+      "section": "ios-api",
+      "field": "value",
+      "source": "SFSafariViewController Componaent",
+      "text": "SFSafariViewController 组件",
+      "rule": "api_safari_view"
+    },
+    {
+      "origin": "ios-api",
+      "section": "ios-api",
+      "field": "value",
+      "source": "Encryption API",
+      "text": "加密 API",
+      "rule": "api_encryption"
+    },
+    {
+      "origin": "ios-api",
+      "section": "ios-api",
+      "field": "value",
+      "source": "WebView Load Request",
+      "text": "WebView 加载请求",
+      "rule": "api_webview_load"
+    },
+    {
+      "origin": "ios-api",
+      "section": "ios-api",
+      "field": "value",
+      "source": "WebView Load HTML String",
+      "text": "WebView 加载 HTML 字符串",
+      "rule": "api_webview_load_string"
+    },
+    {
+      "origin": "ios-api",
+      "section": "ios-api",
+      "field": "value",
+      "source": "Cookie Storage",
+      "text": "Cookie 存储",
+      "rule": "api_cookie"
+    },
+    {
+      "origin": "ios-api",
+      "section": "ios-api",
+      "field": "value",
+      "source": "UIPasteboard",
+      "text": "剪贴板（UIPasteboard）",
+      "rule": "api_ui_pasteboard"
+    },
+    {
+      "origin": "ios-api",
+      "section": "ios-api",
+      "field": "value",
+      "source": "UserDefaults",
+      "text": "偏好设置（UserDefaults）",
+      "rule": "api_userdefaults"
+    },
+    {
+      "origin": "ios-api",
+      "section": "ios-api",
+      "field": "value",
+      "source": "CoreData",
+      "text": "Core Data",
+      "rule": "api_core_data"
+    },
+    {
+      "origin": "ios-api",
+      "section": "ios-api",
+      "field": "value",
+      "source": "Local Authentication Framework",
+      "text": "本地认证框架",
+      "rule": "api_local_auth"
+    },
+    {
+      "origin": "ios-api",
+      "section": "ios-api",
+      "field": "value",
+      "source": "UIActivity Sharing",
+      "text": "UIActivity 分享",
+      "rule": "api_uiactivity_share"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Loading Native Code (Shared Library)",
+      "text": "加载原生代码（共享库）",
+      "rule": "api_native_code"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Get System Service",
+      "text": "获取系统服务",
+      "rule": "api_get_system_service"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Get Running App Processes",
+      "text": "获取正在运行的应用进程",
+      "rule": "api_get_running_app_processes"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Dynamic Class and Dexloading",
+      "text": "动态加载类和 DEX",
+      "rule": "api_dexloading"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Java Reflection",
+      "text": "Java 反射",
+      "rule": "api_java_reflection"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Crypto",
+      "text": "加密操作",
+      "rule": "api_crypto"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Starting Activity",
+      "text": "启动 Activity",
+      "rule": "api_start_activity"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Starting Service",
+      "text": "启动服务",
+      "rule": "api_start_service"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Sending Broadcast",
+      "text": "发送广播",
+      "rule": "api_send_broadcast"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Local File I/O Operations",
+      "text": "本地文件读写",
+      "rule": "api_local_file_io"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Inter Process Communication",
+      "text": "进程间通信",
+      "rule": "api_ipc"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "HTTP Requests, Connections and Sessions",
+      "text": "HTTP 请求、连接和会话",
+      "rule": "api_web"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "HTTP Connection",
+      "text": "HTTP 连接",
+      "rule": "api_http_connection"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Load and Manipulate Dex Files",
+      "text": "加载和操作 DEX 文件",
+      "rule": "api_dex_manipulate"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Content Provider",
+      "text": "内容提供者",
+      "rule": "api_content_provider"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Obfuscation",
+      "text": "混淆",
+      "rule": "api_obfuscation"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Execute OS Command",
+      "text": "执行操作系统命令",
+      "rule": "api_os_command"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Kill Process",
+      "text": "结束进程",
+      "rule": "api_kill_process"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Android Keystore",
+      "text": "Android 密钥库",
+      "rule": "api_keystore"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "TCP Server Socket",
+      "text": "TCP 服务端套接字",
+      "rule": "api_tcp_server"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "TCP Socket",
+      "text": "TCP 套接字",
+      "rule": "api_tcp"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "UDP Datagram Packet",
+      "text": "UDP 数据报",
+      "rule": "api_udp_datagram"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "UDP Datagram Socket",
+      "text": "UDP 数据报套接字",
+      "rule": "api_udp_datagram_socket"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "WebView JavaScript Interface",
+      "text": "WebView JavaScript 接口",
+      "rule": "api_webview"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "WebView GET Request",
+      "text": "WebView GET 请求",
+      "rule": "api_webview_get"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "WebView POST Request",
+      "text": "WebView POST 请求",
+      "rule": "api_webview_post"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Android Notifications",
+      "text": "Android 通知",
+      "rule": "api_notifications"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Get Cell Information",
+      "text": "获取基站信息",
+      "rule": "api_get_cell"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Get Cell Location",
+      "text": "获取基站位置",
+      "rule": "api_get_location"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Get Subscriber ID",
+      "text": "获取订户标识",
+      "rule": "api_get_subscriber"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Get Device ID, IMEI,MEID/ESN etc",
+      "text": "获取设备 ID、IMEI 或 MEID/ESN 等",
+      "rule": "api_get_device"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Get Software Version, IMEI/SV etc",
+      "text": "获取软件版本或 IMEI/SV 等",
+      "rule": "api_get_soft"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Get SIM Serial Number",
+      "text": "获取 SIM 卡序列号",
+      "rule": "api_get_sim_serial"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Get SIM Provider Details",
+      "text": "获取 SIM 卡服务商详情",
+      "rule": "api_get_sim_provider"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Get SIM Operator Name",
+      "text": "获取 SIM 卡运营商名称",
+      "rule": "api_get_sim_operator"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Get Phone Number",
+      "text": "获取电话号码",
+      "rule": "api_get_phone"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Query Database of SMS, Contacts etc",
+      "text": "查询短信或联系人等数据库",
+      "rule": "api_sms_call"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Hide application icon",
+      "text": "隐藏应用图标",
+      "rule": "api_hide_app_icon"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Send SMS",
+      "text": "发送短信",
+      "rule": "api_send_sms"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "URL Connection to file/http/https/ftp/jar",
+      "text": "连接 file、HTTP、HTTPS、FTP 或 JAR URL",
+      "rule": "api_url"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "JAR URL Connection",
+      "text": "JAR URL 连接",
+      "rule": "api_jar_url"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "HTTPS Connection",
+      "text": "HTTPS 连接",
+      "rule": "api_https_connection"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Set or Read Clipboard data",
+      "text": "读取或写入剪贴板",
+      "rule": "api_clipboard"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Base64 Encode",
+      "text": "Base64 编码",
+      "rule": "api_base64_encode"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Base64 Decode",
+      "text": "Base64 解码",
+      "rule": "api_base64_decode"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Message Digest",
+      "text": "消息摘要",
+      "rule": "api_message_digest"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "GPS Location",
+      "text": "GPS 定位",
+      "rule": "api_gps"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Get Installed Applications",
+      "text": "获取已安装的应用",
+      "rule": "api_installed"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Get WiFi Details",
+      "text": "获取 Wi-Fi 信息",
+      "rule": "api_get_wifi"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Get Network Interface information",
+      "text": "获取网络接口信息",
+      "rule": "api_get_network"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Get Android Advertising ID",
+      "text": "获取 Android 广告 ID",
+      "rule": "api_get_advertising"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Certificate Handling",
+      "text": "证书处理",
+      "rule": "api_certificate_handling"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "JavaScript Interface Methods",
+      "text": "JavaScript 接口方法",
+      "rule": "api_javascript_interface_methods"
+    },
+    {
+      "origin": "android-api",
+      "section": "android-api",
+      "field": "value",
+      "source": "Passkeys",
+      "text": "通行密钥（Passkeys）",
+      "rule": "api_passkeys"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "control vibrator",
+      "text": "控制设备振动",
+      "rule": "VIBRATE"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows the application to control the vibrator.",
+      "text": "允许应用控制设备的振动器。",
+      "rule": "VIBRATE"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "fine (GPS) location",
+      "text": "获取精确位置（GPS）",
+      "rule": "ACCESS_FINE_LOCATION"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Access fine location sources, such as the Global Positioning System on the phone, where available. Malicious applications can use this to determine where you are and may consume additional battery power.",
+      "text": "允许应用使用 GPS 等来源获取精确位置。恶意应用可能借此确定用户位置，也可能增加耗电。",
+      "rule": "ACCESS_FINE_LOCATION"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "coarse (network-based) location",
+      "text": "获取大致位置（基于网络）",
+      "rule": "ACCESS_COARSE_LOCATION"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Access coarse location sources, such as the mobile network database, to determine an approximate phone location, where available. Malicious applications can use this to determine approximately where you are.",
+      "text": "允许应用使用移动网络等来源获取大致位置。恶意应用可能借此判断用户所在区域。",
+      "rule": "ACCESS_COARSE_LOCATION"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "permits exact alarm scheduling for background work.",
+      "text": "安排精确闹钟",
+      "rule": "SCHEDULE_EXACT_ALARM"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an app to use exact alarm scheduling APIs to perform timing sensitive background work.",
+      "text": "允许应用使用精确闹钟 API 执行对时间敏感的后台任务。",
+      "rule": "SCHEDULE_EXACT_ALARM"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "full Internet access",
+      "text": "访问互联网",
+      "rule": "INTERNET"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to create network sockets.",
+      "text": "允许应用创建网络套接字。",
+      "rule": "INTERNET"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "view network status",
+      "text": "查看网络状态",
+      "rule": "ACCESS_NETWORK_STATE"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to view the status of all networks.",
+      "text": "允许应用查看各网络的连接状态。",
+      "rule": "ACCESS_NETWORK_STATE"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "view Wi-Fi status",
+      "text": "查看 Wi-Fi 状态",
+      "rule": "ACCESS_WIFI_STATE"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to view the information about the status of Wi-Fi.",
+      "text": "允许应用查看 Wi-Fi 连接状态。",
+      "rule": "ACCESS_WIFI_STATE"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "display system-level alerts",
+      "text": "显示系统级悬浮窗",
+      "rule": "SYSTEM_ALERT_WINDOW"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to show system-alert windows. Malicious applications can take over the entire screen of the phone.",
+      "text": "允许应用显示系统级窗口。恶意应用可能用悬浮窗覆盖整个屏幕。",
+      "rule": "SYSTEM_ALERT_WINDOW"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application a broad access to external storage in scoped storage",
+      "text": "广泛访问外部存储",
+      "rule": "MANAGE_EXTERNAL_STORAGE"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application a broad access to external storage in scoped storage. Intended to be used by few apps that need to manage files on behalf of the users.",
+      "text": "在分区存储模式下，允许应用广泛访问外部存储。该权限面向少数需要代表用户管理文件的应用。",
+      "rule": "MANAGE_EXTERNAL_STORAGE"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "read/modify/delete external storage contents",
+      "text": "读写或删除外部存储内容",
+      "rule": "WRITE_EXTERNAL_STORAGE"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to write to external storage.",
+      "text": "允许应用写入外部存储。",
+      "rule": "WRITE_EXTERNAL_STORAGE"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "read external storage contents",
+      "text": "读取外部存储内容",
+      "rule": "READ_EXTERNAL_STORAGE"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to read from external storage.",
+      "text": "允许应用读取外部存储。",
+      "rule": "READ_EXTERNAL_STORAGE"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "take pictures and videos",
+      "text": "拍照和录像",
+      "rule": "CAMERA"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows application to take pictures and videos with the camera. This allows the application to collect images that the camera is seeing at any time.",
+      "text": "允许应用用摄像头拍照和录像。应用可以采集摄像头所看到的画面。",
+      "rule": "CAMERA"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "mount and unmount file systems",
+      "text": "挂载或卸载文件系统",
+      "rule": "MOUNT_UNMOUNT_FILESYSTEMS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows the application to mount and unmount file systems for removable storage.",
+      "text": "允许应用挂载和卸载可移动存储的文件系统。",
+      "rule": "MOUNT_UNMOUNT_FILESYSTEMS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "modify global system settings",
+      "text": "修改全局系统设置",
+      "rule": "WRITE_SETTINGS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to modify the system's settings data. Malicious applications can corrupt your system's configuration.",
+      "text": "允许应用修改系统设置。恶意应用可能破坏系统配置。",
+      "rule": "WRITE_SETTINGS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "change your audio settings",
+      "text": "修改音频设置",
+      "rule": "MODIFY_AUDIO_SETTINGS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows application to modify global audio settings, such as volume and routing.",
+      "text": "允许应用修改系统音量和音频路由等全局设置。",
+      "rule": "MODIFY_AUDIO_SETTINGS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "enables regular apps to use Service.startForeground.",
+      "text": "运行前台服务",
+      "rule": "FOREGROUND_SERVICE"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows a regular application to use Service.startForeground.",
+      "text": "允许普通应用调用 Service.startForeground。",
+      "rule": "FOREGROUND_SERVICE"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "record audio",
+      "text": "录制音频",
+      "rule": "RECORD_AUDIO"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows application to access the audio record path.",
+      "text": "允许应用访问音频录制通道。",
+      "rule": "RECORD_AUDIO"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "allows reading image files from external storage.",
+      "text": "读取图片文件",
+      "rule": "READ_MEDIA_IMAGES"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to read image files from external storage.",
+      "text": "允许应用读取外部存储中的图片。",
+      "rule": "READ_MEDIA_IMAGES"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "allows reading audio files from external storage.",
+      "text": "读取音频文件",
+      "rule": "READ_MEDIA_AUDIO"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to read audio files from external storage.",
+      "text": "允许应用读取外部存储中的音频。",
+      "rule": "READ_MEDIA_AUDIO"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "allows reading video files from external storage.",
+      "text": "读取视频文件",
+      "rule": "READ_MEDIA_VIDEO"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to read video files from external storage.",
+      "text": "允许应用读取外部存储中的视频。",
+      "rule": "READ_MEDIA_VIDEO"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "read phone state and identity",
+      "text": "读取电话状态和设备标识",
+      "rule": "READ_PHONE_STATE"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows the application to access the phone features of the device. An application with this permission can determine the phone number and serial number of this phone, whether a call is active, the number that call is connected to and so on.",
+      "text": "允许应用访问电话功能，例如查看本机号码、设备序列号、通话状态及通话对方号码。",
+      "rule": "READ_PHONE_STATE"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "reorder applications running",
+      "text": "调整运行中的任务顺序",
+      "rule": "REORDER_TASKS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to move tasks to the foreground and background. Malicious applications can force themselves to the front without your control.",
+      "text": "允许应用将任务切换到前台或后台。恶意应用可能在用户没有操作时抢占前台。",
+      "rule": "REORDER_TASKS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "change Wi-Fi status",
+      "text": "更改 Wi-Fi 状态",
+      "rule": "CHANGE_WIFI_STATE"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to connect to and disconnect from Wi-Fi access points and to make changes to configured Wi-Fi networks.",
+      "text": "允许应用连接或断开 Wi-Fi 接入点，并更改已配置的 Wi-Fi 网络。",
+      "rule": "CHANGE_WIFI_STATE"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "create Bluetooth connections",
+      "text": "建立蓝牙连接",
+      "rule": "BLUETOOTH"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows applications to connect to paired bluetooth devices.",
+      "text": "允许应用连接已配对的蓝牙设备。",
+      "rule": "BLUETOOTH"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "bluetooth administration",
+      "text": "管理蓝牙设备",
+      "rule": "BLUETOOTH_ADMIN"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows applications to discover and pair bluetooth devices.",
+      "text": "允许应用发现和配对蓝牙设备。",
+      "rule": "BLUETOOTH_ADMIN"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "read sensitive log data",
+      "text": "读取敏感日志",
+      "rule": "READ_LOGS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to read from the system's various log files. This allows it to discover general information about what you are doing with the phone, potentially including personal or private information.",
+      "text": "允许应用读取系统日志，日志可能包含设备使用情况和个人信息。",
+      "rule": "READ_LOGS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "list accounts",
+      "text": "列出账号",
+      "rule": "GET_ACCOUNTS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows access to the list of accounts in the Accounts Service.",
+      "text": "允许应用访问系统账号服务中的账号列表。",
+      "rule": "GET_ACCOUNTS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "automatically start at boot",
+      "text": "开机后自动启动",
+      "rule": "RECEIVE_BOOT_COMPLETED"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to start itself as soon as the system has finished booting. This can make it take longer to start the phone and allow the application to slow down the overall phone by always running.",
+      "text": "允许应用在系统启动后自行运行。持续运行可能延长启动时间并影响设备性能。",
+      "rule": "RECEIVE_BOOT_COMPLETED"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "retrieve running applications",
+      "text": "查询运行中的应用",
+      "rule": "GET_TASKS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows application to retrieve information about currently and recently running tasks. May allow malicious applications to discover private information about other applications.",
+      "text": "允许应用查询正在运行和近期运行的任务。恶意应用可能借此获取其他应用的私密信息。",
+      "rule": "GET_TASKS"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "prevent phone from sleeping",
+      "text": "阻止设备休眠",
+      "rule": "WAKE_LOCK"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to prevent the phone from going to sleep.",
+      "text": "允许应用保持设备唤醒。",
+      "rule": "WAKE_LOCK"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "kill background processes",
+      "text": "结束后台进程",
+      "rule": "RESTART_PACKAGES"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to kill background processes of other applications, even if memory is not low.",
+      "text": "允许应用结束其他应用的后台进程，即使设备内存充足。",
+      "rule": "RESTART_PACKAGES"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "allows foreground services for media projection.",
+      "text": "运行媒体投影前台服务",
+      "rule": "FOREGROUND_SERVICE_MEDIA_PROJECTION"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows a regular application to use Service.startForeground with the type \"mediaProjection\".",
+      "text": "允许普通应用以 mediaProjection 类型调用 Service.startForeground。",
+      "rule": "FOREGROUND_SERVICE_MEDIA_PROJECTION"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "control flashlight",
+      "text": "控制手电筒",
+      "rule": "FLASHLIGHT"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows the application to control the flashlight.",
+      "text": "允许应用控制设备的手电筒。",
+      "rule": "FLASHLIGHT"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Allows an application to request installing packages.",
+      "text": "请求安装软件包",
+      "rule": "REQUEST_INSTALL_PACKAGES"
+    },
+    {
+      "origin": "android-permissions",
+      "section": "android-permission",
+      "field": "value",
+      "source": "Malicious applications can use this to try and trick users into installing additional malicious packages.",
+      "text": "允许应用请求安装软件包。恶意应用可能借此诱导用户安装其他恶意软件包。",
+      "rule": "REQUEST_INSTALL_PACKAGES"
+    }
+  ]
+}

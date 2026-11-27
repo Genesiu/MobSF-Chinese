@@ -5,7 +5,7 @@
 # ==============================================================================
 services:
   mobsf:
-    image: opensecurity/mobile-security-framework-mobsf:latest
+    image: ${MOBSF_IMAGE:-opensecurity/mobile-security-framework-mobsf:latest}
     container_name: mobsf
     restart: unless-stopped
     ports:
